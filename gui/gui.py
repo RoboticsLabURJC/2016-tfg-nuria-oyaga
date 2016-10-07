@@ -110,11 +110,15 @@ class Gui(QtGui.QWidget):
 
     def update(self):
         image = self.camera.getImage()[0]
-        imageTrans = self.camera.getImage()[1]
+
         if image != None:
+            imageTrans = self.camera.getImage()[1]
             img = QtGui.QImage(image.data, image.shape[1], image.shape[0], QtGui.QImage.Format_RGB888)
-            img_trans = QtGui.QImage(imageTrans.data, imageTrans.shape[1], imageTrans.shape[0], QtGui.QImage.Format_RGB888)
             scaledImage = img.scaled(self.imgLabel.size())
-            scaledTransImage = img_trans.scaled(self.transLabel.size())
             self.imgLabel.setPixmap(QtGui.QPixmap.fromImage(scaledImage))
-            self.transLabel.setPixmap(QtGui.QPixmap.fromImage(scaledTransImage ))
+            img_trans = QtGui.QImage(imageTrans.data, imageTrans.shape[1], imageTrans.shape[0],QtGui.QImage.Format_Indexed8)
+            img_trans2 = img_trans.convertToFormat(QtGui.QImage.Format_Indexed8)
+            colortable = [QtGui.qRgb(i,i,i) for i in xrange(256)]
+            img_trans.setColorTable(colortable)
+            scaledTransImage = img_trans.scaled(self.transLabel.size())
+            self.transLabel.setPixmap(QtGui.QPixmap.fromImage(scaledTransImage))
