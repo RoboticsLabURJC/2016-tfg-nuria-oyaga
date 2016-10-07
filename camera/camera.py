@@ -10,6 +10,9 @@ class Camera():
     def __init__(self):
 
         self.lock = threading.Lock()
+        #Para probar problemas con transformada en el gui
+        #cv2.namedWindow("Image",cv2.WINDOW_NORMAL)
+        #cv2.resizeWindow("Image", 300, 300)
 
         try:
             ic = Ice.initialize()
@@ -34,6 +37,9 @@ class Camera():
             image = np.frombuffer(self.image.pixelData, dtype=np.uint8)
             image.shape = self.height, self.width, 3
             imageTrans = self.trasformImage(image)
+            #imageTrans.shape = 28, 28, 1
+            #Prueba para problemas con transformada
+            #cv2.imshow('Image',imageTrans)
             images = [image,imageTrans]
             self.lock.release()
         return images
@@ -48,5 +54,5 @@ class Camera():
 
     def trasformImage(self, img):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        #resize= cv2.resize(gray,(28,28))
-        return gray
+        resize= cv2.resize(gray,(28,28))
+        return resize
