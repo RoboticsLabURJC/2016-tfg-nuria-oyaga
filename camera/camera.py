@@ -56,8 +56,9 @@ class Camera():
     def trasformImage(self, img): #Trasformates the image for the network
         crop_img = img[0:480, 80:560]
         gray = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
-        resize= cv2.resize(gray,(28,28))
-        return resize
+        resize = cv2.resize(gray,(28,28))
+        neg = 255-resize
+        return neg
 
     def detection(self, img): #Uses caffe to detect the number we are showing
         self.net.blobs['data'].reshape(1,1,28,28)
