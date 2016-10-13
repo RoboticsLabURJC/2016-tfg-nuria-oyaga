@@ -54,7 +54,7 @@ class Camera():
             self.lock.release()
 
     def trasformImage(self, img): #Trasformates the image for the network
-        crop_img = img[80:560, 0:480]
+        crop_img = img[0:480, 80:560]
         gray = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
         resize= cv2.resize(gray,(28,28))
         return resize
