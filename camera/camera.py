@@ -4,15 +4,19 @@ import numpy as np
 import threading
 import cv2
 import Image
+sys.path.insert(0, '/home/nuria/TFG/caffe/python')
+import caffe
 
 class Camera():
 
     def __init__(self):
 
         self.lock = threading.Lock()
-        #Para probar problemas con transformada en el gui
-        #cv2.namedWindow("Image",cv2.WINDOW_NORMAL)
-        #cv2.resizeWindow("Image", 300, 300)
+
+        #Net parameters necesary
+        model_file = '/home/nuria/TFG/caffe/examples/mnist/lenet.prototxt'
+        pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/lenet_iter_10000.caffemodel'
+        self.net = caffe.Classifier(model_file, pretrained_file, image_dims=(28, 28), raw_scale=255)
 
         try:
             ic = Ice.initialize()
@@ -30,21 +34,18 @@ class Camera():
             exit()
             status = 1
 
-    def getImage(self):
+    def getImage(self): #This function gets the image from the webcam and trasformates it for the network
         if self.camera:
             self.lock.acquire()
             image = np.zeros((self.height, self.width, 3), np.uint8)
             image = np.frombuffer(self.image.pixelData, dtype=np.uint8)
             image.shape = self.height, self.width, 3
             imageTrans = self.trasformImage(image)
-            #imageTrans.shape = 28, 28, 1
-            #Prueba para problemas con transformada
-            #cv2.imshow('Image',imageTrans)
             images = [image,imageTrans]
             self.lock.release()
         return images
 
-    def update(self):
+    def update(self): #Updates the camera every time the thread changes
         if self.camera:
             self.lock.acquire()
             self.image = self.camera.getImageData("RGB8")
@@ -52,7 +53,15 @@ class Camera():
             self.width = self.image.description.width
             self.lock.release()
 
-    def trasformImage(self, img):
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    def trasformImage(self, img): #Trasformates the image for the network
+        crop_img = img[80:560, 0:480]
+        gray = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
         resize= cv2.resize(gray,(28,28))
         return resize
+
+    def detection(self, img): #Uses caffe to detect the number we are showing
+        self.net.blobs['data'].reshape(1,1,28,28)
+        self.net.blobs['data'].data[...]=img
+        output = self.net.forward()
+        digito = output['prob'].argmax()
+        return digito
