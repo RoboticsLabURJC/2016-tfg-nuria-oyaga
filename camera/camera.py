@@ -15,7 +15,10 @@ class Camera():
 
         #Net parameters necesary
         model_file = '/home/nuria/TFG/caffe/examples/mnist/lenet.prototxt'
-        pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/lenet_iter_10000.caffemodel'
+        #Canny filter
+        #pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/lenet_edges_iter_10000.caffemodel'
+        #Laplacian filter
+        pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/lenet_lapledges_iter_10000.caffemodel'
         self.net = caffe.Classifier(model_file, pretrained_file, image_dims=(28, 28), raw_scale=255)
 
         try:
@@ -54,11 +57,27 @@ class Camera():
             self.lock.release()
 
     def trasformImage(self, img): #Trasformates the image for the network
-        crop_img = img[0:480, 80:560]
-        gray = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
-        resize = cv2.resize(gray,(28,28))
-        neg = 255-resize
-        return neg
+        #Focus the image
+        img_crop = img[0:480, 80:560]
+        #Grayscale image
+        img_gray = cv2.cvtColor(img_crop, cv2.COLOR_BGR2GRAY)
+        #Resize image
+        resize = cv2.resize(img_gray,(28,28))
+        #Gaussian filter
+        img_filt = cv2.GaussianBlur(resize, (5, 5), 0)
+        #Canny filter
+        #v = np.median(img_filt)
+        #sigma = 0.33
+        #lower = int(max(0, (1.0 - sigma) * v))
+        #upper = int(min(255, (1.0 + sigma) * v))
+        #edges = cv2.Canny(img_filt, lower, upper)
+        #Laplacian filter
+        edges = cv2.Laplacian(img_filt,-1,5)
+        edges = cv2.convertScaleAbs(edges)
+        #Negative
+        #neg = 255-resize
+        return edges
+        #return neg
 
     def detection(self, img): #Uses caffe to detect the number we are showing
         self.net.blobs['data'].reshape(1,1,28,28)
