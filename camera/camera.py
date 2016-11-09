@@ -7,23 +7,31 @@ import Image
 sys.path.insert(0, '/home/nuria/TFG/caffe/python')
 import caffe
 
+ddepth = -1
+kw = dict(ksize=3, scale=1, delta=0, borderType=cv2.BORDER_DEFAULT)
+
+ic = Ice.initialize(sys.argv)
+properties = ic.getProperties()
+filterMode = properties.getProperty("Numberclassifier.Filter")
+
+
 class Camera():
 
     def __init__(self):
 
         self.lock = threading.Lock()
-
         #Net parameters necesary
         model_file = '/home/nuria/TFG/caffe/examples/mnist/lenet.prototxt'
-        #Canny filter
-        #pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/lenet_edges_iter_10000.caffemodel'
-        #Laplacian filter
-        pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/lenet_lapledges_iter_10000.caffemodel'
+        if (filterMode == "0"):
+            #Canny filter
+            pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/lenet_edges_iter_10000.caffemodel'
+        else:
+            #Laplacian filter
+            pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/lenet_sobeledges_iter_10000.caffemodel'
         self.net = caffe.Classifier(model_file, pretrained_file, image_dims=(28, 28), raw_scale=255)
 
         try:
-            ic = Ice.initialize()
-            obj = ic.stringToProxy('cameraA:default -h localhost -p 9999')
+            obj = ic.propertyToProxy("Numberclassifier.Camera.Proxy")
             self.camera = jderobot.CameraPrx.checkedCast(obj)
             if self.camera:
                 self.image = self.camera.getImageData("RGB8")
@@ -65,18 +73,22 @@ class Camera():
         resize = cv2.resize(img_gray,(28,28))
         #Gaussian filter
         img_filt = cv2.GaussianBlur(resize, (5, 5), 0)
-        #Canny filter
-        #v = np.median(img_filt)
-        #sigma = 0.33
-        #lower = int(max(0, (1.0 - sigma) * v))
-        #upper = int(min(255, (1.0 + sigma) * v))
-        #edges = cv2.Canny(img_filt, lower, upper)
-        #Laplacian filter
-        edges = cv2.Laplacian(img_filt,-1,5)
-        edges = cv2.convertScaleAbs(edges)
+        if (filterMode == "0"):
+            #Canny filter
+            v = np.median(img_filt)
+            sigma = 0.33
+            lower = int(max(0, (1.0 - sigma) * v))
+            upper = int(min(255, (1.0 + sigma) * v))
+            edges = cv2.Canny(img_filt, lower, upper)
+        else:
+            #Laplacian filter
+            edges = cv2.Laplacian(img_filt,-1,5)
+            edges = cv2.convertScaleAbs(edges)
+        kernel = np.ones((5,5),np.uint8)
+        dilation = cv2.dilate(edges,kernel,iterations = 1)
         #Negative
         #neg = 255-resize
-        return edges
+        return dilation
         #return neg
 
     def detection(self, img): #Uses caffe to detect the number we are showing
