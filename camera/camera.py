@@ -12,7 +12,6 @@ kw = dict(ksize=3, scale=1, delta=0, borderType=cv2.BORDER_DEFAULT)
 
 ic = Ice.initialize(sys.argv)
 properties = ic.getProperties()
-filterMode = properties.getProperty("Numberclassifier.Filter")
 
 
 class Camera():
@@ -22,12 +21,7 @@ class Camera():
         self.lock = threading.Lock()
         #Net parameters necesary
         model_file = '/home/nuria/TFG/caffe/examples/mnist/lenet.prototxt'
-        if (filterMode == "0"):
-            #Canny filter
-            pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/lenet_edges_iter_10000.caffemodel'
-        else:
-            #Laplacian filter
-            pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/lenet_sobeledges_iter_10000.caffemodel'
+        pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/Transformation 0-1 (Drop 0.5) Net/lenet_iter_7000.caffemodel'
         self.net = caffe.Classifier(model_file, pretrained_file, image_dims=(28, 28), raw_scale=255)
 
         try:
@@ -73,27 +67,17 @@ class Camera():
         resize = cv2.resize(img_gray,(28,28))
         #Gaussian filter
         img_filt = cv2.GaussianBlur(resize, (5, 5), 0)
-        if (filterMode == "0"):
-            #Canny filter
-            v = np.median(img_filt)
-            sigma = 0.33
-            lower = int(max(0, (1.0 - sigma) * v))
-            upper = int(min(255, (1.0 + sigma) * v))
-            edges = cv2.Canny(img_filt, lower, upper)
-        else:
-            #Laplacian filter
-            edges = cv2.Laplacian(img_filt,-1,5)
-            edges = cv2.convertScaleAbs(edges)
-        kernel = np.ones((5,5),np.uint8)
-        dilation = cv2.dilate(edges,kernel,iterations = 1)
-        #Negative
-        #neg = 255-resize
-        return dilation
-        #return neg
+        #Sobel filter
+        sobelx = cv2.Sobel(img_filt,cv2.CV_64F,1,0,ksize=5)  # x
+        sobely = cv2.Sobel(img_filt,cv2.CV_64F,0,1,ksize=5)  # y
+        edges = cv2.add(abs(sobelx),abs(sobely))
+        edges = cv2.normalize(edges,None,0,255,cv2.NORM_MINMAX)
+        edges = np.uint8(edges)
+        return edges
 
     def detection(self, img): #Uses caffe to detect the number we are showing
         self.net.blobs['data'].reshape(1,1,28,28)
-        self.net.blobs['data'].data[...]=img
+        self.net.blobs['data'].data[...]=img * 0.00390625
         output = self.net.forward()
         digito = output['prob'].argmax()
         return digito
