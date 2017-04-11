@@ -1,7 +1,6 @@
 import sys, Ice
 from PyQt4 import QtGui
-from gui.webcamgui import WebcamGui
-from gui.videogui import VideoGui
+from gui.gui import Gui
 from gui.threadgui import ThreadGui
 from camera.camera import Camera
 from camera.threadcamera import ThreadCamera
@@ -14,12 +13,13 @@ if __name__ == '__main__':
     properties = ic.getProperties()
     source = properties.getPropertyAsInt("Detection.Source")
     app = QtGui.QApplication(sys.argv)
+    window = Gui(source)
+    window.show()
 
     if source == 0:
-        window = WebcamGui()
         camera = Camera()
         window.setCamera(camera)
-        window.show()
+
         t1 = ThreadCamera(camera)
         t1.start()
 
@@ -27,9 +27,7 @@ if __name__ == '__main__':
         t2.start()
 
     else:
-        window = VideoGui()
-        window.show()
-        window.evaluate()
-
+        video_file = properties.getProperty("Detection.VideoFile")
+        window.update(video_file)
 
     sys.exit(app.exec_())
