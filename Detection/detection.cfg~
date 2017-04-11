@@ -1,5 +1,0 @@
-Detection.Camera.Proxy=cameraA:default -h localhost -p 9999
-#0 if you want camera, 1 for video
-Detection.Source = 0
-#if you want to use a video uncomment this
-Detection.VideoFile = /home/nuria/TFG/Detection/Videos/example.mp4
