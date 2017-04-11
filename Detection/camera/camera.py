@@ -23,7 +23,6 @@ class Camera():
         ic = None
         # Initializing the Ice run-time.
         ic = Ice.initialize(sys.argv)
-        properties = ic.getProperties()
 
         self.lock = threading.Lock()
 
