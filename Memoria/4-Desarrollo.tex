@@ -1,0 +1,89 @@
+\chapter{Desarrollo}\label{cap.desarrollo}
+En este capítulo se expondrá el trabajo realizado para el entendimiento del problema de clasificación, elaborando un amplio estudio sobre las variantes posibles sobre las redes entrenadas, y una primera aproximación a la detección,todo ello con redes neuronales desarrolladas sobre la plataforma Caffe.\\
+\section{Clasificador de dígitos}
+Para el estudio de la clasificación empleando redes neuronales desarrolladas con Caffe, se optó por la transformación, según determinados criterios, de la red básica proporcionada por la propia plataforma en este ámbito.\\
+\subsection{Red básica}
+Esta red está orientada a la clasificación de números utilizando en el entrenamiento la base de datos numérica MNIST, explicada en el Capítulo~\ref{cap.infraestructura}. Para su entrenamiento, Caffe proporciona tres archivos que se deberán editar para adaptar la red al problema que se abarque.\\
+\begin{description}
+	\item[Definición de la red] \hfill \\
+	Caffe utiliza el archivo 
+	\textit{lenet\_train\_test.prototxt} para la especificación de todos los parámetros que son necesarios en el entrenamiento de la red, es decir, define las imágenes que se emplearán, la propia estructura de la red y la forma en la que se analizarán las imágenes proporcionadas, todo ello empleando diferentes capas (\textit{layers}).\\
+	
+	La primera línea de este documento es utilizada para indicar el nombre que se le quiere dar a la red.
+	\vspace{5pt}
+	\begin{lstlisting}[frame=single]
+	name: "LeNet"
+	\end{lstlisting}
+	
+	En concreto, esta red recibe el nombre de LeNet, un tipo de red que es conocida por un buen funcionamiento en las tareas de clasificiación de dígitos y que, por lo general, consta de una capa convolucional seguida por una capa de agrupamiento (\textit{pooling}), repetido dos veces y, finalmente, dos capas totalmente conectadas similares a las perceptrones multicapa convencionales. En el ejemplo de Caffe, la estructura habitual de la red LeNet se ve ligeramente modificada, ya que en lugar de emplear una función de activacion sigmoidal se utiliza una linear.\\
+	
+	Tras la definición del nombre se definen dos capas de datos, una de ellas correspondiente a los datos de entrenamiento de la red y, la otra, correspondiente a los datos que se utilizarán para realizar el test durante el entrenamiento para obtener datos de \textit{accuracy} y \textit{loss}.
+	\vspace{5pt}
+	\begin{lstlisting}[frame=single]
+	layer {
+		name: "mnist"
+		type: "Data"
+		top: "data"
+		top: "label"
+		include {phase: TRAIN}
+		transform_param {scale: 0.00390625}
+		data_param {
+			source: "examples/mnist/mnist_train_lmdb"
+			batch_size: 64
+			backend: LMDB
+		}
+	}
+	\end{lstlisting}
+	
+	Es importante que los parámetros de transformación, en este caso un factor de escala que establece el rango de la imagen en [0,1], sean los mismos en ambas fases, pues si se evaluase la red con una transformación de la imágen distinta a la aplicada en el entrenamiento los resultados obtenidos no serían reales.\\
+	Se utilizará, por tanto, dos capas de datos que difieren en la fase en la que se utilizarán los datos, entrenamiento o evaluación de la red, el tamaño del lote, siendo 64 muestras para el entrenamiento y 100 para el test, y la ruta de la que se cogen los datos.\\
+	
+	A continuación, se comienzan a definir las capas del entrenamiento propiamente dicho. Se intercala una capa de convolución con una de agrupamiento y se repite dos veces.
+	\vspace{5pt}
+	\begin{lstlisting}[frame=single]
+	layer {
+		name: "conv1"
+		type: "Convolution"
+		bottom: "data"
+		top: "conv1"
+		param {lr_mult: 1}
+		param {lr_mult: 2}
+		convolution_param {
+			num_output: 20
+			kernel_size: 5
+			stride: 1
+			weight_filler {type: "xavier"}
+			bias_filler {type: "constant"}
+		}
+	}	
+	\end{lstlisting}
+	
+	En la capa de convolución, explicada en el Capítulo~\ref{cap.infraestructura}, se define que el tamaño del filtro será de 5x5 y que se obtendrán 20 salidas, en la segunda capa de convolución, sin embargo, se obtendrán 50 salidas. Además se define el algoritmo "Xavier" para la inicialización de los pesos, que determina automáticamente la escala de inicialización basada en el número de entradas y de las neuronas de salida, y la inicialización del \textit{bias} mediante una constante que por defecto es 0.
+	\vspace{5pt}
+	\begin{lstlisting}[frame=single]
+	layer {
+		name: "pool1"
+		type: "Pooling"
+		bottom: "conv1"
+		top: "pool1"
+		pooling_param {
+			pool: MAX
+			kernel_size: 2
+			stride: 2
+		}
+	}	
+	\end{lstlisting}
+	
+	La capa de agrupamiento, también explicada en el Capítulo~\ref{cap.infraestructura}, será alimentada por la capa de convolución anterior y alimentará a la siguiente en caso de que la haya. Se definen en ella un tamaño de filtro de 2x2, un intervalo de dos muestras entre cada aplicación del filtro, por lo que no hay solape, y el método del máximo para realizar el agrupamiento.
+
+	
+	\item[Definición del solucionador] \hfill 
+	\vspace{10pt}
+	\\
+	
+	\item[Ejecución de la red] \hfill 
+	\vspace{10pt}
+	\\
+		
+\end{description}
+
