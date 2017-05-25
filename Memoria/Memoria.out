@@ -5,7 +5,7 @@
 \BOOKMARK [1][-]{section.1.2}{Bases de datos}{chapter.1}% 5
 \BOOKMARK [2][-]{subsection.1.2.1}{MNIST}{section.1.2}% 6
 \BOOKMARK [2][-]{subsection.1.2.2}{COCO}{section.1.2}% 7
-\BOOKMARK [0][-]{chapter.2}{Desarrollo}{}% 8
+\BOOKMARK [0][-]{chapter.2}{Clasificaci\363n con Deep Learning}{}% 8
 \BOOKMARK [1][-]{section.2.1}{Clasificador de d\355gitos}{chapter.2}% 9
 \BOOKMARK [2][-]{subsection.2.1.1}{Red b\341sica}{section.2.1}% 10
-\BOOKMARK [2][-]{subsection.2.1.2}{Bases de datos}{section.2.1}% 11
+\BOOKMARK [2][-]{subsection.2.1.2}{Componente Python}{section.2.1}% 11

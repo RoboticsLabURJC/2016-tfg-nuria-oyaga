@@ -1,24 +1,30 @@
-\chapter{Desarrollo}\label{cap.desarrollo}
-En este capítulo se expondrá el trabajo realizado para el entendimiento del problema de clasificación, elaborando un amplio estudio sobre las variantes posibles sobre las redes entrenadas, y una primera aproximación a la detección,todo ello con redes neuronales desarrolladas sobre la plataforma Caffe.\\
+\chapter{Clasificación con Deep Learning}\label{cap.clasificacion}
+En este capítulo se expondrá el trabajo realizado para el entendimiento del problema de clasificación, mediante la elaboración de un componente en Python que permite la clasificación de dígitos del 0 al 9 en tiempo real, y la realización de un amplio estudio sobre las variantes posibles aplicadas a las redes entrenadas, utilizando la plataforma Caffe.\\
 \section{Clasificador de dígitos}
-Para el estudio de la clasificación empleando redes neuronales desarrolladas con Caffe, se optó por la transformación, según determinados criterios, de la red básica proporcionada por la propia plataforma en este ámbito.\\
+Se ha desarrollado un componente en Pyhton para la clasificación de dígitos entre 0 y 9 en tiempo real, siendo necesario, previamente, un entendimiento de una primera red básica, utilizada por el mismo para la tarea. En esta sección se explicará el procedimiento seguido para el entendimiento de la red y el desarrollo del propio componente.\\
 \subsection{Red básica}
-Esta red está orientada a la clasificación de números utilizando en el entrenamiento la base de datos numérica MNIST, explicada en el Capítulo~\ref{cap.infraestructura}. Para su entrenamiento, Caffe proporciona tres archivos que se deberán editar para adaptar la red al problema que se abarque.\\
+La red que se empleará, está orientada a la clasificación de números utilizando, en el entrenamiento, la base de datos numérica MNIST, explicada en el Capítulo~\ref{cap.infraestructura}.\\
+Para realizar el entrenamiento de la red, Caffe proporciona tres archivos que se editarán para adaptar la red al problema que se abarque. A continuación, se explicará cada uno de esos archivos, siguiendo el orden que fue necesario hasta conseguir la red completamente entrenada.
+\vspace{15pt}
 \begin{description}
-	\item[Definición de la red] \hfill \\
+	\item[Definición de la red] \hfill 
+	\vspace{10pt}
+	\\
 	Caffe utiliza el archivo 
 	\textit{lenet\_train\_test.prototxt} para la especificación de todos los parámetros que son necesarios en el entrenamiento de la red, es decir, define las imágenes que se emplearán, la propia estructura de la red y la forma en la que se analizarán las imágenes proporcionadas, todo ello empleando diferentes capas (\textit{layers}).\\
-	
+	\vspace{-10pt}
+	\\
 	La primera línea de este documento es utilizada para indicar el nombre que se le quiere dar a la red.
-	\vspace{5pt}
+	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	name: "LeNet"
 	\end{lstlisting}
 	
 	En concreto, esta red recibe el nombre de LeNet, un tipo de red que es conocida por un buen funcionamiento en las tareas de clasificiación de dígitos y que, por lo general, consta de una capa convolucional seguida por una capa de agrupamiento (\textit{pooling}), repetido dos veces y, finalmente, dos capas totalmente conectadas similares a las perceptrones multicapa convencionales. En el ejemplo de Caffe, la estructura habitual de la red LeNet se ve ligeramente modificada, ya que en lugar de emplear una función de activacion sigmoidal se utiliza una linear.\\
-	
+	\vspace{-10pt}
+	\\
 	Tras la definición del nombre se definen dos capas de datos, una de ellas correspondiente a los datos de entrenamiento de la red y, la otra, correspondiente a los datos que se utilizarán para realizar el test durante el entrenamiento para obtener datos de \textit{accuracy} y \textit{loss}.
-	\vspace{5pt}
+	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	layer {
 		name: "mnist"
@@ -37,9 +43,10 @@ Esta red está orientada a la clasificación de números utilizando en el entren
 	
 	Es importante que los parámetros de transformación, en este caso un factor de escala que establece el rango de la imagen en [0,1], sean los mismos en ambas fases, pues si se evaluase la red con una transformación de la imágen distinta a la aplicada en el entrenamiento los resultados obtenidos no serían reales.\\
 	Se utilizará, por tanto, dos capas de datos que difieren en la fase en la que se utilizarán los datos, entrenamiento o evaluación de la red, el tamaño del lote, siendo 64 muestras para el entrenamiento y 100 para el test, y la ruta de la que se cogen los datos.\\
-	
+	\vspace{-10pt}
+	\\
 	A continuación, se comienzan a definir las capas del entrenamiento propiamente dicho. Se intercala una capa de convolución con una de agrupamiento y se repite dos veces.
-	\vspace{5pt}
+	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	layer {
 		name: "conv1"
@@ -57,9 +64,9 @@ Esta red está orientada a la clasificación de números utilizando en el entren
 		}
 	}	
 	\end{lstlisting}
-	
+
 	En la capa de convolución, explicada en el Capítulo~\ref{cap.infraestructura}, se define que el tamaño del filtro será de 5x5 y que se obtendrán 20 salidas, en la segunda capa de convolución, sin embargo, se obtendrán 50 salidas. Además se define el algoritmo "Xavier" para la inicialización de los pesos, que determina automáticamente la escala de inicialización basada en el número de entradas y de las neuronas de salida, y la inicialización del \textit{bias} mediante una constante que por defecto es 0.
-	\vspace{5pt}
+	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	layer {
 		name: "pool1"
@@ -75,9 +82,10 @@ Esta red está orientada a la clasificación de números utilizando en el entren
 	\end{lstlisting}
 	
 	La capa de agrupamiento, también explicada en el Capítulo~\ref{cap.infraestructura}, será alimentada por la capa de convolución anterior y alimentará a la siguiente en caso de que la haya. Se definen en ella un tamaño de filtro de 2x2, un intervalo de dos muestras entre cada aplicación del filtro, por lo que no hay solape, y el método del máximo para realizar el agrupamiento.\\
-	
+	\vspace{-10pt}
+	\\
 	Tras estas capas, se establecen dos capas completamente conectadas, \textit{InnerProduct}, separadas por la capa de activación, \textit{ReLu}, ambas explicadas en el Capítulo~\ref{cap.infraestructura}. 
-	\vspace{5pt}
+	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	layer {
 		name: "ip1"
@@ -104,9 +112,10 @@ Esta red está orientada a la clasificación de números utilizando en el entren
 	\end{lstlisting}
 	
 	Las capas completamente conectadas se definen con, 500 salidas la primera de ellas, y tantas como clases se tengan en la segunda, en el caso concreto que se trata serán 10, correspondientes con los dígitos del 0 al 9.\\
-	
+	\vspace{-10pt}
+	\\
 	Para terminar la estructura de la red básica, Caffe permite la opción de añadir capas que muestren parámetros de evaluación de la red que se está entrenando. Para ello, en el Capítulo~\ref{cap.infraestructura}, se explicaron varias capas de \textit{Loss}, que serán empleadas en esta red para su evaluación, se deberán explicitar en este documento.
-	\vspace{5pt}
+	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	layer {
 		name: "accuracy"
@@ -126,8 +135,9 @@ Esta red está orientada a la clasificación de números utilizando en el entren
 	}	
 	\end{lstlisting}
 	
-	Estas dos capas permiten obtener valores de precisión y pérdidas cada ciertas iteraciones, siendo marcado este valor en el siguiente documento.
-	
+	Estas dos capas permiten obtener valores de precisión y pérdidas cada ciertas iteraciones, siendo marcado este valor en el siguiente documento.\\
+	\vspace{-10pt}
+	\\
 	En la Figura~\ref{fig.redBasica} se puede observar un esquema de la estructura definida en este apartado, los valores de interés y cada una de las entradas y salidas de las capas.
 	
 	\begin{figure}[h!]
@@ -139,16 +149,18 @@ Esta red está orientada a la clasificación de números utilizando en el entren
 	\end{figure}
 	
 	Para obtener la Figura~\ref{fig.redBasica}, se ha ejecutado un código proporcionado por la propia plataforma, que, mediante el archivo que define la estructura, explicado anteriormente, dibuja la red. Para ello se debe ejecutar el siguiente comando:
-	\vspace{5pt}
+	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	$ caffe/python/draw_net.py <netprototxt_filename> <out_img_filename>
 	\end{lstlisting}
 	
+	\vspace{50pt}
+	\item[Definición del solucionador] \hfill 
 	\vspace{10pt}
-	\item[Definición del solucionador] \hfill \\
-	Pare esta tarea se va a utilizar el archivo de Caffe \textit{lenet\_solver.prototxt}.\\
-	Este archivo será importante manipularlo para manejar parámetros del propio entrenamiento de la red. Se definen en él, valores importantes del entrenamiento, como la estructura de red que se utilizará, definida en el apartado anterior, y el número de iteraciones que se ejecutarán durante el entrenamiento de la red, cuya explicación se aportó en el Capítulo~\ref{cap.infraestructura}. Además, en ese mismo capítulo, se explican el resto de parámetros que se manipularán en este proyecto, como la evaluación de la red o las redes intermedias que se guardarán.
-	\vspace{10pt}
+	\\
+	Para esta tarea se va a utilizar el archivo de Caffe \textit{lenet\_solver.prototxt}, que permitirá manejar parámetros del propio entrenamiento de la red.\\ 
+	Se definen en él parámetros como la estructura de red que se utilizará, definida en el apartado anterior, y el número de iteraciones que se ejecutarán durante el entrenamiento de la red, cuya explicación se aportó en el Capítulo~\ref{cap.infraestructura}. Además, en ese mismo capítulo, se explican el resto de parámetros que se manejarán en este proyecto, como la evaluación de la red o las redes intermedias que se guardarán.
+	\vspace{5pt}
 	\begin{lstlisting}[frame=single]
 	# The train/test net protocol buffer definition
 	net: "examples/mnist/lenet_train_test.prototxt"
@@ -177,18 +189,19 @@ Esta red está orientada a la clasificación de números utilizando en el entren
 	# solver mode: CPU or GPU
 	solver_mode: CPU	
 	\end{lstlisting}
-	\vspace{40pt}
-	
-	\item[Ejecución de la red] \hfill \\
+	\vspace{15pt}
+	\item[Ejecución de la red] \hfill 
+	\vspace{10pt}
+	\\
 	Una vez se han definido los parámetros adecuados para la red que se quiera entrenar, se ejecutarán los siguientes comandos, que comenzará con el entrenamiento de la red:
-	\vspace{5pt}
+	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	cd $CAFFE_ROOT
 	./examples/mnist/train_lenet.sh	
 	\end{lstlisting}
 	
 	El archivo que se ejecuta contiene información sobre qué solucionador se debe implementar y el modo de ejecución. Además es posible añadirle una línea que guardará un archivo con información de \textit{log} del proceso de entrenamiento.
-	\vspace{5pt}
+	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	#!/usr/bin/env sh
 	set -e
@@ -212,11 +225,12 @@ Esta red está orientada a la clasificación de números utilizando en el entren
 			\label{fig.finEntrBas}
 		\end{center}
 	\end{figure}
-	\vspace{50pt}
+	\vspace{30pt}
 	Tras terminar el entrenamiento, mostrado en la Figura~\ref{fig.finEntrBas}, se obtiene el archivo con la red neuronal entrenada, almacenado según la ruta que se indicó en el solucionador, que podrá ser utilizada en la herramienta que sea de interés.\\
-	
+	\vspace{-10pt}
+	\\
 	El archivo \textit{log} generado podrá ser visualizado mediante la ejecución del script \textit{plot\_learning\_curve.py} \footnote{https://github.com/adilmoujahid/deeplearning-cats-dogs-tutorial/blob/master/code/plot\_learning\_curve.py} de la siguiente forma:
-	\vspace{5pt}
+	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	python plot_learning_curve.py /home/nuria/TFG/logs/RedBasica.log 
 	 RedBasicaLog.png
@@ -232,5 +246,6 @@ Esta red está orientada a la clasificación de números utilizando en el entren
 		\end{center}
 	\end{figure}
 \end{description}
-\subsection{Bases de datos}
+\subsection{Componente Python}
+
 

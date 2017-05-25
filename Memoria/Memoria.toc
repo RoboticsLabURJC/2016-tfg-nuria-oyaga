@@ -6,7 +6,7 @@
 \contentsline {section}{\numberline {1.2}Bases de datos}{7}{section.1.2}
 \contentsline {subsection}{\numberline {1.2.1}MNIST}{7}{subsection.1.2.1}
 \contentsline {subsection}{\numberline {1.2.2}COCO}{8}{subsection.1.2.2}
-\contentsline {chapter}{\numberline {2}Desarrollo}{10}{chapter.2}
+\contentsline {chapter}{\numberline {2}Clasificaci\IeC {\'o}n con Deep Learning}{10}{chapter.2}
 \contentsline {section}{\numberline {2.1}Clasificador de d\IeC {\'\i }gitos}{10}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Red b\IeC {\'a}sica}{10}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Bases de datos}{19}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.2}Componente Python}{19}{subsection.2.1.2}

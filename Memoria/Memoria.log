@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.5.22)  23 MAY 2017 14:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.5.22)  25 MAY 2017 18:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -743,7 +743,7 @@ LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
  (./0-Agradecimientos.aux) (./0-Resumen.aux)
 (./1-Introduccion.aux) (./2-Objetivos.aux) (./3-Infraestructura.aux)
-(./4-Desarrollo.aux) (./5-Experimentos.aux) (./6-Conclusiones.aux)
+(./4-Clasificacion.aux) (./5-Deteccion.aux) (./6-Conclusiones.aux)
 (./7-Bibliografia.aux))
 \openout1 = `Memoria.aux'.
 
@@ -878,7 +878,7 @@ LaTeX Info: Redefining \. on input line 63.
 LaTeX Info: Redefining \% on input line 63.
 \openout2 = `0-Portada.aux'.
 
-(./0-Portada.tex <figures/logo.jpg, id=44, 632.3625pt x 321.2pt>
+(./0-Portada.tex <figures/logo.jpg, id=48, 632.3625pt x 321.2pt>
 File: figures/logo.jpg Graphic file (type jpg)
 
 <use figures/logo.jpg>
@@ -888,7 +888,7 @@ Package pdftex.def Info: figures/logo.jpg used on input line 7.
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/logo.jpg>] <figu
-res/CC-BY-SA.png, id=54, 1284.8pt x 452.69125pt>
+res/CC-BY-SA.png, id=58, 1284.8pt x 452.69125pt>
 File: figures/CC-BY-SA.png Graphic file (type png)
 
 <use figures/CC-BY-SA.png>
@@ -1009,73 +1009,78 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--10
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 37--38
+Underfull \hbox (badness 10000) in paragraph at lines 36--37
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 39--40
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
 
  []
 
 
-LaTeX Warning: Reference `' on page 3 undefined on input line 41.
+LaTeX Warning: Reference `' on page 3 undefined on input line 40.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 41--42
+Underfull \hbox (badness 10000) in paragraph at lines 40--41
 
  []
 
-<figures/red_caffe.png, id=111, 796.9775pt x 301.125pt>
+<figures/red_caffe.png, id=116, 796.9775pt x 301.125pt>
 File: figures/red_caffe.png Graphic file (type png)
 
 <use figures/red_caffe.png>
-Package pdftex.def Info: figures/red_caffe.png used on input line 45.
+Package pdftex.def Info: figures/red_caffe.png used on input line 44.
 (pdftex.def)             Requested size: 273.14923pt x 103.2036pt.
  [3 <./figures/red_caffe.png>] [4]
-<figures/relu.jpeg, id=124, 312.16624pt x 210.7875pt>
+<figures/relu.jpeg, id=129, 312.16624pt x 210.7875pt>
 File: figures/relu.jpeg Graphic file (type jpg)
  <use figures/relu.jpeg>
-Package pdftex.def Info: figures/relu.jpeg used on input line 85.
+Package pdftex.def Info: figures/relu.jpeg used on input line 105.
 (pdftex.def)             Requested size: 227.62206pt x 153.70313pt.
 
 [5 <./figures/relu.jpeg>]
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
+Underfull \hbox (badness 10000) in paragraph at lines 136--138
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 144--145
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 119--120
+Underfull \hbox (badness 10000) in paragraph at lines 146--147
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
 
  []
 
-<figures/basic_structure_annotations.png, id=146, 697.60625pt x 613.29124pt>
+<figures/basic_structure_annotations.png, id=151, 697.60625pt x 613.29124pt>
 File: figures/basic_structure_annotations.png Graphic file (type png)
 
 <use figures/basic_structure_annotations.png>
 Package pdftex.def Info: figures/basic_structure_annotations.png used on input 
-line 138.
+line 165.
 (pdftex.def)             Requested size: 364.19667pt x 320.1766pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figures/instancia_objetos.png, id=147, 699.61375pt x 311.1625pt>
+<figures/instancia_objetos.png, id=152, 699.61375pt x 311.1625pt>
 File: figures/instancia_objetos.png Graphic file (type png)
 
 <use figures/instancia_objetos.png>
-Package pdftex.def Info: figures/instancia_objetos.png used on input line 146.
+Package pdftex.def Info: figures/instancia_objetos.png used on input line 173.
 (pdftex.def)             Requested size: 364.19667pt x 161.98111pt.
 ) [8] [9 <./figures/basic_structure_annotations.png> <./figures/instancia_objet
 os.png>]
-\openout2 = `4-Desarrollo.aux'.
+\openout2 = `4-Clasificacion.aux'.
 
- (./4-Desarrollo.tex
+ (./4-Clasificacion.tex
 Cap\'{\i }tulo 2.
 
 Underfull \hbox (badness 10000) in paragraph at lines 2--3
@@ -1087,95 +1092,62 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 6--7
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 8--11
-
- []
-
 [10
 
 
 
 ]
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 14.
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 19.
 
  (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Underfull \hbox (badness 10000) in paragraph at lines 18--19
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--40
-
- []
-
-[11] [12]
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-
- []
-
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 106--107
-
- []
-
-[14] <figures/Original_net.png, id=269, 702.625pt x 702.625pt>
+) [11] [12] [13] [14]
+<figures/Original_net.png, id=274, 702.625pt x 702.625pt>
 File: figures/Original_net.png Graphic file (type png)
 
 <use figures/Original_net.png>
-Package pdftex.def Info: figures/Original_net.png used on input line 135.
+Package pdftex.def Info: figures/Original_net.png used on input line 145.
 (pdftex.def)             Requested size: 364.19667pt x 364.20921pt.
  [15 <./figures/Original_net.png (PNG copy)>]
-Overfull \hbox (2.98598pt too wide) in paragraph at lines 162--163
+Overfull \hbox (2.98598pt too wide) in paragraph at lines 174--175
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[16] <figures/RedBasica5000.png, id=310, 736.7525pt x 441.65pt>
+[16] <figures/RedBasica5000.png, id=315, 736.7525pt x 441.65pt>
 File: figures/RedBasica5000.png Graphic file (type png)
 
 <use figures/RedBasica5000.png>
-Package pdftex.def Info: figures/RedBasica5000.png used on input line 203.
+Package pdftex.def Info: figures/RedBasica5000.png used on input line 216.
 (pdftex.def)             Requested size: 364.19667pt x 218.31754pt.
 
-<figures/RedBasicaFin.png, id=311, 724.7075pt x 221.82875pt>
+<figures/RedBasicaFin.png, id=316, 724.7075pt x 221.82875pt>
 File: figures/RedBasicaFin.png Graphic file (type png)
 
 <use figures/RedBasicaFin.png>
-Package pdftex.def Info: figures/RedBasicaFin.png used on input line 210.
+Package pdftex.def Info: figures/RedBasicaFin.png used on input line 223.
 (pdftex.def)             Requested size: 364.19667pt x 111.47935pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--217
-
- []
-
-[17 <./figures/RedBasica5000.png>]
-Overfull \hbox (32.53867pt too wide) in paragraph at lines 218--218
+Overfull \hbox (32.53867pt too wide) in paragraph at lines 232--232
 [][][]\OT1/lmr/m/n/10 https://github.com/adilmoujahid/deeplearning-cats-dogs-tu
 torial/blob/master/code/plot[]learning[]curve.py| 
  []
 
-<figures/RedBasicaLog.png, id=331, 578.16pt x 433.62pt>
+[17 <./figures/RedBasica5000.png>]
+<figures/RedBasicaLog.png, id=336, 578.16pt x 433.62pt>
 File: figures/RedBasicaLog.png Graphic file (type png)
 
 <use figures/RedBasicaLog.png>
-Package pdftex.def Info: figures/RedBasicaLog.png used on input line 229.
+Package pdftex.def Info: figures/RedBasicaLog.png used on input line 243.
 (pdftex.def)             Requested size: 227.62206pt x 170.71231pt.
 ) [18 <./figures/RedBasicaFin.png> <./figures/RedBasicaLog.png>] [19]
-\openout2 = `5-Experimentos.aux'.
+\openout2 = `5-Deteccion.aux'.
 
 
-No file 5-Experimentos.tex.
+No file 5-Deteccion.tex.
 \openout2 = `6-Conclusiones.aux'.
 
 No file 6-Conclusiones.tex.
@@ -1189,32 +1161,26 @@ LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
  (./0-Agradecimientos.aux) (./0-Resumen.aux)
 (./1-Introduccion.aux) (./2-Objetivos.aux) (./3-Infraestructura.aux)
-(./4-Desarrollo.aux) (./5-Experimentos.aux) (./6-Conclusiones.aux)
+(./4-Clasificacion.aux) (./5-Deteccion.aux) (./6-Conclusiones.aux)
 (./7-Bibliografia.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 105.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 105.
+Package rerunfilecheck Info: File `Memoria.out' has not changed.
+(rerunfilecheck)             Checksum: B742B252EC31B3CB66689D31F87E0B82;677.
 
-
-Package rerunfilecheck Warning: File `Memoria.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Memoria.out':
-(rerunfilecheck)             Before: 26A948A69AC762FAADF955A65B7A66E5;582
-(rerunfilecheck)             After:  EE8DEAD973BCF36EDFD8465FA1A19BCA;650.
 
 LaTeX Warning: There were undefined references.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 105.
  ) 
 Here is how much of TeX's memory you used:
- 11391 strings out of 493029
- 165183 string characters out of 6136234
- 281096 words of memory out of 5000000
- 14537 multiletter control sequences out of 15000+600000
+ 11392 strings out of 493029
+ 165210 string characters out of 6136234
+ 281118 words of memory out of 5000000
+ 14538 multiletter control sequences out of 15000+600000
  54189 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,12n,43p,998b,1923s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,12n,43p,998b,1925s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/
 dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr
 /share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/
@@ -1227,10 +1193,10 @@ nts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb
 are/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/l
 m/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/tex
 mf/fonts/type1/public/lm/lmtt10.pfb>
-Output written on Memoria.pdf (23 pages, 745083 bytes).
+Output written on Memoria.pdf (23 pages, 745411 bytes).
 PDF statistics:
- 431 PDF objects out of 1000 (max. 8388607)
- 376 compressed objects within 4 object streams
+ 435 PDF objects out of 1000 (max. 8388607)
+ 380 compressed objects within 4 object streams
  173 named destinations out of 1000 (max. 500000)
- 131 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 139 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -30,7 +30,6 @@ Para su uso, es necesario editar su fichero de configuración, adaptándolo a la
          \item Invertir o no la imagen 
     \end{itemize}
 \end{itemize}
-
 \end{description}
 
 \subsection{Caffe}
@@ -49,36 +48,57 @@ Su base se encuentra en las redes neuronales convolucionales explicadas en el Ca
 \end{figure}
 
 La plataforma utiliza una serie de capas (\textit{layers}), que, según su configuración y la distinta conexión entre ellas, permite la creación de diferentes redes neuronales. Estas etiquetas se dividen en varios grupos, en función del tipo de entrada, el tipo de salida o la función que realiza cada una de ellas. Este trabajo no utiliza todas las capas existentes en la plataforma, a continuación se explicarán cada una de las capas empleadas, clasificadas según al grupo que pertenecen.\\
-\vspace{-25pt}
+\vspace{-20pt}
+
 \begin{description}
-\item[Data Layers] \hfill \\
+\item[Data Layers] \hfill 
+\vspace{10pt}
+\\
 	Su uso se centra en la introducción de datos a la red neuronal, y estarán situadas siempre en la parte inferior de la misma. Estos datos pueden provenir de diferentes vías como bases de datos eficientes como LMDB, utilizada en este trabajo, diréctamente desde la memoria o desde archivos en disco en HDF5 o formatos de imagen comunes.\\
 	Dentro de esta capa es posible, además de especificar la ruta de los datos y el tamaño del lote (\textit{batch}), indicar la fase en la que se utilizarán los datos, entrenamiento o test, así como algunos parámetros de transformación para el preprocesamiento de la imagen. En concreto, en este trabajo, se utilizarán datos de entrada para ambas fases y un factor de escala para establecer el rango de las imágenes en [0,1].
+	\vspace{15pt}
 	
+\item[Vision Layers] \hfill 
 \vspace{10pt}
-\item[Vision Layers] \hfill \\
+\\
 	Típicamente toman una imagen de entrada y producen otra de salida, de forma que, aplicando una operación particular a alguna región de la entrada, se obtiene la región correspondiente de la salida. Caffe dispone de varias capas de este estilo, a continuación se comentan las dos utilizadas en el trabajo.
+	\vspace{10pt}
 	\begin{description}
-	\item[Convolution Layer] \hfill \\
+	\item[Convolution Layer] \hfill 
+	\vspace{5pt}
+	\\
 		Realiza la convolución de la imagen de entrada con un conjunto de filtros de aprendizaje, cada uno produciendo un mapa de características en la imagen de salida. Se deben especificar datos como el número de salidas, el tamaño del filtro, el desplazamiento entre cada paso del filtro, y la inicialización y relleno de los pesos y bias.
-	\item[Pooling Layer] \hfill \\
+		\vspace{10pt}
+	\item[Pooling Layer] \hfill 
+	\vspace{5pt}
+	\\
 		Combina la imagen de entrada tomando el máximo, el promedio, u otras operaciones dentro de las regiones, siendo su finalidad la reducción del muestreo. En esta capa se pueden especificar parámetros como el tipo de pooling a realizar, máximo, promedio o estocástico, el tamaño del filtro o el desplazamiento entre cada paso del filtro.
 	\end{description}
 
 \vspace{70pt}
 \item[Common Layers] \hfill
 	\begin{description}
-	\item[Inner Product] \hfill \\
+	\item[Inner Product] \hfill 
+	\vspace{5pt}
+	\\
 	Calcula un producto escalar con un conjunto de pesos aprendidos, y, de manera opcional, añade sesgos. Trata la entrada como un simple vector y produce una salida en forma de otro, estableciendo la altura y el ancho de cada \textit{bolb} en 1. Se establece el número de salidas, y la inicialización y relleno de los pesos y bias.
-	\item[Dropout] \hfill \\
+	\vspace{10pt}
+	\item[Dropout] \hfill 
+	\vspace{5pt}
+	\\
 	Durante el entrenamiento, únicamente, establece una porción aleatoria del conjunto de entrada a 0, ajustando el resto de la magnitud del vector en consecuencia, evistando así el sobre ajuste. Se debe indicar el ration en un valor del 0 a 1, que indicará el porcentaje de muestras que se ignorarán.
 	\end{description}
 
-\vspace{10pt}	
-\item[Activation / Neuron Layers] \hfill  \\
-	En general, estas capas, son operadores de elementos, que toman un /textit{bolb} inferior y producen uno superior del mismo tamaño. Existen varias capas con este funcionamiento en la plataforma, en concreto se empleará la ReLu.
+\vspace{15pt}	
+\item[Activation / Neuron Layers] \hfill  
+\vspace{10pt}
+\\
+	En general, estas capas, son operadores de elementos, que toman un \textit{bolb} inferior y producen uno superior del mismo tamaño. Existen varias capas con este funcionamiento en la plataforma, en concreto se empleará la ReLu.
+	\vspace{10pt}
 	\begin{description}
-	\item[ReLu] \hfill  \\
+	\item[ReLu] \hfill  
+	\vspace{5pt}
+	\\
 		Utiliza la función $y=max(0,x)$ cuya gráfica se define en la Figura~\ref{fig.reLu}
 		\begin{figure}[h!]
 			\begin{center}
@@ -90,28 +110,35 @@ La plataforma utiliza una serie de capas (\textit{layers}), que, según su confi
 	\end{description}
 	
 \vspace{50pt}
-\item[Loss Layers] \hfill \\
+\item[Loss Layers] \hfill 
+\vspace{10pt}
+\\
 	El cálculo de la pérdida permite el aprendizaje mediante la comparación de la salida con un objetivo y la asignación de un coste para minimizarla. Se calcula mediante el paso hacia adelante. Existen diferentes medidas de las que se destacan dos.
+	\vspace{10pt}
 	\begin{description}
-	\item[Softmax with Loss] \hfill \\
+	\item[Softmax with Loss] \hfill 
+	\vspace{5pt}
+	\\
 		Se calcula como: 
 		$$E = \frac{-1}{N} \sum\limits_{n=1}^N \log(\hat{p}_{n,l_n})$$
 		Siendo $N$ el número total de muestras y $\hat{p}$ las probabilidades de cada etiqueta para cada muestra.
-	\item[Accuracy] \hfill \\
+		\vspace{10pt}
+	\item[Accuracy] \hfill 
+	\vspace{5pt}
+	\\
 		Se calcula como:
 		$$\frac{1}{N} \sum\limits_{n=1}^N \delta\{ \hat{l}_n = l_n \}$$
 		donde $\delta\{ \textup{condición}\} = \left\{ \begin{array}{lr} 1 &  \textup{si condición} \\ 0 & \mbox{resto} \end{array} \right.$
 	\end{description}
 	
 \end{description}
-\vspace{10pt}
+\vspace{20pt}
 Por último, además de las capas y parámetros definidos anteriormente, Caffe, permite el desarrollo de un \textit{solver} en el que se podrán ajustar parámetros como el número de iteraciones totales que se ejecutarán, el de test que se van a realizar, cada cuantas iteraciones se realizarán esos test, así como se sacarán redes intermedias.\\
-Para Caffe, el número de iteraciones no se corresponde con el número de veces que la red recorre la base de datos al completo, sino como las veces que se pasa por cada lote al completo. De esta manera, se define el número de épocas, es decir, el número de veces que se recorre de manera completa la base de datos, con la siguiente expresión:
-$$\textup{N.Epocas}=\frac{\textup{Tamaño lote de entrenamiento}\times \textup{Total iteraciones}}{\textup{Muestras entrenamiento}} $$
+Para Caffe, el número de iteraciones no se corresponde con el número de veces que la red recorre la base de datos al completo, sino como las veces que se pasa por cada lote al completo. De esta manera, se define el número de épocas, es decir, el número de veces que se recorre de manera completa la base de datos, con la siguiente expresión:\\
+$$\textup{N.Epocas}=\frac{\textup{Tamaño lote de entrenamiento}\times \textup{Total iteraciones}}{\textup{Muestras entrenamiento}} $$\\
 En cuanto al número de iteraciones que se establecerán de test, se debe cumplir la siguiente igualdad:
 $$\textup{Iteraciones test}=\frac{\textup{Muestras test}}{\textup{Tamaño lote de test}}$$
 
-\vspace{15pt}
 \section{Bases de datos}
 \subsection{MNIST}
 MNIST \footnote{http://yann.lecun.com/exdb/mnist/} está formada por diferentes imágenes con números escritos a mano y consta de un conjunto de entrenamiento de 60.000 ejemplos y otro de prueba de 10.000 ejemplos. Es una buena base de datos para personas que quieren probar técnicas de aprendizaje y métodos de reconocimiento de patrones en datos del mundo real, mientras que dedican un mínimo esfuerzo a preprocesar y formatear. \\
