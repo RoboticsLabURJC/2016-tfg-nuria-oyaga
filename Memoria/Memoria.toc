@@ -3,10 +3,21 @@
 \contentsline {section}{\numberline {1.1}Software}{1}{section.1.1}
 \contentsline {subsection}{\numberline {1.1.1}JdeRobot}{1}{subsection.1.1.1}
 \contentsline {subsection}{\numberline {1.1.2}Caffe}{3}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}DroidCam}{7}{subsection.1.1.3}
 \contentsline {section}{\numberline {1.2}Bases de datos}{7}{section.1.2}
 \contentsline {subsection}{\numberline {1.2.1}MNIST}{7}{subsection.1.2.1}
 \contentsline {subsection}{\numberline {1.2.2}COCO}{8}{subsection.1.2.2}
-\contentsline {chapter}{\numberline {2}Clasificaci\IeC {\'o}n con Deep Learning}{10}{chapter.2}
-\contentsline {section}{\numberline {2.1}Clasificador de d\IeC {\'\i }gitos}{10}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Red b\IeC {\'a}sica}{10}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Componente Python}{19}{subsection.2.1.2}
+\contentsline {section}{\numberline {1.3}M\IeC {\'e}tricas}{10}{section.1.3}
+\contentsline {chapter}{\numberline {2}Clasificaci\IeC {\'o}n con Deep Learning}{11}{chapter.2}
+\contentsline {section}{\numberline {2.1}Clasificador de d\IeC {\'\i }gitos}{11}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Red b\IeC {\'a}sica}{11}{subsection.2.1.1}
+\contentsline {subsubsection}{Definici\IeC {\'o}n de la red}{12}{section*.8}
+\contentsline {subsubsection}{Definici\IeC {\'o}n del solucionador}{16}{lstnumber.-8.1}
+\contentsline {subsubsection}{Ejecuci\IeC {\'o}n de la red}{18}{lstnumber.-9.26}
+\contentsline {subsection}{\numberline {2.1.2}Componente Python}{20}{subsection.2.1.2}
+\contentsline {subsubsection}{C\IeC {\'a}mara}{20}{section*.13}
+\contentsline {subsubsection}{GUI}{22}{lstnumber.-15.6}
+\contentsline {subsubsection}{Ejecuci\IeC {\'o}n}{23}{figure.caption.14}
+\contentsline {section}{\numberline {2.2}Banco de pruebas}{26}{section.2.2}
+\contentsline {section}{\numberline {2.3}Efectos del aprendizaje}{26}{section.2.3}
+\contentsline {section}{\numberline {2.4}Experimentos}{26}{section.2.4}
