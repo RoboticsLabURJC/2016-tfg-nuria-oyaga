@@ -1,10 +1,34 @@
 \begin{thebibliography}{1}
 
+\bibitem{fundamentos}
+{\em Fundamentos para el procesamiento de im{\'a}genes}.
+\newblock Uabc.
+
+\bibitem{4767851}
+J.~Canny.
+\newblock A computational approach to edge detection.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  PAMI-8(6):679--698, Nov 1986.
+
+\bibitem{metrics}
+K.~Ganesan.
+\newblock Text mining, analytics \& more.
+\newblock
+  \url{http://text-analytics101.rxnlp.com/2014/10/computing-precision-and-recall-for.html},
+  2014.
+\newblock [Accedido 25 de Mayo de 2017].
+
 \bibitem{jia2014caffe}
 Y.~Jia, E.~Shelhamer, J.~Donahue, S.~Karayev, J.~Long, R.~Girshick,
   S.~Guadarrama, and T.~Darrell.
 \newblock Caffe: Convolutional architecture for fast feature embedding.
 \newblock {\em arXiv preprint arXiv:1408.5093}, 2014.
+
+\bibitem{lopez2008redes}
+R.~L{\'o}pez and J.~Fern{\'a}ndez.
+\newblock {\em Las Redes Neuronales Artificiales}.
+\newblock Metodolog{\'\i}a y An{\'a}lisis de Datos en Ciencias Sociales.
+  Netbiblo, 2008.
 
 \bibitem{pullum2007guidance}
 L.~Pullum, B.~Taylor, and M.~Darrah.
