@@ -1,18 +1,22 @@
 \select@language {spanish}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Estructura y funcionamiento b\IeC {\'a}sico de red en Caffe\relax }}{3}{figure.caption.4}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Funci\IeC {\'o}n de activaci\IeC {\'o}n ReLu\relax }}{5}{figure.caption.5}
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Estructura de instancias de objetos\relax }}{9}{figure.caption.6}
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Estructura b\IeC {\'a}sica de anotaciones\relax }}{10}{figure.caption.7}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Red b\IeC {\'a}sica LeNet MNIST\relax }}{17}{figure.caption.10}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Ejecuci\IeC {\'o}n de entrenamiento de red LeNet MNIST\relax }}{19}{figure.caption.11}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Fin de entrenamiento de red LeNet MNIST\relax }}{19}{figure.caption.12}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Curva de aprendizaje Red B\IeC {\'a}sica\relax }}{20}{figure.caption.13}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Captura de componente gr\IeC {\'a}fico de la aplicaci\IeC {\'o}n\relax }}{24}{figure.caption.15}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Captura de DroidCam en el ordenador\relax }}{25}{figure.caption.16}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Captura de DroidCam en el dispositivo m\IeC {\'o}vil\relax }}{25}{figure.caption.17}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Captura del componente clasificador\relax }}{26}{figure.caption.18}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Imagen original y su correspondiente negativo\relax }}{35}{figure.caption.19}
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Porcentaje de acierto de base de datos original y ampliada con negativo\relax }}{35}{figure.caption.20}
-\contentsline {figure}{\numberline {2.11}{\ignorespaces Muestra de imagen con filtro Canny\relax }}{37}{figure.caption.21}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Estructura y funcionamiento b\IeC {\'a}sico de red en Caffe.\relax }}{5}{figure.caption.6}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Funci\IeC {\'o}n de activaci\IeC {\'o}n ReLu.\relax }}{7}{figure.caption.7}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Estructura de instancias de objetos.\relax }}{11}{figure.caption.8}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Estructura b\IeC {\'a}sica de anotaciones.\relax }}{12}{figure.caption.9}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Red b\IeC {\'a}sica LeNet MNIST.\relax }}{19}{figure.caption.12}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Ejecuci\IeC {\'o}n de entrenamiento de red LeNet MNIST.\relax }}{21}{figure.caption.13}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Fin de entrenamiento de red LeNet MNIST.\relax }}{21}{figure.caption.14}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Curva de aprendizaje Red B\IeC {\'a}sica.\relax }}{22}{figure.caption.15}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Captura de componente gr\IeC {\'a}fico de la aplicaci\IeC {\'o}n.\relax }}{26}{figure.caption.17}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Captura de DroidCam en el ordenador.\relax }}{27}{figure.caption.18}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Captura de DroidCam en el dispositivo m\IeC {\'o}vil.\relax }}{27}{figure.caption.19}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Captura del componente clasificador.\relax }}{28}{figure.caption.20}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Imagen original y su correspondiente negativo.\relax }}{37}{figure.caption.21}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Porcentaje de acierto de base de datos original y ampliada con negativo.\relax }}{37}{figure.caption.22}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Muestra de imagen con filtro Canny.\relax }}{39}{figure.caption.23}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
