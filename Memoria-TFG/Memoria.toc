@@ -1,32 +1,37 @@
 \select@language {spanish}
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2}Objetivos}{2}{chapter.2}
-\contentsline {chapter}{\numberline {3}Infraestructura}{3}{chapter.3}
-\contentsline {section}{\numberline {3.1}Software}{3}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}JdeRobot}{3}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Caffe}{5}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}DroidCam}{9}{subsection.3.1.3}
-\contentsline {section}{\numberline {3.2}Bases de datos}{9}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}MNIST}{9}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}COCO}{10}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Evaluaci\IeC {\'o}n de prestaciones}{12}{section.3.3}
-\contentsline {chapter}{\numberline {4}Clasificaci\IeC {\'o}n con Deep Learning}{13}{chapter.4}
-\contentsline {section}{\numberline {4.1}Clasificador de d\IeC {\'\i }gitos}{13}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Red b\IeC {\'a}sica}{13}{subsection.4.1.1}
-\contentsline {subsubsection}{Definici\IeC {\'o}n de la red}{14}{section*.10}
-\contentsline {subsubsection}{Definici\IeC {\'o}n del solucionador}{19}{figure.caption.12}
-\contentsline {subsubsection}{Ejecuci\IeC {\'o}n de la red}{20}{lstnumber.-9.26}
-\contentsline {subsection}{\numberline {4.1.2}Componente Python}{22}{subsection.4.1.2}
-\contentsline {subsubsection}{C\IeC {\'a}mara}{23}{section*.16}
-\contentsline {subsubsection}{GUI}{25}{lstnumber.-15.6}
-\contentsline {subsubsection}{Ejecuci\IeC {\'o}n}{26}{figure.caption.17}
-\contentsline {section}{\numberline {4.2}Banco de pruebas}{29}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Obtenci\IeC {\'o}n de datos de test}{29}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Banco de pruebas manual: Excel}{31}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Efectos del aprendizaje}{34}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Bases de datos}{35}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}N\IeC {\'u}mero de neuronas}{39}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Dropout}{39}{subsection.4.3.3}
-\contentsline {section}{\numberline {4.4}Experimentos}{39}{section.4.4}
-\contentsline {chapter}{\numberline {5}Detecci\IeC {\'o}n}{40}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusiones}{41}{chapter.6}
+\contentsline {section}{\numberline {1.1}Contexto y motivaci\IeC {\'o}n}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Objetivos}{1}{section.1.2}
+\contentsline {section}{\numberline {1.3}Metodolog\IeC {\'\i }a}{1}{section.1.3}
+\contentsline {section}{\numberline {1.4}Estructura de la memoria}{1}{section.1.4}
+\contentsline {chapter}{\numberline {2}Infraestructura}{2}{chapter.2}
+\contentsline {section}{\numberline {2.1}Software}{2}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}JdeRobot}{2}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Caffe}{4}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}DroidCam}{8}{subsection.2.1.3}
+\contentsline {section}{\numberline {2.2}Bases de datos}{8}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}MNIST}{8}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}COCO}{9}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}Evaluaci\IeC {\'o}n de prestaciones}{11}{section.2.3}
+\contentsline {chapter}{\numberline {3}Clasificaci\IeC {\'o}n con Deep Learning}{12}{chapter.3}
+\contentsline {section}{\numberline {3.1}Clasificador de d\IeC {\'\i }gitos}{12}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Red b\IeC {\'a}sica}{12}{subsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.1.1}Definici\IeC {\'o}n de la red}{13}{subsubsection.3.1.1.1}
+\contentsline {subsubsection}{\numberline {3.1.1.2}Definici\IeC {\'o}n del solucionador}{18}{subsubsection.3.1.1.2}
+\contentsline {subsubsection}{\numberline {3.1.1.3}Ejecuci\IeC {\'o}n de la red}{19}{subsubsection.3.1.1.3}
+\contentsline {subsection}{\numberline {3.1.2}Componente Python}{21}{subsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.2.1}C\IeC {\'a}mara}{22}{subsubsection.3.1.2.1}
+\contentsline {subsubsection}{\numberline {3.1.2.2}GUI}{24}{subsubsection.3.1.2.2}
+\contentsline {subsubsection}{\numberline {3.1.2.3}Ejecuci\IeC {\'o}n}{25}{subsubsection.3.1.2.3}
+\contentsline {section}{\numberline {3.2}Banco de pruebas}{28}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Obtenci\IeC {\'o}n de datos de test}{28}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Banco de pruebas manual}{30}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Efectos del aprendizaje}{33}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Modificaci\IeC {\'o}n de bases de datos}{34}{subsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.1.1}Im\IeC {\'a}genes de bordes}{34}{subsubsection.3.3.1.1}
+\contentsline {subsubsection}{\numberline {3.3.1.2}Im\IeC {\'a}genes ruidosas en test}{41}{subsubsection.3.3.1.2}
+\contentsline {subsubsection}{\numberline {3.3.1.3}Im\IeC {\'a}genes ruidosas en entrenamiento}{44}{subsubsection.3.3.1.3}
+\contentsline {subsection}{\numberline {3.3.2}N\IeC {\'u}mero de iteraciones}{50}{subsection.3.3.2}
+\contentsline {section}{\numberline {3.4}Experimentos}{51}{section.3.4}
+\contentsline {chapter}{\numberline {4}Detecci\IeC {\'o}n}{53}{chapter.4}
+\contentsline {chapter}{\numberline {5}Conclusiones}{54}{chapter.5}

@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{fundamentos}
 {\em Fundamentos para el procesamiento de im{\'a}genes}.
@@ -12,7 +12,7 @@ J.~Canny.
 
 \bibitem{metrics}
 K.~Ganesan.
-\newblock Text mining, analytics \& more.
+\newblock \textit{Text Mining, Analytics \& More}.
 \newblock
   \url{http://text-analytics101.rxnlp.com/2014/10/computing-precision-and-recall-for.html},
   2014.
@@ -36,10 +36,29 @@ L.~Pullum, B.~Taylor, and M.~Darrah.
   Networks}.
 \newblock Emerging Technologies. Wiley, 2007.
 
+\bibitem{laplacian2}
+Tutorialspoint.
+\newblock \textit{Laplacian Operator}.
+\newblock \url{https://www.tutorialspoint.com/dip/laplacian_operator.htm},
+  2017.
+\newblock [Accedido 7 de Junio de 2017].
+
+\bibitem{sobel}
+Tutorialspoint.
+\newblock \textit{Sobel Operator}.
+\newblock \url{https://www.tutorialspoint.com/dip/sobel_operator.htm}, 2017.
+\newblock [Accedido 7 de Junio de 2017].
+
 \bibitem{veit2016cocotext}
 A.~Veit, T.~Matera, L.~Neumann, J.~Matas, and S.~Belongie.
 \newblock Coco-text: Dataset and benchmark for text detection and recognition
   in natural images.
 \newblock In {\em arXiv preprint arXiv:1601.07140}, 2016.
+
+\bibitem{laplacian}
+X.~Wang.
+\newblock Laplacian operator-based edge detectors.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  29(5):886--890, May 2007.
 
 \end{thebibliography}

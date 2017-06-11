@@ -16,8 +16,12 @@
 \usepackage[spanish]{babel}
 \usepackage{url}
 \usepackage{float}
+\usepackage{multirow}
+\usepackage{rotating} 
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
 
-\usepackage{titlesec}
 \makeatletter
 \renewcommand{\@makeschapterhead}[1]{%
 %  \vspace*{50\p@}%
@@ -33,7 +37,7 @@
 
 \renewcommand{\baselinestretch}{1.4}
 \setlength{\headheight}{16pt} 
-
+\captionsetup{justification=centering}
 \pretolerance=1000
 
 \chead[]{}
@@ -61,6 +65,9 @@
 	captionpos=b
 }
 \setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\definecolor{lightgray}{gray}{0.9}
 
 \begin{document}
 %%%%%%%%%%%%%%% Portada %%%%%%%%%%%%%%%%%%%%
@@ -70,6 +77,7 @@
 
 %%%%%%%%%%%%%%% Agradecimientos %%%%%%%%%%%%
 \include{0-Agradecimientos}
+
 
 %%%%%%%%%%%%%%% Resumen %%%%%%%%%%%%%%%%%%%%
 \include{0-Resumen}
@@ -90,8 +98,6 @@
 
 \lhead[]{CAPÍTULO \thechapter. INTRODUCCIÓN}
 \include{1-Introduccion}
-\lhead[]{CAPÍTULO \thechapter. OBJETIVOS}
-\include{2-Objetivos}
 \lhead[]{CAPÍTULO \thechapter. INFRAESTRUCTURA}
 \include{3-Infraestructura}
 \lhead[]{CAPÍTULO \thechapter. CLASIFICACIÓN}
