@@ -1,35 +1,38 @@
 \select@language {spanish}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Estructura y funcionamiento b\IeC {\'a}sico de red en Caffe.\relax }}{4}{figure.caption.6}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Funci\IeC {\'o}n de activaci\IeC {\'o}n ReLu.\relax }}{6}{figure.caption.7}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Estructura de instancias de objetos.\relax }}{10}{figure.caption.8}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Estructura b\IeC {\'a}sica de anotaciones.\relax }}{11}{figure.caption.9}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Estructura y funcionamiento b\IeC {\'a}sico de red en Caffe. Figura obtenida de~\cite {caffe}\relax }}{4}{figure.caption.10}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Funci\IeC {\'o}n de activaci\IeC {\'o}n \textit {\ac {ReLU}}.\relax }}{6}{figure.caption.11}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Estructura b\IeC {\'a}sica de anotaciones en \ac {COCO}.\relax }}{11}{figure.caption.15}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Estructura de instancias de objetos en \ac {COCO}.\relax }}{12}{figure.caption.17}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Ejemplos de im\IeC {\'a}genes en \ac {VOC}. Imagen tomada de~\cite {Everingham10}\relax }}{13}{figure.caption.18}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Estructura de las clases en \ac {VOC}2007. Imagen tomada de~\cite {Everingham10}\relax }}{13}{figure.caption.19}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Ejemplo sencillo de matriz de confusi\IeC {\'o}n. Imagen tomada de~\cite {metrics}\relax }}{14}{figure.caption.20}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Muestras de base de datos MNIST original.\relax }}{14}{figure.caption.11}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Red b\IeC {\'a}sica LeNet MNIST.\relax }}{19}{figure.caption.12}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Ejecuci\IeC {\'o}n de entrenamiento de red LeNet MNIST.\relax }}{22}{figure.caption.13}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Fin de entrenamiento de red LeNet MNIST.\relax }}{22}{figure.caption.14}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Curva de aprendizaje Red B\IeC {\'a}sica.\relax }}{23}{figure.caption.15}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Captura de componente gr\IeC {\'a}fico de la aplicaci\IeC {\'o}n.\relax }}{27}{figure.caption.16}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Capturas de DroidCam en los diferentes dispositivos\relax }}{28}{figure.caption.17}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Captura del componente clasificador.\relax }}{29}{figure.caption.18}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Muestras de base de datos con negativo.\relax }}{37}{figure.caption.19}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Porcentaje de acierto de base de datos original y ampliada con negativo.\relax }}{38}{figure.caption.20}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Muestra de d\IeC {\'\i }gitos con filtro Canny.\relax }}{39}{figure.caption.21}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Muestra de d\IeC {\'\i }gitos con filtro Laplaciano.\relax }}{40}{figure.caption.22}
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Muestra de d\IeC {\'\i }gitos con filtro de Sobel.\relax }}{41}{figure.caption.23}
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Comparaci\IeC {\'o}n de tasa de acierto con diferentes filtros.\relax }}{42}{figure.caption.24}
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Captura del componente clasificador con filtro Sobel.\relax }}{43}{figure.caption.25}
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Muestra de d\IeC {\'\i }gitos rotados.\relax }}{44}{figure.caption.26}
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Muestra de d\IeC {\'\i }gitos trasladados.\relax }}{45}{figure.caption.27}
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Muestra de d\IeC {\'\i }gitos escalados.\relax }}{46}{figure.caption.28}
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Muestra de d\IeC {\'\i }gitos con ruido.\relax }}{46}{figure.caption.29}
-\contentsline {figure}{\numberline {3.20}{\ignorespaces Muestra de d\IeC {\'\i }gitos con mezcla de transformaciones.\relax }}{47}{figure.caption.30}
-\contentsline {figure}{\numberline {3.21}{\ignorespaces Evaluaci\IeC {\'o}n de la red con bases de datos transformadas.\relax }}{47}{figure.caption.31}
-\contentsline {figure}{\numberline {3.22}{\ignorespaces Resultados de par\IeC {\'a}metros de evaluaci\IeC {\'o}n: (a) \textit {Precision}, (b) \textit {Recall}\relax }}{53}{figure.caption.37}
-\contentsline {figure}{\numberline {3.23}{\ignorespaces Red b\IeC {\'a}sica LeNet MNIST.\relax }}{54}{figure.caption.38}
-\contentsline {figure}{\numberline {3.24}{\ignorespaces Evaluaci\IeC {\'o}n de la aplicaci\IeC {\'o}n con imagen de fondo negro.\relax }}{55}{figure.caption.39}
-\contentsline {figure}{\numberline {3.25}{\ignorespaces Evaluaci\IeC {\'o}n de la aplicaci\IeC {\'o}n con diferentes redes.\relax }}{55}{figure.caption.40}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Muestras de base de datos MNIST original.\relax }}{18}{figure.caption.22}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Red b\IeC {\'a}sica LeNet MNIST.\relax }}{23}{figure.caption.23}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Ejecuci\IeC {\'o}n de entrenamiento de red LeNet MNIST.\relax }}{26}{figure.caption.24}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Fin de entrenamiento de red LeNet MNIST.\relax }}{26}{figure.caption.25}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Archivos \text {log}.\relax }}{27}{figure.caption.26}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Captura de componente gr\IeC {\'a}fico de la aplicaci\IeC {\'o}n.\relax }}{31}{figure.caption.27}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Capturas de DroidCam en los diferentes dispositivos\relax }}{32}{figure.caption.28}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Captura del componente clasificador.\relax }}{33}{figure.caption.29}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Muestras de base de datos con negativo.\relax }}{41}{figure.caption.30}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Porcentaje de acierto de base de datos original y ampliada con negativo.\relax }}{41}{figure.caption.31}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Muestra de d\IeC {\'\i }gitos con filtro Canny.\relax }}{43}{figure.caption.32}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Muestra de d\IeC {\'\i }gitos con filtro Laplaciano.\relax }}{43}{figure.caption.33}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Muestra de d\IeC {\'\i }gitos con filtro de Sobel.\relax }}{44}{figure.caption.34}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Comparaci\IeC {\'o}n de tasa de acierto con diferentes filtros.\relax }}{45}{figure.caption.35}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Captura del componente clasificador con filtro Sobel.\relax }}{46}{figure.caption.36}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Muestra de d\IeC {\'\i }gitos rotados.\relax }}{47}{figure.caption.37}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Muestra de d\IeC {\'\i }gitos trasladados.\relax }}{47}{figure.caption.38}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Muestra de d\IeC {\'\i }gitos escalados.\relax }}{48}{figure.caption.39}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Muestra de d\IeC {\'\i }gitos con ruido.\relax }}{48}{figure.caption.40}
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Muestra de d\IeC {\'\i }gitos con mezcla de transformaciones.\relax }}{49}{figure.caption.41}
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Evaluaci\IeC {\'o}n de la red con bases de datos transformadas.\relax }}{49}{figure.caption.42}
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Resultados de par\IeC {\'a}metros de evaluaci\IeC {\'o}n: (a) \textit {Precision}, (b) \textit {Recall}\relax }}{56}{figure.caption.48}
+\contentsline {figure}{\numberline {3.23}{\ignorespaces Red b\IeC {\'a}sica LeNet MNIST.\relax }}{57}{figure.caption.49}
+\contentsline {figure}{\numberline {3.24}{\ignorespaces Evaluaci\IeC {\'o}n de la aplicaci\IeC {\'o}n con imagen de fondo negro.\relax }}{58}{figure.caption.50}
+\contentsline {figure}{\numberline {3.25}{\ignorespaces Evaluaci\IeC {\'o}n de la aplicaci\IeC {\'o}n con diferentes redes.\relax }}{58}{figure.caption.51}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

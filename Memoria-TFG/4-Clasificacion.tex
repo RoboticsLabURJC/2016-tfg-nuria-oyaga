@@ -263,21 +263,15 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	
 	Tras terminar el entrenamiento, mostrado en la Figura~\ref{fig.finEntrBas}, se obtiene el archivo con la red neuronal entrenada, almacenado según la ruta que se indicó en el solucionador, que podrá ser utilizada en la herramienta que sea de interés.\\
 
-	Los parámetros de pérdidas y precisión calculados durante el entrenamiento para ambas fases, almacenados en el archivo \textit{log} generado, podrán ser visualizados mediante la ejecución del script \textit{plot\_learning\_curve.py}~\footnote{https://github.com/adilmoujahid/deeplearning-cats-dogs-tutorial/blob/master/code/plot\_learning\_curve.py} de la siguiente forma:
+	Los parámetros de pérdidas y precisión calculados durante el entrenamiento para ambas fases, queda almacenados en el archivo \textit{log} generado, y serán divididos en las dos fases, entrenamiento y evauación para su análisis. Para ello se ejecuta el archivo \textit{parse\_log.sh} proporcionado por la plataforma en su carpeta \textit{tools/extra}. En la Figura~\ref{fig.parse} se muestra el aspecto de estos archivos desglosados.
 	\vspace{10pt}
-	\begin{lstlisting}[frame=single]
-	python plot_learning_curve.py /home/nuria/TFG/logs/RedBasica.log 
-	 RedBasicaLog.png
-	\end{lstlisting}
-	
-	En la Figura~\ref{fig.Log} se puede observar el resultado final de la curva de aprendizaje, con valores de precisión y pérdidas, según lo explicado en la Sección~\ref{sec.caffe}, para la fase de evaluación, y en entrenamiento únicamente de pérdidas.
 	
 	\begin{figure}[H]
-		\begin{center}
-			\includegraphics[width=0.5\textwidth]{figures/RedBasicaLog}
-			\caption{Curva de aprendizaje Red Básica.}
-			\label{fig.Log}
-		\end{center}
+			\centering
+			\subfigure[Entrenamiento]{\includegraphics[width=0.4\textwidth]{figures/parselogtrain}} \hspace{10pt}
+			\subfigure[Evaluación]{\includegraphics[width=0.4\textwidth]{figures/parselogtest}}
+			\caption{Archivos \text{log}.}
+			\label{fig.parse}
 	\end{figure}
 
 \subsection{Componente Python} \label{sec.componente}
@@ -500,9 +494,6 @@ Una vez se dispone de los datos necesarios para la evaluación de prestaciones, 
 	\item[Matriz de confusión] \hfill 
 	\vspace{5pt}
 	\\
-	Tanto para este apartado, como para los dos posteriores, se ha utilizado la información proporcionada por~\cite{metrics}.\\
-	\vspace{-10pt}
-	\\
 	Para elaborar la matriz de confusión se parte de la misma hoja de cálculo del apartado anterior. En este caso se debe de tener en cuenta, para cada dígito real, tanto el número de veces que se clasifica correctamente, como el número de veces que se equivoca con cada uno de los dígitos restantes.\\
 	\vspace{-10pt}
 	\\
@@ -603,6 +594,7 @@ En la Figura~\ref{fig.neg-orig} se muestran los resultados obtenidos, donde se p
 		\label{fig.neg-orig}
 	\end{center}
 \end{figure}
+\vspace{20pt}
 
 Para solucionar el problema que acarrea el tener esta gran diferencia únicamente modificando el fondo de la imagen, y puesto que la aplicación no está enfocada a un único tipo de fondo, se opta por aplicar un filtro de bordes que independice la imagen del fondo. Existen varios filtros de bordes que es posible aplicar para solucionar el problema~\cite{fundamentos}.\\
 
@@ -617,13 +609,7 @@ A continuación se explicarán los tres filtros que han sido evaluados en este p
 	El algoritmo de Canny es un operador desarrollado por John F. Canny en 1986 que utiliza un algoritmo de múltiples etapas para detectar una amplia gama de bordes en imágenes~\cite{4767851}. Para ello utiliza el cálculo de variaciones, una técnica que encuentra la función que optimiza un funcional indicado. En este caso, la función óptima, es definida por la suma de cuatro términos exponenciales, pero se puede aproximar por la primera derivada de una gaussiana. El resultado de aplicar este filtro es siempre una imagen binaria en la que los píxeles únicamente pueden tomar los valores 0 ó 1 (0 ó 255 dependiendo del rango).\\
 	\vspace{-10pt}
 	\\
-	Para aplicar este algoritmo en el código se debe implementar la función que proporciona \textit{openCV}~\footnote{http://docs.opencv.org/trunk/da/d22/tutorial\_py\_canny.html} , implementada de la siguiente forma:
-	\vspace{10pt}
-	\begin{lstlisting}[frame=single]
-		data_filter = cv2.Canny(data[0],100,200) #shape (28,28)
-		data_filter = data_filter[np.newaxis,:, :] #dimensions to (1,28,28)
-	\end{lstlisting}
-	En la Figura~\ref{fig.canny} se muestra la aplicación de este filtro para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}. En la base de datos de test, se van a obtener dos imágenes iguales de cada dígito. Este hecho se debe a que se está aplicando sobre el original y el negativo el mismo filtro, que por su propio funcionamiento, detecta los mismos bordes en ambos.
+	Para aplicar este algoritmo en el código se debe implementar la función proporcionada por \textit{openCV} según~\cite{canny}. En la Figura~\ref{fig.canny} se muestra la aplicación de este filtro para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}. En la base de datos de test, se van a obtener dos imágenes iguales de cada dígito ya que se está aplicando sobre el original y el negativo el mismo filtro, que por su propio funcionamiento, detecta los mismos bordes en ambos.
 	
 	\begin{figure}[H]
 		\begin{center}
@@ -639,15 +625,7 @@ A continuación se explicarán los tres filtros que han sido evaluados en este p
 	El laplaciano es un operador de segunda derivada que se utiliza con frecuencia en la detección de bordes~\cite{laplacian}. Su fundamento se encuentra en la identificación de un borde cuando se produce un cruce por cero en la segunda derivada obtenida. Este operador posee dos filtros diferentes, uno positivo con el que se obtienen los bordes externos, este es el utilizado en este proyecto, y uno negativo que obtiene los bordes internos de la misma~\cite{laplacian2}. El resultado final será una imagen en escala de grises correspondiente con los bordes de interés.\\
 	\vspace{-10pt}
 	\\
-	La aplicación del filtro es posible gracias a otra función de \textit{openCV}~\footnote{http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/laplace\_operator/laplace\_operator.html}, obteniendo el siguiente algoritmo:
-	\vspace{10pt}
-	\begin{lstlisting}[frame=single]
-	data_filter = cv2.Laplacian(data[0],-1,5) #shape (28,28)
-	data_filter = cv2.convertScaleAbs(data_filter)
-	data_filter = data_filter[np.newaxis,:, :] #dimensions to (1,28,28)
-	\end{lstlisting}
-	
-	Finalmente, en la Figura~\ref{fig.laplacian}, se muestra la aplicación de este filtro para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST} y a su negativo. La diferencia entre ambos resultados se debe a que en la imagen original, como se comentó anteriormente, se están obteniendo los bordes externos gracias al operador positivo, pero al aplicarlo en el negativo de la imagen, los correspondientes bordes externos son ahora los internos de la imagen original. Esta diferencia podría perjudicar a la robustez de la red, pues dependiendo de la imagen la diferencia entre ambos podría ser suficiente como para crear confusión.
+	La aplicación del filtro es posible gracias a otra función de \textit{openCV}, según~\cite{laplacianOCV}. En la Figura~\ref{fig.laplacian}, se muestra la aplicación de este filtro para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST} y a su negativo. La diferencia entre ambos resultados se debe a que en la imagen original, como se comentó anteriormente, se están obteniendo los bordes externos gracias al operador positivo, pero al aplicarlo en el negativo de la imagen, los correspondientes bordes externos son ahora los internos de la imagen original. Esta diferencia podría perjudicar a la robustez de la red, pues dependiendo de la imagen la diferencia entre ambos podría ser suficiente como para crear confusión.
 	\begin{figure}[H]
 		\centering
 		\subfigure[Original]{\includegraphics[width=0.3\textwidth]{figures/laplacian-orig}} \hspace{10pt}
@@ -662,18 +640,7 @@ A continuación se explicarán los tres filtros que han sido evaluados en este p
 	Este filtro está formado por dos máscaras de derivadas  que permiten obtener los bordes en una determinada dirección, horizontal y vertical~\cite{sobel}. Para obtener la imagen de bordes final será necesario sumar ambas soluciones,en valor absoluto, obteniendo la imagen de grises con los bordes.\\
 	\vspace{-10pt}
 	\\
-	Para aplicar este filtro primero se debe aplicar cada una de las dos máscaras, horizontal y vertical, gracias a la función de \textit{openCV}~\footnote{http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/sobel\_derivatives/sobel\_derivatives.html}. Una vez se tienen los bordes en ambas direcciones se suman ambos en valor absoluto y se normaliza a valores entre 0 y 255, obteniendo una imagen de tipo \textit{float} que deberá ser transformada a \textit{uint8}. Todo ello se realiza mediante el código mostrado a continuación.
-	\vspace{25pt}
-	\begin{lstlisting}[frame=single]
-	 sobelx = cv2.Sobel(data[0],cv2.CV_64F,1,0,ksize=5)  # x
-	 sobely = cv2.Sobel(data[0],cv2.CV_64F,0,1,ksize=5)  # y
-	 edges = cv2.add(abs(sobelx),abs(sobely))
-	 edges = cv2.normalize(edges,None,0,255,cv2.NORM_MINMAX)
-	 edges = np.uint8(edges)
-	 data_filter = edges[np.newaxis,:, :] #dimensions to (1,28,28)
-	\end{lstlisting}
-	
-	En la Figura~\ref{fig.sobel} se muestra la aplicación de este filtro para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}. En este caso, y al igual que en el caso de Canny, se obtiene la misma imagen de bordes en ambas imágenes, pues el filtro no hace distinción entre bordes internos y externos.
+	Para aplicar este filtro primero se debe aplicar cada una de las dos máscaras, horizontal y vertical, gracias a la función de \textit{openCV}~\footnote{http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/sobel\_derivatives/sobel\_derivatives.html}. Una vez se tienen los bordes en ambas direcciones se suman ambos en valor absoluto y se normaliza a valores entre 0 y 255, obteniendo una imagen de tipo \textit{float} que deberá ser transformada a \textit{uint8}. En la Figura~\ref{fig.sobel} se muestra la aplicación de este filtro para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}. En este caso, y al igual que en el caso de Canny, se obtiene la misma imagen de bordes en ambas imágenes, pues el filtro no hace distinción entre bordes internos y externos.
 	
 	\begin{figure}[H]
 		\begin{center}
@@ -728,16 +695,7 @@ A continuación se explicarán las distinas transformaciones realizadas, todas e
 	La rotación consiste en el giro sobre un eje situado en el centro de la imagen,un determinado ángulo establecido por el desarrollador.\\
 	\vspace{-10pt}
 	\\
-	En concreto, en esta aplicación se ha optado por la rotación con un ángulo aleatorio dentro del rango [-20,20] grados. Para ello se utiliza el siguiente código:
-	\vspace{10pt}
-	\begin{lstlisting}[frame=single]
-	rows,cols = img.shape
-	angle = random.randint(-20, 20)
-	M = cv2.getRotationMatrix2D((cols/2,rows/2),angle,1)
-	rotate = cv2.warpAffine(img,M,(cols,rows))
-	\end{lstlisting}
-	
-	En la Figura~\ref{fig.rotacion} se muestra la aplicación de la rotación para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
+	En concreto, en esta aplicación se ha optado por la rotación con un ángulo aleatorio dentro del rango [-20,20] grados. En la Figura~\ref{fig.rotacion} se muestra la aplicación de la rotación para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
 	
 	\begin{figure}[H]
 		\begin{center}
@@ -748,21 +706,12 @@ A continuación se explicarán las distinas transformaciones realizadas, todas e
 	\end{figure}
 	\vspace{-10pt}
 	\item[Traslación] \hfill 
-	\vspace{10pt}
+	\vspace{5pt}
 	\\
 	La traslación de una imagen consiste en desplazar la misma en una determinada dirección y sentido marcados por dos variables \textit{x} e \textit{y}, tomando como referencia el eje central.\\
 	\vspace{-10pt}
 	\\
-	Para la evaluación que es de interés en el proyecto, se ha establecido un rango de desplazamiento horizontal aleatorio de [-4,4] y uno vertical de [-4,2], de tal manera que la imagen del dígito no quede recortada. Para ello se utiliza el siguiente código:\\
-	\begin{lstlisting}[frame=single]
-	rows,cols = img.shape
-	movex = random.randint(-4, 4)
-	movey = random.randint(-4, 2)
-	M = np.float32([[1,0,movex],[0,1,movey]])
-	transl = cv2.warpAffine(img,M,(cols,rows))
-	\end{lstlisting}
-	
-	En la Figura~\ref{fig.traslacion} se muestra la aplicación de la traslación para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
+	Para la evaluación que es de interés en el proyecto, se ha establecido un rango de desplazamiento horizontal aleatorio de [-4,4] y uno vertical de [-4,2], de tal manera que la imagen del dígito no quede recortada. En la Figura~\ref{fig.traslacion} se muestra la aplicación de la traslación para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[width=0.3\textwidth]{figures/traslacion}
@@ -777,16 +726,10 @@ A continuación se explicarán las distinas transformaciones realizadas, todas e
 	El escalado de una imagen consiste en cambiar el tamaño de la misma estableciendo una proporción, manteniendo el centro de la imagen en el mismo punto.\\
 	\vspace{-10pt}
 	\\
-	Para integrar esta transformación en el estudio realizado se establece un parámetro de proporción aleatorio en el rango [0.5,1.5]. El código empleado para ello es el siguiente:
-	\vspace{10pt}
-	\begin{lstlisting}[frame=single]
-	size = random.uniform(0.5, 1.5)
-	size = round(size,2)
-	res = cv2.resize(img,None,fx=size, fy=size, 
-						interpolation =cv2.INTER_LINEAR)
-	\end{lstlisting}
-	
-	Tras aplicar este código el resultado es una imagen cuyas dimensiones han variado, aumentando o disminuyendo en función de la proporción. Para introducir las imágenes en la red y obtener resultados adecuados se debe adaptar el tamaño de las mismas al necesario para la red (28x28) sin deformar la imagen. Para ello, si el tamaño de la imagen es mayor, se recortará la misma manteniendo el centro, si por el contrario, el tamaño es menor, se añadirá un borde del mismo color que el fondo de la imagen hasta obtener el tamaño deseado.
+	Para integrar esta transformación en el estudio realizado se establece un parámetro de proporción aleatorio en el rango [0.5,1.5].\\
+	\vspace{-10pt}
+	\\
+	Tras aplicar el escalado, el resultado es una imagen cuyas dimensiones han variado, aumentando o disminuyendo en función de la proporción. Para introducir las imágenes en la red y obtener resultados adecuados se debe adaptar el tamaño de las mismas al necesario para la red (28x28) sin deformar la imagen. Para ello, si el tamaño de la imagen es mayor, se recortará la misma manteniendo el centro, si por el contrario, el tamaño es menor, se añadirá un borde del mismo color que el fondo de la imagen hasta obtener el tamaño deseado.
 	\vspace{10pt}
 	\\
 	En la Figura~\ref{fig.escalado} se muestra la aplicación de la traslación para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
@@ -803,14 +746,7 @@ A continuación se explicarán las distinas transformaciones realizadas, todas e
 	El ruido de una imagen es una variación aleatoria de la información de brillo o color en la misma. Existen diferentes tipos de ruido con naturalezas distintas que pueden estar producidos por diversas causas como por ejemplo ruido Gaussiano, ruido \textit{Salt\&Pepper} o ruido uniforme.\\
 	\vspace{-10pt}
 	\\
-	La apliación pretende clasificar los dígitos mostrados a una cámara en tiempo real, en donde el ruido más presente es el ruido Gaussiano, por lo que será el empleado para el test. Se aplicará un ruido Gaussiano con  una varianza de 0.02, utilizando, en este caso, una función que proporciona \textit{skimage.util} de la siguiente manera:
-	\vspace{10pt}
-	\begin{lstlisting}[frame=single]
-	noisy = skimage.util.random_noise(img, mode='gaussian', seed=None, 
-											clip=True, var=0.02)
-	\end{lstlisting}
-	
-	En la Figura~\ref{fig.ruido} se muestra la aplicación del ruido para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
+	La apliación pretende clasificar los dígitos mostrados a una cámara en tiempo real, en donde el ruido más presente es el ruido Gaussiano, por lo que será el empleado para el test. Se aplicará un ruido Gaussiano con  una varianza de 0.02, utilizando, en este caso, una función que proporciona \textit{skimage.util}. En la Figura~\ref{fig.ruido} se muestra la aplicación del ruido para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[width=0.3\textwidth]{figures/ruido}

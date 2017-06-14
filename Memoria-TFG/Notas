@@ -1,0 +1,37 @@
+
+Entre items en description: 15pt
+Entre items en description dentro de descr: 10pt
+Entre parrafos en description : -10pt
+Antes de listas: -20pt
+Entre titulo y texto en item descr: 10pt
+Entre titulo y texto en item descr dentro de descr: 5pt
+Antes de codigo: 10pt
+
+Matriz:
+\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|l|c|c|c|c|c|c|c|c|c|c|c|}
+			\cline{3-13} 
+			 \multicolumn{2}{c|}{} & \multicolumn{11}{c|}{\textbf{Real}} \\ \cline{3-13} 
+			 \multicolumn{2}{c|}{} & \textbf{0} & \textbf{1} & \textbf{2} &  \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{Total}\\ \hline
+			 \multirow{10}{0.5cm}{\rotatebox{90}{\textbf{Predicción}}}& \textbf{0} & \cellcolor{lightgray} &  &  &  &  &  &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{1} &  & \cellcolor{lightgray} &  &  &  &  &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{2} &  &  & \cellcolor{lightgray} &  &  &  &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{3} &  &  &  & \cellcolor{lightgray} &  &  &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{4} &  &  &  &  & \cellcolor{lightgray} &  &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{5} &  &  &  &  &  & \cellcolor{lightgray} &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{6} &  &  &  &  &  &  & \cellcolor{lightgray} &  &  &  & \\ \cline{2-13}
+			 & \textbf{7} &  &  &  &  &  &  &  & \cellcolor{lightgray} &  &  & \\ \cline{2-13}
+			 & \textbf{8} &  &  &  &  &  &  &  &  & \cellcolor{lightgray} &  & \\ \cline{2-13}
+			 & \textbf{9} &  &  &  &  &  &  &  &  &  & \cellcolor{lightgray} & \\ \cline{2-13}
+			 & \textbf{Total} &  &  &  &  &  &  &  &  &  &  & \\ \hline
+		\end{tabular}
+		\caption{Matriz de confusión red .}
+		\label{tab.matriz}
+	\end{table}
+
+
+\subsection{Dropout}
+El concepto del \textit{dropout} es bastante sencillo, su fundamento se encuentra en que, durante el entrenamiento, existen algunos pesos que quedan descartados de manera aleatoria en cada una de las capas de la red~\cite{dropout}. El descarte de estos pesos implica que no serán utilizados para la retroalimentación en el aprendizaje en una determinada etapa del entrenamiento. Es decir, estos pesos quedan congelados, sin reinicializarse y, pasada la etapa del entrenamiento en la que han sido descartados, continuarán variando según el aprendizaje. El número de pesos que se descartan queda definido por un determinado porcentaje que marca el desarrollador, es decir, en cada una de las etapas existe un tanto por ciento de los pesos totales que quedan descartados. En la Figura~\ref{fig.dropout} se muestra, de forma esquemática el funcionamiento de este concepto.
+
+La plataforma de estudio, Caffe, propociona un \textit{layer} para especificar el \textit{dropout}. Esta capa se debe incluir entre las dos capas en las que se quiera realizar el descarte e indicar en la misma el porcentaje de muestras que se quieren descartar, con el parámentro \textit{dropout\_ratio}, cuyo valor podrá varia

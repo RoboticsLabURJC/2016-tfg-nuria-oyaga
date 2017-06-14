@@ -10,7 +10,27 @@ J.~Canny.
 \newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
   PAMI-8(6):679--698, Nov 1986.
 
-\bibitem{metrics}
+\bibitem{pascal-voc-2007}
+M.~Everingham, L.~Van~Gool, C.~K.~I. Williams, J.~Winn, and A.~Zisserman.
+\newblock The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2007 {(VOC2007)}
+  {R}esults.
+\newblock
+  http://www.pascal-network.org/challenges/VOC/voc2007/workshop/index.html.
+
+\bibitem{pascal-voc-2012}
+M.~Everingham, L.~Van~Gool, C.~K.~I. Williams, J.~Winn, and A.~Zisserman.
+\newblock The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2012 {(VOC2012)}
+  {R}esults.
+\newblock
+  http://www.pascal-network.org/challenges/VOC/voc2012/workshop/index.html.
+
+\bibitem{Everingham10}
+M.~Everingham, L.~Van~Gool, C.~K.~I. Williams, J.~Winn, and A.~Zisserman.
+\newblock The pascal visual object classes (voc) challenge.
+\newblock {\em International Journal of Computer Vision}, 88(2):303--338, June
+  2010.
+
+\bibitem{metrics2}
 K.~Ganesan.
 \newblock \textit{Text Mining, Analytics \& More}.
 \newblock
@@ -30,11 +50,41 @@ R.~L{\'o}pez and J.~Fern{\'a}ndez.
 \newblock Metodolog{\'\i}a y An{\'a}lisis de Datos en Ciencias Sociales.
   Netbiblo, 2008.
 
+\bibitem{metrics}
+U.~of~Regina.
+\newblock \textit{Text Mining, Analytics \& More}.
+\newblock
+  \url{http://www2.cs.uregina.ca/~dbd/cs831/notes/confusion_matrix/confusion_matrix.html},
+  2008.
+
+\bibitem{canny}
+OpenCV-Doxygen.
+\newblock \textit{Canny Edge Detection}.
+\newblock \url{http://docs.opencv.org/trunk/da/d22/tutorial_py_canny.html},
+  2017.
+\newblock [Accedido 14 de Junio de 2017].
+
+\bibitem{laplacianOCV}
+OpenCV-Sphinx.
+\newblock \textit{Laplace Operator}.
+\newblock
+  \url{http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/laplace_operator/laplace_operator.html},
+  2017.
+\newblock [Accedido 14 de Junio de 2017].
+
 \bibitem{pullum2007guidance}
 L.~Pullum, B.~Taylor, and M.~Darrah.
 \newblock {\em Guidance for the Verification and Validation of Neural
   Networks}.
 \newblock Emerging Technologies. Wiley, 2007.
+
+\bibitem{caffe}
+C.~M. Rob~Hess and Friends.
+\newblock \textit{Introducing: Flickr PARK or BIRD}.
+\newblock
+  \url{http://code.flickr.net/2014/10/20/introducing-flickr-park-or-bird/},
+  2014.
+\newblock [Accedido 13 de Junio de 2017].
 
 \bibitem{laplacian2}
 Tutorialspoint.
