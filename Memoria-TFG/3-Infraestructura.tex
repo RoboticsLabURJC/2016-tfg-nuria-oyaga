@@ -95,17 +95,17 @@ La plataforma utiliza una serie de capas (\textit{layers}), que, según su confi
 \item[\textit{Activation / Neuron Layers}] \hfill  
 \vspace{10pt}
 \\
-	En general estas capas son operadores de elementos que toman un \textit{bolb} inferior y producen uno superior del mismo tamaño. Existen varias capas con este funcionamiento en la plataforma, en concreto se empleará la \textit{\ac{ReLU}}.
+	En general estas capas son operadores de elementos que toman un \textit{bolb} inferior y producen uno superior del mismo tamaño. Existen varias capas con este funcionamiento en la plataforma, en concreto se empleará la \textit{\acrfull{relu}}.
 	\vspace{10pt}
 	\begin{description}
-	\item[\textit{\ac{ReLU}}] \hfill  
+	\item[\textit{\acrshort{relu}}] \hfill  
 	\vspace{5pt}
 	\\
 		Utiliza la función $y=max(0,x)$, cuya gráfica se define en la Figura~\ref{fig.reLu}, donde \textit{x} es la entrada a la neurona.
 		\begin{figure}[H]
 			\begin{center}
 				\includegraphics[width=0.5\textwidth]{figures/relu.jpeg}
-				\caption{Función de activación \textit{\ac{ReLU}}.}
+				\caption{Función de activación \textit{{relu}}.}
 				\label{fig.reLu}
 			\end{center}
 		\end{figure} 
@@ -164,14 +164,14 @@ Entre sus características principales destacan:
 \section{Bases de datos}
 
 \subsection{MNIST}\label{sec.minst}
-La base de datos \textit{\ac{MNIST}}~\footnote{http://yann.lecun.com/exdb/mnist/} está formada por diferentes imágenes con números escritos a mano y consta de un conjunto de entrenamiento de 60.000 ejemplos y otro de prueba de 10.000 ejemplos. Es una buena base de datos para personas que quieren probar técnicas de aprendizaje y métodos de reconocimiento de patrones en datos del mundo real, mientras que dedican un mínimo esfuerzo a preprocesar y formatear. \\
+La base de datos \textit{\acrfull{mnist}}~\footnote{http://yann.lecun.com/exdb/mnist/} está formada por diferentes imágenes con números escritos a mano y consta de un conjunto de entrenamiento de 60.000 ejemplos y otro de prueba de 10.000 ejemplos. Es una buena base de datos para personas que quieren probar técnicas de aprendizaje y métodos de reconocimiento de patrones en datos del mundo real, mientras que dedican un mínimo esfuerzo a preprocesar y formatear. \\
 
-Se trata de un subconjunto de una más grande, \textit{\ac{NIST}}, en la que las imágenes originales en blanco y negro fueron normalizadas en el tamaño para encajar en un cuadro de 20x20 píxeles, preservando su relación de aspecto. Las imágenes obtenidas contienen niveles de gris como resultado de la técnica anti-aliasing utilizada por el algoritmo de normalización. Estas imágenes se centraron en una de 28x28 calculando el centro de masa de los píxeles y trasladando la imagen para situar este punto en el centro del campo 28x28.\\
+Se trata de un subconjunto de una más grande, \textit{\acrfull{nist}}, en la que las imágenes originales en blanco y negro fueron normalizadas en el tamaño para encajar en un cuadro de 20x20 píxeles, preservando su relación de aspecto. Las imágenes obtenidas contienen niveles de gris como resultado de la técnica anti-aliasing utilizada por el algoritmo de normalización. Estas imágenes se centraron en una de 28x28 calculando el centro de masa de los píxeles y trasladando la imagen para situar este punto en el centro del campo 28x28.\\
 
-Fue construida a partir de la Base de Datos Especial 3 y la Base de Datos Especial 1 del \ac{NIST}, que contienen imágenes binarias de dígitos manuscritos. \ac{NIST} originalmente designó SD-3 como su conjunto de entrenamiento y SD-1 como su conjunto de pruebas. Sin embargo, SD-3 es mucho más limpio y más fácil de reconocer que SD-1.Esto es debido a que SD-3 fue recogido entre los empleados de la Oficina del Censo, mientras que el SD-1 fue recogido entre los estudiantes de secundaria. Dado que para una buena extracción de conclusiones es necesario que el resultado sea independiente de la elección del conjunto de entrenamiento y de prueba entre el conjunto completo de muestras, fue necesaria la elaboración de un nuevo conjunto en el que ambas bases de datos estuviesen representadas de manera equitativa. Además, se aseguraron de que los conjuntos de escritores en el de entrenamiento y el de prueba son disjuntos.\\
+Fue construida a partir de la Base de Datos Especial 3 y la Base de Datos Especial 1 del \acrshort{nist}, que contienen imágenes binarias de dígitos manuscritos.\acrshort{nist} originalmente designó SD-3 como su conjunto de entrenamiento y SD-1 como su conjunto de pruebas. Sin embargo, SD-3 es mucho más limpio y más fácil de reconocer que SD-1.Esto es debido a que SD-3 fue recogido entre los empleados de la Oficina del Censo, mientras que el SD-1 fue recogido entre los estudiantes de secundaria. Dado que para una buena extracción de conclusiones es necesario que el resultado sea independiente de la elección del conjunto de entrenamiento y de prueba entre el conjunto completo de muestras, fue necesaria la elaboración de un nuevo conjunto en el que ambas bases de datos estuviesen representadas de manera equitativa. Además, se aseguraron de que los conjuntos de escritores en el de entrenamiento y el de prueba son disjuntos.\\
 
 \subsection{COCO}
-Microsoft \textit{\ac{COCO}}~\footnote{http://mscoco.org/} es un gran conjunto de datos de imágenes diseñado para la detección de objetos, segmentación y generación de subtítulos~\cite{veit2016cocotext}. Alguna de las características principales de este conjunto de datos son:
+Microsoft \textit{\acrfull{coco}}~\footnote{http://mscoco.org/} es un gran conjunto de datos de imágenes diseñado para la detección de objetos, segmentación y generación de subtítulos~\cite{veit2016cocotext}. Alguna de las características principales de este conjunto de datos son:
 	\begin{itemize}
          \item Múltiples objetos en cada imagen
      	 \item Más de 300.000 imágenes
@@ -179,35 +179,35 @@ Microsoft \textit{\ac{COCO}}~\footnote{http://mscoco.org/} es un gran conjunto d
          \item 80 categorías de objetos
     \end{itemize}
     
-Esta plataforma se ha desarrollado para varios retos, en concreto es de interés el reto de la detección, establecido en 2016. Se utilizan conjuntos de entrenamiento, prueba y validación con sus correspondientes anotaciones. \ac{COCO} tiene tres tipos de anotaciones: instancias de objeto, puntos clave de objeto y leyendas de imagen, que se almacenan utilizando el formato de archivo \textit{\ac{JSON}} y comparten estructura de datos establecida en la Figura~\ref{fig.basicStruc}. \\
+Esta plataforma se ha desarrollado para varios retos, en concreto es de interés el reto de la detección, establecido en 2016. Se utilizan conjuntos de entrenamiento, prueba y validación con sus correspondientes anotaciones. \acrshort{coco} tiene tres tipos de anotaciones: instancias de objeto, puntos clave de objeto y leyendas de imagen, que se almacenan utilizando el formato de archivo \textit{\acrfull{json}} y comparten estructura de datos establecida en la Figura~\ref{fig.basicStruc}. \\
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{figures/basic_structure_annotations.png}
-		\caption{Estructura básica de anotaciones en \ac{COCO}.}
+		\caption{Estructura básica de anotaciones en \acrshort{coco}.}
 		\label{fig.basicStruc}
 	\end{center}
 \end{figure} 
 
-Para la detección son de interés las anotaciones de instancias de objetos, cuya estructura se muestra en la Figura~\ref{fig.objInst}.Cada anotación de instancia contiene una serie de campos, incluyendo el ID de categoría y la máscara de segmentación del objeto. El formato de segmentación depende de si la instancia representa un único objeto (\textit{iscrowd}~=~0), en cuyo caso se utilizan polígonos, o una colección de objetos (\textit{iscrowd}~=~1), en cuyo caso se utiliza \textit{\ac{RLE}}. Debe tenerse en cuenta que un único objeto puede requerir múltiples polígonos, y que las anotaciones de la multitud se utilizan para etiquetar grandes grupos de objetos. Además, se proporciona una caja delimitadora para cada objeto, cuyas coordenadas se miden desde la esquina superior izquierda de la imagen y están indexadas en 0. Finalmente, el campo de categorías  almacena el mapeo del ID de categoría a los nombres de categoría y supercategoría.
+Para la detección son de interés las anotaciones de instancias de objetos, cuya estructura se muestra en la Figura~\ref{fig.objInst}.Cada anotación de instancia contiene una serie de campos, incluyendo el ID de categoría y la máscara de segmentación del objeto. El formato de segmentación depende de si la instancia representa un único objeto (\textit{iscrowd}~=~0), en cuyo caso se utilizan polígonos, o una colección de objetos (\textit{iscrowd}~=~1), en cuyo caso se utiliza \textit{\acrfull{rle}}. Debe tenerse en cuenta que un único objeto puede requerir múltiples polígonos, y que las anotaciones de la multitud se utilizan para etiquetar grandes grupos de objetos. Además, se proporciona una caja delimitadora para cada objeto, cuyas coordenadas se miden desde la esquina superior izquierda de la imagen y están indexadas en 0. Finalmente, el campo de categorías  almacena el mapeo del ID de categoría a los nombres de categoría y supercategoría.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{figures/instancia_objetos.png}
-		\caption{Estructura de instancias de objetos en \ac{COCO}.}
+		\caption{Estructura de instancias de objetos en \acrshort{coco}.}
 		\label{fig.objInst}
 	\end{center}
 \end{figure}
 
 \subsection{VOC}
-El objetivo del desafío de \textit{\ac{VOC}} \cite{Everingham10} es investigar el desempeño de los métodos de reconocimiento en un amplio espectro de imágenes naturales. Para ello, se requiere que los conjuntos de datos \ac{VOC} contengan variabilidad significativa en términos de tamaño del objeto, orientación, pose, iluminación, posición y oclusión. También es importante que los conjuntos de datos no muestren sesgos sistemáticos, por ejemplo, favoreciendo imágenes con objetos centrados o una buena iluminación. Del mismo modo, para garantizar un entrenamiento y una evaluación precisa, es necesario que las anotaciones de imagen sean consistentes, precisas y exhaustivas para las clases especificadas.\\
+El objetivo del desafío de \textit{\acrfull{voc}} \cite{Everingham10} es investigar el desempeño de los métodos de reconocimiento en un amplio espectro de imágenes naturales. Para ello, se requiere que los conjuntos de datos \acrshort{voc} contengan variabilidad significativa en términos de tamaño del objeto, orientación, pose, iluminación, posición y oclusión. También es importante que los conjuntos de datos no muestren sesgos sistemáticos, por ejemplo, favoreciendo imágenes con objetos centrados o una buena iluminación. Del mismo modo, para garantizar un entrenamiento y una evaluación precisa, es necesario que las anotaciones de imagen sean consistentes, precisas y exhaustivas para las clases especificadas.\\
 
-Teniendo claros estos conceptos, en 2007, se llevó a cabo una recolección de imágenes, como las mostradas en la Figura~\ref{fig.voc_example}, formando el conjunto de datos \textit{\ac{VOC}}\textit{2007}~\cite{pascal-voc-2007}. Este conjunto dispone de dos grandes bases de datos, una de ellas compuesta por un conjunto de validación y otro de entrenamiento, y la otra con un único conjunto de test. Ambas bases de datos contienen alrededor de 5000 imágenes en las que se representan, apróximadamente, 12.000 objetos diferentes, por lo que, en total, este conjunto dispone de unas 10000 imágenes en las que se reperesentan unos 24000 objetos. En el año 2012 se modifica este conjunto, aumentando a 11530 el número de imágenes con representación de 27450 objetos diferentes~\cite{pascal-voc-2012}.
+Teniendo claros estos conceptos, en 2007, se llevó a cabo una recolección de imágenes, como las mostradas en la Figura~\ref{fig.voc_example}, formando el conjunto de datos \textit{\acrshort{voc}}\textit{2007}~\cite{pascal-voc-2007}. Este conjunto dispone de dos grandes bases de datos, una de ellas compuesta por un conjunto de validación y otro de entrenamiento, y la otra con un único conjunto de test. Ambas bases de datos contienen alrededor de 5000 imágenes en las que se representan, apróximadamente, 12.000 objetos diferentes, por lo que, en total, este conjunto dispone de unas 10000 imágenes en las que se reperesentan unos 24000 objetos. En el año 2012 se modifica este conjunto, aumentando a 11530 el número de imágenes con representación de 27450 objetos diferentes~\cite{pascal-voc-2012}.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{figures/vocexample}
-		\caption{Ejemplos de imágenes en \ac{VOC}. Imagen tomada de~\cite{Everingham10}}.
+		\caption{Ejemplos de imágenes en \acrshort{voc}. Imagen tomada de~\cite{Everingham10}}.
 		\label{fig.voc_example}
 	\end{center}
 \end{figure}
@@ -221,7 +221,7 @@ Dado que la finalidad de este conjunto de datos es permitir el desarrollo tanto 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{figures/vocclasses}
-		\caption{Estructura de las clases en \ac{VOC}2007. Imagen tomada de~\cite{Everingham10}}. El año de inclusión de cada clase en el desafío está indicado por
+		\caption{Estructura de las clases en \acrfull{voc}2007. Imagen tomada de~\cite{Everingham10}}. El año de inclusión de cada clase en el desafío está indicado por
 		superíndices: $2005^1$, $2006^2$, $2007^3$.
 		\label{fig.clasesVOC}
 	\end{center}

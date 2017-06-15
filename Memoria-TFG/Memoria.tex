@@ -21,7 +21,11 @@
 \usepackage{color}
 \usepackage{colortbl}
 \usepackage[table]{xcolor}
-\usepackage{acronym}
+
+
+\usepackage[acronym, nonumberlist]{glossaries}
+\makeglossaries
+\include{0-Acronimos}
 
 \makeatletter
 \renewcommand{\@makeschapterhead}[1]{%
@@ -84,18 +88,20 @@
 \include{0-Resumen}
 
 
-%%%%%%%%%%%%%%% Acronimos %%%%%%%%%%%%%%%%%%%%
-\include{0-Acronimos}
-
-
 %%%%%%%%%%%%%%% Índices %%%%%%%%%%%%%%%%%%%%
 \renewcommand{\tablename}{Tabla}
 \renewcommand{\listtablename}{Índice de tablas}
 \tableofcontents
 \listoffigures % Í­ndice de figuras
-%\listoftables % Í­ndice de tablas
-\cleardoublepage
+\listoftables % Í­ndice de tablas
 
+
+%%%%%%%%%%%%%%% Acronimos %%%%%%%%%%%%%%%%%%%%
+\renewcommand{\acronymname}{Acrónimos}
+\printglossary[type=\acronymtype]
+
+
+\cleardoublepage
 %%%%%%%%%%%%%%% Capí­tulos %%%%%%%%%%%%%%%%%%
 \pagestyle{fancy}
 \pagenumbering{arabic}

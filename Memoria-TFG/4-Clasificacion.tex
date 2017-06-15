@@ -5,9 +5,9 @@ En este capítulo se expondrá el trabajo realizado para la comprensión del pro
 La primera tarea que se abarca en el proyecto es el desarrollo de un componente en Pyhton para la clasificación de dígitos entre 0 y 9 en tiempo real, materializando en una aplicación concreta el probblema de la clasificación de imágenes con aprendizaje profundo. Para poder desarrollar esta aplicación es necesario, previamente, un entendimiento de una primera red básica, que será la encargada de realizar la clasificación. En esta sección se explicará el procedimiento seguido para el entendimiento de la red y el desarrollo del propio componente.\\
 
 \subsection{Red básica}\label{sec.red}
-La red que se empleará, está orientada a la clasificación de números utilizando, en el entrenamiento, la base de datos numérica MNIST, explicada en la Sección~\ref{sec.minst}, y en la que se entrará en detalle a continuación.\\
+La red que se empleará, está orientada a la clasificación de números utilizando, en el entrenamiento, la base de datos numérica \acrshort{mnist}, explicada en la Sección~\ref{sec.minst}, y en la que se entrará en detalle a continuación.\\
 
-La base de datos explicada, MNIST, proporciona dos conjuntos de datos, uno de entrenamiento y otro de test, pero, a diferencia de otros conjuntos no dispone de una de validación, utilizada para evaluar el modelo durante el entrenamiento. Por ello, el primer paso que se derá consiste en dividir la base de datos de entrenamiento en dos, obteniendo un conjunto de validación a partir del que ofrece MNIST para el entrenamiento. Para esta tarea, se desarrolla un script, \textit{createvalidationdatabase.py}, que divide la base de datos de entrenamiento original en dos, el 80\% para entrenamiento y el 20\% restante para validación. En la Tabla~\ref{tab.baseDatos}, se muestra un resumen de la estructura final de ambas bases de datos, así como la estructura de la base de datos de test que no sufre ninguna modificación.\\
+La base de datos explicada, \acrshort{mnist}, proporciona dos conjuntos de datos, uno de entrenamiento y otro de test, pero, a diferencia de otros conjuntos no dispone de una de validación, utilizada para evaluar el modelo durante el entrenamiento. Por ello, el primer paso que se derá consiste en dividir la base de datos de entrenamiento en dos, obteniendo un conjunto de validación a partir del que ofrece \acrshort{mnist} para el entrenamiento. Para esta tarea, se desarrolla un script, \textit{createvalidationdatabase.py}, que divide la base de datos de entrenamiento original en dos, el 80\% para entrenamiento y el 20\% restante para validación. En la Tabla~\ref{tab.baseDatos}, se muestra un resumen de la estructura final de ambas bases de datos, así como la estructura de la base de datos de test que no sufre ninguna modificación.\\
 
 \begin{table}[H]
 	\centering
@@ -38,7 +38,7 @@ En la Figura~\ref{fig.digitosMNIST} se puede observar una muestra de cada uno de
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.3\textwidth]{figures/original}
-		\caption{Muestras de base de datos MNIST original.}
+		\caption{Muestras de base de datos \acrshort{mnist} original.}
 		\label{fig.digitosMNIST}
 	\end{center}
 \end{figure}
@@ -134,7 +134,7 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	
 	En estas capas se definen 500 salidas para la primera de ellas, y tantas como clases se tengan, en la segunda. La aplicación que se está desarrollando pretende clasificar los dígitos del 0 al 9, por lo que esta última capa deberá de tener 10 salidas.\\
 
-	Las capas completamente conectadas están separadas entre sí por una capa de activación, en este caso linear, llamada \textit{ReLu}. Esta capa fue explicada en la Sección~\ref{sec.caffe} y tiene la siguiente forma en el documento:
+	Las capas completamente conectadas están separadas entre sí por una capa de activación, en este caso linear, llamada \textit{\acrshort{relu}}. Esta capa fue explicada en la Sección~\ref{sec.caffe} y tiene la siguiente forma en el documento:
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	layer {
@@ -179,7 +179,7 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[width=0.8\textwidth]{figures/Original_net}
-			\caption{Red básica LeNet MNIST.}
+			\caption{Red básica LeNet \acrshort{mnist}.}
 			\label{fig.redBasica}
 		\end{center}
 	\end{figure}
@@ -248,7 +248,7 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[width=0.8\textwidth]{figures/RedBasica5000}
-			\caption{Ejecución de entrenamiento de red LeNet MNIST.}
+			\caption{Ejecución de entrenamiento de red LeNet \acrshort{mnist}.}
 			\label{fig.entrenamiento}
 		\end{center}
 	\end{figure}
@@ -256,7 +256,7 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[width=0.8\textwidth]{figures/RedBasicaFin}
-			\caption{Fin de entrenamiento de red LeNet MNIST.}
+			\caption{Fin de entrenamiento de red LeNet \acrshort{mnist}.}
 			\label{fig.finEntrBas}
 		\end{center}
 	\end{figure}
@@ -682,7 +682,7 @@ Una vez se ha obtenido una clasificación independiente del fondo de la imagen e
 
 Al obtener una imagen con la cámara esta puede no estar perfectamente centrada, recta o con un tamaño igual al de la base de datos empleada en el entrenamiento, además de poder incluir ruido introducido por la propia cámara. Esto hará que, al introducir una de estas imágenes en la red, entrenada con imágenes sin ningún tipo de alteración, no se obtenga la precisión deseada.\\
 
-Para la evaluación del ruido sobre la red neuronal, entendiendo por ruido cualquier posible alteración de la imagen, se elaborará una base de datos de test a partir de la que proporciona MNIST de 10000 muestras, incluyendo en ella 6 imágenes con la transformación aplicada y la imagen original para cada muestra, aplicando, por último el filtro de Sobel a cada una. De esta manera se obtiene una base de datos de test con 70000 muestras de bordes ruidosas.\\
+Para la evaluación del ruido sobre la red neuronal, entendiendo por ruido cualquier posible alteración de la imagen, se elaborará una base de datos de test a partir de la que proporciona \acrshort{mnist} de 10000 muestras, incluyendo en ella 6 imágenes con la transformación aplicada y la imagen original para cada muestra, aplicando, por último el filtro de Sobel a cada una. De esta manera se obtiene una base de datos de test con 70000 muestras de bordes ruidosas.\\
 
 Tras aplicar las diferentes transformaciones sobre la base de datos de test se obtendrán diversas bases de datos modificadas que serán introducidas sobre la misma red neuronal, la desarrollada anteriormente con bordes de Sobel, para poder evaluar la robustez de la misma.\\
 
@@ -949,7 +949,7 @@ Como se comentó en la Sección~\ref{sec.red}, Caffe permite obtener durante el 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{figures/iteraciones}
-		\caption{Red básica LeNet MNIST.}
+		\caption{Red básica LeNet \acrshort{mnist}.}
 		\label{fig.iteraciones}
 	\end{center}
 \end{figure}

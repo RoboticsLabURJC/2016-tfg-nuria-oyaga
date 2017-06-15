@@ -4,7 +4,6 @@ The top-level auxiliary file: Memoria.aux
 A level-1 auxiliary file: 0-Portada.aux
 A level-1 auxiliary file: 0-Agradecimientos.aux
 A level-1 auxiliary file: 0-Resumen.aux
-A level-1 auxiliary file: 0-Acronimos.aux
 A level-1 auxiliary file: 1-Introduccion.aux
 A level-1 auxiliary file: 3-Infraestructura.aux
 A level-1 auxiliary file: 4-Clasificacion.aux
@@ -28,7 +27,7 @@ Name 1 in "Rob Hess, Clayton Mellina, and Friends" has a comma at the end for en
 while executing---line 1090 of file abbrv.bst
 You've used 17 entries,
             2118 wiz_defined-function locations,
-            593 strings with 6503 characters,
+            592 strings with 6488 characters,
 and the built_in function-call counts, 4773 in all, are:
 = -- 442
 > -- 256
