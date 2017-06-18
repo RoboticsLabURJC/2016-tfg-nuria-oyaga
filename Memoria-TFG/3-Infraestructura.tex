@@ -39,7 +39,7 @@ Caffe~\cite{jia2014caffe} es una plataforma de aprendizaje profundo que permite 
 
 Esta plataforma es interesante por múltiples factores. Además de incluir diferentes ejemplos y modelos ya entrenados, lo que ofrece mayor agilidad a la hora de empezar a entender el funcionamiento de las redes neuronales, es destacable la velocidad que ésta ofrece para el entrenamiento de las redes y su posterior evaluación, ya que está prevista con varios indicadores que permiten evaluar la propia red y compararla con otras.\\ 
 
-Su base se encuentra en las redes neuronales convolucionales explicadas en el Capítulo \ref{cap.introduccion}, utilizando un entrenamiento por lotes. En concreto, su estructura y funcionamiento básico queda explicado en la Figura~\ref{fig.redCaffe}.\\
+Su base se encuentra en las redes neuronales convolucionales explicadas en el Capítulo~\ref{cap.introduccion}, utilizando un entrenamiento por lotes. En concreto, su estructura y funcionamiento básico queda explicado en la Figura~\ref{fig.redCaffe}.\\
 
 \begin{figure}[H]
 	\begin{center}
@@ -233,30 +233,31 @@ Existen multitud de parámetros que permiten la evaluación de las redes neurona
 Las dos primeras fueron explicadas en la Sección~\ref{sec.caffe}, por lo que no se ahondará más sobre ellas. Las tres restantes serán explicdas más profundamente, y de manera totalmente teórica a continuación.
 
 \subsection{Matriz de confusión}
-Una matriz de confusión (Kohavi y Provost, 1998) contiene información sobre las clasificaciones reales y predichas hechas por un sistema de clasificación. El rendimiento de estos sistemas se evalúa comúnmente utilizando los datos de la matriz~\cite{metrics}. En la Figura~\ref{fig.matriz} se muestra un ejemplo sencillo de la construcción de esta matriz donde:
-\begin{itemize}
-	\item \textbf{\textit{a}} es el número de predicciones correctas de que una instancia es negativa
-	\item \textbf{\textit{b}} es el número de predicciones incorrectas de que una instancia es positiva
-	\item \textbf{\textit{c}} es el número de predicciones incorrectas de una instancia negativa
-	\item \textbf{\textit{d}} es el número de predicciones correctas de que una instancia es positiva.
-\end{itemize}
+Una matriz de confusión resume el desempeño de clasificación de un clasificador con respecto a algunos datos de prueba. Es una matriz bidimensional, indexada en una dimensión por la clase verdadera de un objeto y en la otra por la clase que el clasificador. Un caso especial de la matriz de confusión se utiliza a menudo con dos clases, una designada la clase positiva y la otra a la clase negativa. En este contexto, las cuatro células de la matriz se designan como verdaderos positivos (TP), falsos positivos (FP), negativos verdaderos (TN) y falsos negativos (FN), según se muestra en la Figura~\ref{fig.matriz}~\cite{sammut2011encyclopedia}.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.3\textwidth]{figures/matrizexample}
-		\caption{Ejemplo sencillo de matriz de confusión. Imagen tomada de~\cite{metrics}}.
+		\includegraphics[width=0.4\textwidth]{figures/matriz}
+		\caption{Matriz de confusión para clasificación binaria. Imagen tomada de~\cite{FAWCETT2006861}}. 
 		\label{fig.matriz}
 	\end{center}
 \end{figure}
+En una clasificación multiclase, esta matriz se aumenta de tal forma que exista una columna para cada clase posible real y una fila para cada clase posible predicha, según se muestra en la Figura~\ref{fig.matriz2}. 
 
-Además de ayudar con el cálculo de \textit{precision} y \textit{recall}, es importante mirar la matriz de confusión para analizar sus resultados, ya que también proporciona información importante sobre dónde el clasificador funciona mal~\cite{metrics2}. Para que una matriz proporcione información sobre el correcto funcionamiento de un clasificador se obtendrán valores altos en la diagonal, y lo más pequeños posible en el resto de celdas de la misma.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{figures/matriz2}
+		\caption{Matriz de confusión para clasificación multiclase. Imagen tomada de~\cite{kolo2011binary}}. 
+		\label{fig.matriz2}
+	\end{center}
+\end{figure}
+
+En este caso no existe el concepto de falso negativo, sino que se obtiene, en cada celda, el número de veces que se predijo la clase correspondiente a la fila de la misma, al producirse la clase correspondiente a la columna en la que se sitúa. De esta manera, la diagonal, formaría los aciertos que se produjeron en la clasificación, y el resto de celdas las equivocaciones cometidas~\cite{kolo2011binary}.
+
 
 \subsection{\textit{Precision}}
-Se trata de la proporción de los casos positivos predichos que fueron correctos~\cite{metrics}. Para obtener este valor en el ejemplo sencillo anteriormente explicado se utiliza la fórmula:
-$$P = \frac{d}{b+d} $$
-Donde $P$ es el valor de \textit{precision} y $b$ y $d$ los mismo valores explicados en la sección anterior.\\
+El valor de \textit{precision}, en clasificación binaria se define como una proporción de positivos verdaderos (TP) y el número total de positivos predichos por un modelo~\cite{FAWCETT2006861}. En el caso de clasificación multiclase se deberá de tener en cuenta la existencia de varias clases y se utilizará la siguiente expresión, adaptada de~\cite{FAWCETT2006861}:
 
-En un caso más complejo en el que la clasificación no sea binaria, se deben de tener en cuenta todas las clases, por ello la fórmula queda expresada de la siguiente forma~\cite{metrics2}:
 $$P = \frac{TP_X}{TP_X + FP_X} $$
 Donde:
 \begin{itemize}
@@ -265,10 +266,6 @@ Donde:
 \end{itemize}
 
 \subsection{\textit{Recall}}
-Se trata de la proporción de casos positivos que fueron correctamente identificados~\cite{metrics}. Para el ejemplo sencillo se calcula mediante la siguiente expresión:
-$$R = \frac{d}{c+d} $$
-Donde $R$ es el valor de \textit{recall} y $c$ y $d$ los mismo valores explicados anteriormente.\\
-
-Al igual que en el caso de la sección anterior, en caso de tener una clasificación multiclase se deberás tener en cuenta todas ellas, utilizando para ello la expresión~\cite{metrics2}:
+El valor de \textit{recall}, en clasificación binaria, se define como una proporción de positivos verdaderos (TP) y el número total de positivos que se producen~\cite{FAWCETT2006861}. Al igual que en el caso anterior, al considerar la clasificación multiclase se adapta la expresión de~\cite{FAWCETT2006861} para considerar todas las clases posibles, de esta forma se obtiene la expresión:
 $$R = \frac{TP_X}{TP_X +FN_X} $$
 Donde $TP_X$ se corresponde con lo explicado en la sección anterior y $FN_X$ se corresponde con los falsos negativos para la clase $X$, es decir, el número de veces que se predijo errónamente otra clase habiéndose producido $X$, correspondiente con la suma del resto de la columna. 

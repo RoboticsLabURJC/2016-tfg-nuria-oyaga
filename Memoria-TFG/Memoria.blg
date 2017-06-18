@@ -10,60 +10,51 @@ A level-1 auxiliary file: 4-Clasificacion.aux
 A level-1 auxiliary file: 5-Deteccion.aux
 A level-1 auxiliary file: 6-Conclusiones.aux
 A level-1 auxiliary file: 7-Bibliografia.aux
-The style file: abbrv.bst
+The style file: unsrt.bst
 Database file #1: Memoria.bib
-I was expecting a `,' or a `}'---line 150 of file Memoria.bib
- :  
- :  note = "[Accedido 14 de Junio de 2017]"
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "codigo"
 Name 1 in "Rob Hess, Clayton Mellina, and Friends" has a comma at the end for entry caffe
-while executing---line 1049 of file abbrv.bst
-Warning--to sort, need author, editor, or key in fundamentos
-Warning--empty author and editor in fundamentos
+while executing---line 944 of file unsrt.bst
 Warning--empty year in fundamentos
-Name 1 in "Rob Hess, Clayton Mellina, and Friends" has a comma at the end for entry caffe
-while executing---line 1090 of file abbrv.bst
-You've used 17 entries,
-            2118 wiz_defined-function locations,
-            592 strings with 6488 characters,
-and the built_in function-call counts, 4773 in all, are:
-= -- 442
-> -- 256
+You've used 18 entries,
+            1791 wiz_defined-function locations,
+            554 strings with 6429 characters,
+and the built_in function-call counts, 3363 in all, are:
+= -- 275
+> -- 173
 < -- 0
-+ -- 107
-- -- 86
-* -- 286
-:= -- 824
-add.period$ -- 58
-call.type$ -- 17
-change.case$ -- 91
++ -- 66
+- -- 48
+* -- 175
+:= -- 558
+add.period$ -- 62
+call.type$ -- 18
+change.case$ -- 12
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 157
-empty$ -- 393
-format.name$ -- 86
-if$ -- 992
+cite$ -- 19
+duplicate$ -- 146
+empty$ -- 360
+format.name$ -- 48
+if$ -- 761
 int.to.chr$ -- 0
-int.to.str$ -- 17
-missing$ -- 10
-newline$ -- 93
-num.names$ -- 32
-pop$ -- 138
+int.to.str$ -- 18
+missing$ -- 18
+newline$ -- 98
+num.names$ -- 18
+pop$ -- 84
 preamble$ -- 1
-purify$ -- 77
+purify$ -- 0
 quote$ -- 0
-skip$ -- 112
+skip$ -- 52
 stack$ -- 0
-substring$ -- 156
-swap$ -- 18
+substring$ -- 94
+swap$ -- 19
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 62
-warning$ -- 3
-while$ -- 36
-width$ -- 19
-write$ -- 184
-(There were 3 error messages)
+type$ -- 0
+warning$ -- 1
+while$ -- 23
+width$ -- 20
+write$ -- 196
+(There was 1 error message)

@@ -1,14 +1,41 @@
 \begin{thebibliography}{10}
 
-\bibitem{fundamentos}
-{\em Fundamentos para el procesamiento de im{\'a}genes}.
-\newblock Uabc.
+\bibitem{caffe}
+Clayton~Mellina Rob~Hess and Friends.
+\newblock \textit{Introducing: Flickr PARK or BIRD}.
+\newblock
+  \url{http://code.flickr.net/2014/10/20/introducing-flickr-park-or-bird/},
+  2014.
+\newblock [Accedido 13 de Junio de 2017].
 
-\bibitem{4767851}
-J.~Canny.
-\newblock A computational approach to edge detection.
-\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  PAMI-8(6):679--698, Nov 1986.
+\bibitem{Everingham10}
+M.~Everingham, L.~Van~Gool, C.~K.~I. Williams, J.~Winn, and A.~Zisserman.
+\newblock The pascal visual object classes (voc) challenge.
+\newblock {\em International Journal of Computer Vision}, 88(2):303--338, June
+  2010.
+
+\bibitem{FAWCETT2006861}
+Tom Fawcett.
+\newblock An introduction to roc analysis.
+\newblock {\em Pattern Recognition Letters}, 27(8):861 -- 874, 2006.
+\newblock ROC Analysis in Pattern Recognition.
+
+\bibitem{kolo2011binary}
+B.~Kolo.
+\newblock {\em Binary and Multiclass Classification}.
+\newblock Weatherford Press, 2011.
+
+\bibitem{jia2014caffe}
+Yangqing Jia, Evan Shelhamer, Jeff Donahue, Sergey Karayev, Jonathan Long, Ross
+  Girshick, Sergio Guadarrama, and Trevor Darrell.
+\newblock Caffe: Convolutional architecture for fast feature embedding.
+\newblock {\em arXiv preprint arXiv:1408.5093}, 2014.
+
+\bibitem{veit2016cocotext}
+Andreas Veit, Tomas Matera, Lukas Neumann, Jiri Matas, and Serge Belongie.
+\newblock Coco-text: Dataset and benchmark for text detection and recognition
+  in natural images.
+\newblock In {\em arXiv preprint arXiv:1601.07140}, 2016.
 
 \bibitem{pascal-voc-2007}
 M.~Everingham, L.~Van~Gool, C.~K.~I. Williams, J.~Winn, and A.~Zisserman.
@@ -24,45 +51,51 @@ M.~Everingham, L.~Van~Gool, C.~K.~I. Williams, J.~Winn, and A.~Zisserman.
 \newblock
   http://www.pascal-network.org/challenges/VOC/voc2012/workshop/index.html.
 
-\bibitem{Everingham10}
-M.~Everingham, L.~Van~Gool, C.~K.~I. Williams, J.~Winn, and A.~Zisserman.
-\newblock The pascal visual object classes (voc) challenge.
-\newblock {\em International Journal of Computer Vision}, 88(2):303--338, June
-  2010.
+\bibitem{pullum2007guidance}
+L.L. Pullum, B.J. Taylor, and M.A. Darrah.
+\newblock {\em Guidance for the Verification and Validation of Neural
+  Networks}.
+\newblock Emerging Technologies. Wiley, 2007.
 
-\bibitem{metrics2}
-K.~Ganesan.
-\newblock \textit{Text Mining, Analytics \& More}.
-\newblock
-  \url{http://text-analytics101.rxnlp.com/2014/10/computing-precision-and-recall-for.html},
-  2014.
-\newblock [Accedido 25 de Mayo de 2017].
-
-\bibitem{jia2014caffe}
-Y.~Jia, E.~Shelhamer, J.~Donahue, S.~Karayev, J.~Long, R.~Girshick,
-  S.~Guadarrama, and T.~Darrell.
-\newblock Caffe: Convolutional architecture for fast feature embedding.
-\newblock {\em arXiv preprint arXiv:1408.5093}, 2014.
+\bibitem{sammut2011encyclopedia}
+C.~Sammut and G.I. Webb.
+\newblock {\em Encyclopedia of Machine Learning}.
+\newblock Encyclopedia of Machine Learning. Springer US, 2011.
 
 \bibitem{lopez2008redes}
-R.~L{\'o}pez and J.~Fern{\'a}ndez.
+R.F. L{\'o}pez and J.M.F. Fern{\'a}ndez.
 \newblock {\em Las Redes Neuronales Artificiales}.
 \newblock Metodolog{\'\i}a y An{\'a}lisis de Datos en Ciencias Sociales.
   Netbiblo, 2008.
 
-\bibitem{metrics}
-U.~of~Regina.
-\newblock \textit{Text Mining, Analytics \& More}.
-\newblock
-  \url{http://www2.cs.uregina.ca/~dbd/cs831/notes/confusion_matrix/confusion_matrix.html},
-  2008.
+\bibitem{fundamentos}
+Jos{\'e} Jaime~Esqueda Elizondo and Luis Enrique~Palafox Maestre.
+\newblock {\em Fundamentos para el procesamiento de im{\'a}genes}.
+\newblock Uabc.
 
-\bibitem{canny}
-OpenCV-Doxygen.
+\bibitem{4767851}
+J.~Canny.
+\newblock A computational approach to edge detection.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  PAMI-8(6):679--698, Nov 1986.
+
+\bibitem{cannyOCV}
+OpenCV.
 \newblock \textit{Canny Edge Detection}.
 \newblock \url{http://docs.opencv.org/trunk/da/d22/tutorial_py_canny.html},
   2017.
 \newblock [Accedido 14 de Junio de 2017].
+
+\bibitem{laplacian}
+X.~Wang.
+\newblock Laplacian operator-based edge detectors.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  29(5):886--890, May 2007.
+
+\bibitem{gonzalez2008digital}
+R.C. Gonzalez and R.E. Woods.
+\newblock {\em Digital Image Processing}.
+\newblock Pearson/Prentice Hall, 2008.
 
 \bibitem{laplacianOCV}
 OpenCV-Sphinx.
@@ -72,43 +105,12 @@ OpenCV-Sphinx.
   2017.
 \newblock [Accedido 14 de Junio de 2017].
 
-\bibitem{pullum2007guidance}
-L.~Pullum, B.~Taylor, and M.~Darrah.
-\newblock {\em Guidance for the Verification and Validation of Neural
-  Networks}.
-\newblock Emerging Technologies. Wiley, 2007.
-
-\bibitem{caffe}
-C.~M. Rob~Hess and Friends.
-\newblock \textit{Introducing: Flickr PARK or BIRD}.
+\bibitem{sobelOCV}
+OpenCV.
+\newblock \textit{Sobel Derivatives}.
 \newblock
-  \url{http://code.flickr.net/2014/10/20/introducing-flickr-park-or-bird/},
-  2014.
-\newblock [Accedido 13 de Junio de 2017].
-
-\bibitem{laplacian2}
-Tutorialspoint.
-\newblock \textit{Laplacian Operator}.
-\newblock \url{https://www.tutorialspoint.com/dip/laplacian_operator.htm},
+  \url{http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/sobel_derivatives/sobel_derivatives.html},
   2017.
-\newblock [Accedido 7 de Junio de 2017].
-
-\bibitem{sobel}
-Tutorialspoint.
-\newblock \textit{Sobel Operator}.
-\newblock \url{https://www.tutorialspoint.com/dip/sobel_operator.htm}, 2017.
-\newblock [Accedido 7 de Junio de 2017].
-
-\bibitem{veit2016cocotext}
-A.~Veit, T.~Matera, L.~Neumann, J.~Matas, and S.~Belongie.
-\newblock Coco-text: Dataset and benchmark for text detection and recognition
-  in natural images.
-\newblock In {\em arXiv preprint arXiv:1601.07140}, 2016.
-
-\bibitem{laplacian}
-X.~Wang.
-\newblock Laplacian operator-based edge detectors.
-\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  29(5):886--890, May 2007.
+\newblock [Accedido 18 de Junio de 2017].
 
 \end{thebibliography}

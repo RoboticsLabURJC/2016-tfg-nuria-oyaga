@@ -15,7 +15,7 @@
 \contentsline {subsection}{\numberline {2.2.3}VOC}{12}{subsection.2.2.3}
 \contentsline {section}{\numberline {2.3}Evaluaci\IeC {\'o}n de prestaciones}{14}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Matriz de confusi\IeC {\'o}n}{14}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}\textit {Precision}}{15}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.2}\textit {Precision}}{16}{subsection.2.3.2}
 \contentsline {subsection}{\numberline {2.3.3}\textit {Recall}}{16}{subsection.2.3.3}
 \contentsline {chapter}{\numberline {3}Clasificaci\IeC {\'o}n con Aprendizaje Profundo}{17}{chapter.3}
 \contentsline {section}{\numberline {3.1}Clasificador de d\IeC {\'\i }gitos}{17}{section.3.1}
@@ -31,11 +31,11 @@
 \contentsline {subsection}{\numberline {3.2.1}Obtenci\IeC {\'o}n de datos de test}{34}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Banco de pruebas manual}{37}{subsection.3.2.2}
 \contentsline {section}{\numberline {3.3}Efectos del aprendizaje}{40}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Modificaci\IeC {\'o}n de bases de datos}{40}{subsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.1.1}Im\IeC {\'a}genes de bordes}{40}{subsubsection.3.3.1.1}
-\contentsline {subsubsection}{\numberline {3.3.1.2}Im\IeC {\'a}genes ruidosas en test}{47}{subsubsection.3.3.1.2}
-\contentsline {subsubsection}{\numberline {3.3.1.3}Im\IeC {\'a}genes ruidosas en entrenamiento}{51}{subsubsection.3.3.1.3}
-\contentsline {subsection}{\numberline {3.3.2}N\IeC {\'u}mero de iteraciones}{57}{subsection.3.3.2}
-\contentsline {section}{\numberline {3.4}Experimentos}{58}{section.3.4}
-\contentsline {chapter}{\numberline {4}Detecci\IeC {\'o}n}{61}{chapter.4}
-\contentsline {chapter}{\numberline {5}Conclusiones}{62}{chapter.5}
+\contentsline {subsection}{\numberline {3.3.1}Aprendizaje con im\IeC {\'a}genes originales}{40}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Aprendizaje con transformaci\IeC {\'o}n por gradiente}{43}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Otras transformaciones. \textit {Data Aumentation}}{47}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Aprendizaje con bases de datos aumentadas}{49}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}N\IeC {\'u}mero de iteraciones}{56}{subsection.3.3.5}
+\contentsline {section}{\numberline {3.4}Experimentos}{57}{section.3.4}
+\contentsline {chapter}{\numberline {4}Detecci\IeC {\'o}n}{60}{chapter.4}
+\contentsline {chapter}{\numberline {5}Conclusiones}{61}{chapter.5}

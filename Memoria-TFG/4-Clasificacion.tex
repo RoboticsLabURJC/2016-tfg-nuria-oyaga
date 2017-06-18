@@ -268,9 +268,9 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	
 	\begin{figure}[H]
 			\centering
-			\subfigure[Entrenamiento]{\includegraphics[width=0.4\textwidth]{figures/parselogtrain}} \hspace{10pt}
-			\subfigure[Evaluación]{\includegraphics[width=0.4\textwidth]{figures/parselogtest}}
-			\caption{Archivos \text{log}.}
+			\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/parselogtrain}} \hspace{10pt}
+			\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/parselogtest}}
+			\caption{Archivos \text{log} de: (a)~Entrenamiento, (b)~Evaluación.}
 			\label{fig.parse}
 	\end{figure}
 
@@ -349,9 +349,9 @@ En la Sección~\ref{sec.droid} se comentó una aplicación que permitía utiliza
 
 \begin{figure}[H]
 	\centering
-	\subfigure[Escritorio]{\includegraphics[width=0.4\textwidth]{figures/droidcamEscr}} \hspace{10pt}
-	\subfigure[Dispositivo móvil]{\includegraphics[width=0.3\textwidth]{figures/droidcamMov}}
-	\caption{Capturas de DroidCam en los diferentes dispositivos}
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/droidcamEscr}} \hspace{10pt}
+	\subfigure[]{\includegraphics[width=0.3\textwidth]{figures/droidcamMov}}
+	\caption{Capturas de DroidCam en: (a)~Escritorio, (b)~Dispositivo móvil}
 	\label{fig.droid}
 \end{figure}
 
@@ -528,27 +528,25 @@ Una vez se dispone de los datos necesarios para la evaluación de prestaciones, 
 	Para este parámetro, se debe dividir el número de clasificaciones correctas de cada dígito entre el número de veces que se produjo el mismo. En este caso, se sumarán los valores obtenidos por columnas, lo que dará por resultado el número de veces que se introdujo a la red cada uno de los dígitos. Una vez obtenido ese valor, se debe dividir el valor de la diagonal correspondiente, al igual que en el caso anterior, entre el valor obtenido para cada columna.
 \end{description}
 \vspace{10pt}
-\section{Efectos del aprendizaje}
+\section{Efectos del aprendizaje} \label{sec.aprendizaje}
 Existen numerosos factores que afectan a la robusted de la red en el proceso de entrenamiento de la misma. Elementos como la base de datos, el número de neuronas empleadas, el número de capas o las etapas que se realizan en el entrenamiento~\cite{lopez2008redes}, hacen que la red tenga una mayor robusted, mejorando la aplicación deseada.\\
 
 En esta sección se tratará el efecto en el aprendizaje de dos de los factores que se pueden manipular para adaptar la robusted de la red a la aplicación que se vaya a tratar, estos elementos son el cambio en las bases de datos de entrenamiento y validación, y la disminución del número de iteraciones.\\
 
-\subsection{Modificación de bases de datos} \label{sec.mod_bbdd}
-
+\subsection{Aprendizaje con imágenes originales}
 La base de datos empleada en el primer ejemplo explicado es excesivamente simple y, por lo tanto, no aporta la robusted necesaria para un problema de clasificación real. Por ello se estudiará la ampliación y modificación de la misma para obtener una red robusta que permita solucionar el problema de la clasificación de imágenes en tiempo real de la manera más precisa posible.\\
 
-\subsubsection{Imágenes de bordes} \label{sec.bordes}
 El primer problema que se encuentra en esta base de datos es que únicamente se dispone de muestras con el fondo negro y el dígito en blanco. Ésto limita bastante la funcionalidad de la aplicación, ya que se pretende clasificar cualquier dígito, independientemente del fondo sobre el que se muestre. Para estudiar el efecto que tiene el cambio de fondo en las imágenes en la red neuronal desarrollada se ha elaborado una base de datos de evaluación ampliada, incluyendo, para cada muestra, su negativo.\\
 
 La obtención de la base de datos se consigue gracias al script \textit{create\_neg\_database.py}. El proceso llevado a cabo en este script parte del tratamiento de bases de datos de tipo \textit{lmdb} explicado en la Sección~\ref{sec.banco}. Se debe abrir la base de datos con las imágenes originales y utilizar los datos de la imagen obtenidos para realizar la transformación deseada. Posteriormente, para almacenar las imágenes transformadas, se debe abrir una nueva base de datos de este tipo, que permita escritura. Esta apertura se realiza con las siguientes líneas:
 \vspace{10pt}
 \begin{lstlisting}[frame=single]
 	new_lmdb_env = lmdb.open('/home/nuria/TFG/lmdb_test/test_edgesCanny_lmdb',
-						map_size=int(1e12))
+								map_size=int(1e12))
 	new_lmdb_txn = new_lmdb_env.begin(write=True)
 	new_lmdb_cursor = new_lmdb_txn.cursor()
 	new_datum = caffe.proto.caffe_pb2.Datum()
-\end{lstlisting}
+	\end{lstlisting}
 
 Se puede observar que el proceso es muy similar al explicado en la Sección~\ref{sec.banco}, incluyendo dos parámetros que permitan la escritura en la base de datos.\\
 
@@ -594,14 +592,15 @@ En la Figura~\ref{fig.neg-orig} se muestran los resultados obtenidos, donde se p
 		\label{fig.neg-orig}
 	\end{center}
 \end{figure}
-\vspace{20pt}
 
-Para solucionar el problema que acarrea el tener esta gran diferencia únicamente modificando el fondo de la imagen, y puesto que la aplicación no está enfocada a un único tipo de fondo, se opta por aplicar un filtro de bordes que independice la imagen del fondo. Existen varios filtros de bordes que es posible aplicar para solucionar el problema~\cite{fundamentos}.\\
+\subsection{Aprendizaje con transformación por gradiente}
+\label{sec.bordes}
+Para solucionar el problema que acarrea el tener una gran diferencia en la precisión de la aplicación, únicamente con la modificación del fondo de la imagen, y puesto que la aplicación no está enfocada a un único tipo de fondo, se opta por aplicar un filtro de bordes que independice la imagen del fondo. Existen varios filtros de bordes que es posible aplicar para solucionar el problema~\cite{fundamentos}.\\
 
 Para desarrollar la comparación entre los diferentes filtros posibles se ha desarrollado un script similar al anterior, en el que se aplicaba el negativo, \textit{create\_edges\_database.py}, que aplicará el filtro de borde seleccionado. Se parte de la base de datos ampliada con el negativo, por lo que no es necesario almacenar la imagen de la que se parte en la base de datos. Será necesario aplicar el filtro, también sobre las bases de datos de entrenamiento y validación, puesto que el objetivo es desarrollar una nueva red neuronal que interprete los bordes. Se obtiene, así, una base de datos de entrenamiento con 48000 muestras, otra de validación con 12000, y una última de test con 20000, a las que se les ha aplicado un determinado filtro de bordes.\\
 
 A continuación se explicarán los tres filtros que han sido evaluados en este proyecto: Canny, Laplaciano y Sobel.
-
+\vspace{10pt}
 \begin{description}
 	\item[Filtro de Canny] \hfill 
 	\vspace{5pt}
@@ -609,48 +608,36 @@ A continuación se explicarán los tres filtros que han sido evaluados en este p
 	El algoritmo de Canny es un operador desarrollado por John F. Canny en 1986 que utiliza un algoritmo de múltiples etapas para detectar una amplia gama de bordes en imágenes~\cite{4767851}. Para ello utiliza el cálculo de variaciones, una técnica que encuentra la función que optimiza un funcional indicado. En este caso, la función óptima, es definida por la suma de cuatro términos exponenciales, pero se puede aproximar por la primera derivada de una gaussiana. El resultado de aplicar este filtro es siempre una imagen binaria en la que los píxeles únicamente pueden tomar los valores 0 ó 1 (0 ó 255 dependiendo del rango).\\
 	\vspace{-10pt}
 	\\
-	Para aplicar este algoritmo en el código se debe implementar la función proporcionada por \textit{openCV} según~\cite{canny}. En la Figura~\ref{fig.canny} se muestra la aplicación de este filtro para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}. En la base de datos de test, se van a obtener dos imágenes iguales de cada dígito ya que se está aplicando sobre el original y el negativo el mismo filtro, que por su propio funcionamiento, detecta los mismos bordes en ambos.
-	
-	\begin{figure}[H]
-		\begin{center}
-			\includegraphics[width=0.3\textwidth]{figures/canny}
-			\caption{Muestra de dígitos con filtro Canny.}
-			\label{fig.canny}
-		\end{center}
-	\end{figure}
-	
+	Para aplicar este algoritmo en el código se debe implementar la función proporcionada por \textit{openCV} según~\cite{cannyOCV}. En la base de datos de test, se van a obtener dos imágenes iguales de cada dígito ya que se está aplicando sobre el original y el negativo el mismo filtro, que por su propio funcionamiento, detecta los mismos bordes en ambos.
+	\vspace{10pt}
 	\item[Filtro Laplaciano] \hfill 
 	\vspace{5pt}
 	\\
-	El laplaciano es un operador de segunda derivada que se utiliza con frecuencia en la detección de bordes~\cite{laplacian}. Su fundamento se encuentra en la identificación de un borde cuando se produce un cruce por cero en la segunda derivada obtenida. Este operador posee dos filtros diferentes, uno positivo con el que se obtienen los bordes externos, este es el utilizado en este proyecto, y uno negativo que obtiene los bordes internos de la misma~\cite{laplacian2}. El resultado final será una imagen en escala de grises correspondiente con los bordes de interés.\\
+	El laplaciano es un operador de segunda derivada que se utiliza con frecuencia en la detección de bordes~\cite{laplacian}~\cite{gonzalez2008digital}. Su fundamento se encuentra en la identificación de un borde cuando se produce un cruce por cero en la segunda derivada obtenida. Este operador posee dos filtros diferentes, uno positivo con el que se obtienen los bordes externos, este es el utilizado en este proyecto, y uno negativo que obtiene los bordes internos de la misma. El resultado final será una imagen en escala de grises correspondiente con los bordes de interés.\\
 	\vspace{-10pt}
 	\\
-	La aplicación del filtro es posible gracias a otra función de \textit{openCV}, según~\cite{laplacianOCV}. En la Figura~\ref{fig.laplacian}, se muestra la aplicación de este filtro para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST} y a su negativo. La diferencia entre ambos resultados se debe a que en la imagen original, como se comentó anteriormente, se están obteniendo los bordes externos gracias al operador positivo, pero al aplicarlo en el negativo de la imagen, los correspondientes bordes externos son ahora los internos de la imagen original. Esta diferencia podría perjudicar a la robustez de la red, pues dependiendo de la imagen la diferencia entre ambos podría ser suficiente como para crear confusión.
-	\begin{figure}[H]
-		\centering
-		\subfigure[Original]{\includegraphics[width=0.3\textwidth]{figures/laplacian-orig}} \hspace{10pt}
-		\subfigure[Negativo]{\includegraphics[width=0.3\textwidth]{figures/laplacian-neg}}
-		\caption{Muestra de dígitos con filtro Laplaciano.}
-		\label{fig.laplacian}
-	\end{figure}
-	\vspace{-10pt}
+	La aplicación del filtro es posible gracias a otra función de \textit{openCV}, según~\cite{laplacianOCV}. Al aplicar este filtro sobre las imágenes originales y su negativo no se obtienen exáctamente la misma imagen. La diferencia entre ambos resultados se debe a que en la imagen original, como se comentó anteriormente, se están obteniendo los bordes externos gracias al operador positivo, pero al aplicarlo en el negativo de la imagen, los correspondientes bordes externos son ahora los internos de la imagen original. Esta diferencia podría perjudicar a la robustez de la red, pues dependiendo de la imagen la diferencia entre ambos podría ser suficiente como para crear confusión.
+	\vspace{10pt}
 	\item[Filtro de Sobel] \hfill 
 	\vspace{5pt}
 	\\
-	Este filtro está formado por dos máscaras de derivadas  que permiten obtener los bordes en una determinada dirección, horizontal y vertical~\cite{sobel}. Para obtener la imagen de bordes final será necesario sumar ambas soluciones,en valor absoluto, obteniendo la imagen de grises con los bordes.\\
+	Este filtro está formado por dos máscaras de derivadas  que permiten obtener los bordes en una determinada dirección, horizontal y vertical~\cite{gonzalez2008digital}. Para obtener la imagen de bordes final será necesario sumar ambas soluciones,en valor absoluto, obteniendo la imagen de grises con los bordes.\\
 	\vspace{-10pt}
 	\\
-	Para aplicar este filtro primero se debe aplicar cada una de las dos máscaras, horizontal y vertical, gracias a la función de \textit{openCV}~\footnote{http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/sobel\_derivatives/sobel\_derivatives.html}. Una vez se tienen los bordes en ambas direcciones se suman ambos en valor absoluto y se normaliza a valores entre 0 y 255, obteniendo una imagen de tipo \textit{float} que deberá ser transformada a \textit{uint8}. En la Figura~\ref{fig.sobel} se muestra la aplicación de este filtro para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}. En este caso, y al igual que en el caso de Canny, se obtiene la misma imagen de bordes en ambas imágenes, pues el filtro no hace distinción entre bordes internos y externos.
-	
-	\begin{figure}[H]
-		\begin{center}
-			\includegraphics[width=0.3\textwidth]{figures/sobel}
-			\caption{Muestra de dígitos con filtro de Sobel.}
-			\label{fig.sobel}
-		\end{center}
-	\end{figure}	
+	Para aplicar este filtro primero se debe aplicar cada una de las dos máscaras, horizontal y vertical, gracias a la función de \textit{openCV}, según~\cite{sobelOCV}. Una vez se tienen los bordes en ambas direcciones se suman ambos en valor absoluto y se normaliza a valores entre 0 y 255, obteniendo una imagen de tipo \textit{float} que deberá ser transformada a \textit{uint8}. En este caso, y al igual que en el caso de Canny, se obtiene la misma imagen de bordes en ambas imágenes, pues el filtro no hace distinción entre bordes internos y externos.	
 \end{description}
-\vspace{-10pt}
+
+La Figura~\ref{fig.bordes} muestra la aplicación de las tres transformaciones por gradiente explicadas para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}, incluyendo las dos versiones del filtro Laplaciano, los bordes obtenidos para la original y su negativo.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/canny}} \hspace{10pt}
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/laplacian-orig}} \hspace{10pt}
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/laplacian-neg}} \hspace{10pt}
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/sobel}}
+	\caption{Muestras de imágenes de bordes: (a)~Canny, (b)~Laplaciano original, (c)~Laplaciano negativo, (d)~Sobel.}
+	\label{fig.bordes}
+\end{figure}
 
 Una vez obtenidas las diferentes bases de datos con los filtros de bordes aplicados se procede al entrenamiento de tres redes neuronales diferentes, una con cada uno de los filtros, según se explicó en la Sección~\ref{sec.red}. En concreto, únicamente se modificarán las distintas bases de datos empleadas en entrenamiento y evaluación por la obtenida para cada caso.\\
 
@@ -658,7 +645,7 @@ Tras obtener las tres redes neuronales entrenadas será posible comenzar con el 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{figures/filtros}
+		\includegraphics[width=0.6\textwidth]{figures/filtros}
 		\caption{Comparación de tasa de acierto con diferentes filtros.}
 		\label{fig.filtros}
 	\end{center}
@@ -678,16 +665,11 @@ Una vez se ha obtenido una clasificación independiente del fondo de la imagen e
 	\end{center}
 \end{figure}
 
-\subsubsection{Imágenes ruidosas en test}
-
+\subsection{Otras transformaciones. \textit{Data Aumentation}}
 Al obtener una imagen con la cámara esta puede no estar perfectamente centrada, recta o con un tamaño igual al de la base de datos empleada en el entrenamiento, además de poder incluir ruido introducido por la propia cámara. Esto hará que, al introducir una de estas imágenes en la red, entrenada con imágenes sin ningún tipo de alteración, no se obtenga la precisión deseada.\\
 
-Para la evaluación del ruido sobre la red neuronal, entendiendo por ruido cualquier posible alteración de la imagen, se elaborará una base de datos de test a partir de la que proporciona \acrshort{mnist} de 10000 muestras, incluyendo en ella 6 imágenes con la transformación aplicada y la imagen original para cada muestra, aplicando, por último el filtro de Sobel a cada una. De esta manera se obtiene una base de datos de test con 70000 muestras de bordes ruidosas.\\
-
-Tras aplicar las diferentes transformaciones sobre la base de datos de test se obtendrán diversas bases de datos modificadas que serán introducidas sobre la misma red neuronal, la desarrollada anteriormente con bordes de Sobel, para poder evaluar la robustez de la misma.\\
-
-A continuación se explicarán las distinas transformaciones realizadas, todas ellas con ayuda de las funciones que proporciona \textit{openCV} y cómo afecta cada una a los parámentros que permiten evaluar la red.
-
+A continuación se explicarán las distinas transformaciones que serán aplicadas, todas ellas con ayuda de las funciones que proporciona \textit{openCV}.
+\vspace{10pt}
 \begin{description}
 	\item[Rotación] \hfill 
 	\vspace{5pt}
@@ -695,31 +677,16 @@ A continuación se explicarán las distinas transformaciones realizadas, todas e
 	La rotación consiste en el giro sobre un eje situado en el centro de la imagen,un determinado ángulo establecido por el desarrollador.\\
 	\vspace{-10pt}
 	\\
-	En concreto, en esta aplicación se ha optado por la rotación con un ángulo aleatorio dentro del rango [-20,20] grados. En la Figura~\ref{fig.rotacion} se muestra la aplicación de la rotación para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
-	
-	\begin{figure}[H]
-		\begin{center}
-			\includegraphics[width=0.3\textwidth]{figures/rotacion}
-			\caption{Muestra de dígitos rotados.}
-			\label{fig.rotacion}
-		\end{center}
-	\end{figure}
-	\vspace{-10pt}
+	En concreto, en esta aplicación se ha optado por la rotación con un ángulo aleatorio dentro del rango [-20,20] grados.
+	\vspace{10pt}
 	\item[Traslación] \hfill 
 	\vspace{5pt}
 	\\
 	La traslación de una imagen consiste en desplazar la misma en una determinada dirección y sentido marcados por dos variables \textit{x} e \textit{y}, tomando como referencia el eje central.\\
 	\vspace{-10pt}
 	\\
-	Para la evaluación que es de interés en el proyecto, se ha establecido un rango de desplazamiento horizontal aleatorio de [-4,4] y uno vertical de [-4,2], de tal manera que la imagen del dígito no quede recortada. En la Figura~\ref{fig.traslacion} se muestra la aplicación de la traslación para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
-	\begin{figure}[H]
-		\begin{center}
-			\includegraphics[width=0.3\textwidth]{figures/traslacion}
-			\caption{Muestra de dígitos trasladados.}
-			\label{fig.traslacion}
-		\end{center}
-	\end{figure}
-	\vspace{-10pt}
+	Para la evaluación que es de interés en el proyecto, se ha establecido un rango de desplazamiento horizontal aleatorio de [-4,4] y uno vertical de [-4,2], de tal manera que la imagen del dígito no quede recortada.
+	\vspace{10pt}
 	\item[Escalado] \hfill 
 	\vspace{5pt}
 	\\
@@ -731,30 +698,31 @@ A continuación se explicarán las distinas transformaciones realizadas, todas e
 	\\
 	Tras aplicar el escalado, el resultado es una imagen cuyas dimensiones han variado, aumentando o disminuyendo en función de la proporción. Para introducir las imágenes en la red y obtener resultados adecuados se debe adaptar el tamaño de las mismas al necesario para la red (28x28) sin deformar la imagen. Para ello, si el tamaño de la imagen es mayor, se recortará la misma manteniendo el centro, si por el contrario, el tamaño es menor, se añadirá un borde del mismo color que el fondo de la imagen hasta obtener el tamaño deseado.
 	\vspace{10pt}
-	\\
-	En la Figura~\ref{fig.escalado} se muestra la aplicación de la traslación para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
-	\begin{figure}[H]
-		\begin{center}
-			\includegraphics[width=0.3\textwidth]{figures/escala}
-			\caption{Muestra de dígitos escalados.}
-			\label{fig.escalado}
-		\end{center}
-	\end{figure}
 	\item[Ruido] \hfill 
 	\vspace{10pt}
 	\\
 	El ruido de una imagen es una variación aleatoria de la información de brillo o color en la misma. Existen diferentes tipos de ruido con naturalezas distintas que pueden estar producidos por diversas causas como por ejemplo ruido Gaussiano, ruido \textit{Salt\&Pepper} o ruido uniforme.\\
 	\vspace{-10pt}
 	\\
-	La apliación pretende clasificar los dígitos mostrados a una cámara en tiempo real, en donde el ruido más presente es el ruido Gaussiano, por lo que será el empleado para el test. Se aplicará un ruido Gaussiano con  una varianza de 0.02, utilizando, en este caso, una función que proporciona \textit{skimage.util}. En la Figura~\ref{fig.ruido} se muestra la aplicación del ruido para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
-	\begin{figure}[H]
-		\begin{center}
-			\includegraphics[width=0.3\textwidth]{figures/ruido}
-			\caption{Muestra de dígitos con ruido.}
-			\label{fig.ruido}
-		\end{center}
-	\end{figure}
+	La apliación pretende clasificar los dígitos mostrados a una cámara en tiempo real, en donde el ruido más presente es el ruido Gaussiano, por lo que será el empleado para el test. Se aplicará un ruido Gaussiano con  una varianza de 0.02, utilizando, en este caso, una función que proporciona \textit{skimage.util}. 
 \end{description}
+
+La Figura~\ref{fig.transformaciones} muestra la aplicación de las cuatro transformaciones explicadas para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/rotacion}} \hspace{10pt}
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/traslacion}} \hspace{10pt}
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/escala}} \hspace{10pt}
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/ruido}}
+	\caption{Muestras de imágenes transformadas: (a)~Rotación, (b)~Traslación, (c)~Escalado, (d)~Ruido.}
+	\label{fig.transformaciones}
+\end{figure}
+
+\subsection{Aprendizaje con bases de datos aumentadas} \label{sec.transformaciones}
+Para la evaluación de las posibles alteraciones de la imagen obtenida, se elaborará una base de datos de test a partir de la que proporciona \acrshort{mnist} de 10000 muestras, incluyendo en ella 6 imágenes con la transformación aplicada, de las explicadas en la sección anterior, y la imagen original para cada muestra, aplicando, por último el filtro de Sobel a cada una. De esta manera se obtiene una base de datos de test con 70000 muestras.\\
+
+Tras aplicar las diferentes transformaciones sobre la base de datos de test se obtendrán diversas bases de datos modificadas que serán introducidas sobre la misma red neuronal, la desarrollada anteriormente con bordes de Sobel, para poder evaluar la robustez de la misma.\\
 
 Además de las bases de datos creadas con la transformación única, se elabora una nueva base de datos que contiene una combinación de todas las transformaciones explicadas: escalado, traslación, rotación y ruido, para obtener una evaluación más realista. En esta combinación, a la hora de aplicar la traslación, se tendrá en cuenta el factor de escala aplicado, de tal manera que si es mayor que 1, es decir, la imagen se ha ampliado, el rango de desplazamiento se ve reducido a la mitad en ambas direcciones. De esta manera, el dígito se mantendrá siempre dentro de la imagen, sin verse recortado por ningún lado.\\
 
@@ -777,34 +745,33 @@ Una vez se han obtenido las bases de datos que permitan realizar el estudio sobr
 	\end{center}
 \end{figure}
 
-Se puede observar que el introducir varias transformaciones sobre la imagen hace que la tasa de acierto disminuya considerablemente, siendo especialmente sensible a la traslación, mientras que el ruido a penas afecta, algo que concuerda con las imágenes mostradas. Estos resultados hacen ver que la red, frente a un escenario real en el que las imágenes no son perfectas, no reaccionaría de la manera que se desearía, existiendo una probabilidad de fallo del 0.3. Por ello, se continuará el estudio elaborando bases de datos de entrenamiento y validación que incluyan estas transformaciones y permitan mejorar la tasa de acierto de la aplicación.
+Se puede observar que el introducir varias transformaciones sobre la imagen hace que la tasa de acierto disminuya considerablemente, siendo especialmente sensible a la traslación, mientras que el ruido a penas afecta, algo que concuerda con las imágenes mostradas. Estos resultados hacen ver que la red, frente a un escenario real en el que las imágenes no son perfectas, no reaccionaría de la manera que se desearía, existiendo una probabilidad de fallo del 0.3.\\
 
-\subsubsection{Imágenes ruidosas en entrenamiento}
-Para conseguir desarrollar una red más robusta, según lo analizado las secciones anteriores, se elaborarán nuevas bases de datos de entrenamiento y validación mediante la combinación de las transformaciones explicadas anteriormente. Las nuevas bases de datos serán modificaciones de la utilizada en la red básica, explicada en la Sección~\ref{sec.red}. Para la evaluación de todas las redes creadas se empleará la base de datos de test creada anteriormente, en la que se combinan todas las transformaciones, con 70000 muestras.\\
+Para conseguir desarrollar una red más robusta, según lo analizado anteriormente, se elaborarán nuevas bases de datos de entrenamiento y validación mediante la combinación de las transformaciones explicadas anteriormente. Las nuevas bases de datos serán modificaciones de la utilizada en la red básica, explicada en la Sección~\ref{sec.red}. Para la evaluación de todas las redes creadas se empleará la base de datos de test creada anteriormente, en la que se combinan todas las transformaciones, con 70000 muestras.\\
 
 En primer lugar, se calcula la matriz de confusión de la red entrenada únicamente con las imágenes de bordes de Sobel, que queda reflejada en la Tabla~\ref{tab.matriz1-0}. De esta manera se podrán obtener valores de \textit{precision} y \textit{recall} de la misma y hacer una comparación adecuada de todas las redes.\\
-	\begin{table}[H]
-		\centering
-		\begin{tabular}{|c|l|c|c|c|c|c|c|c|c|c|c|c|}
-			\cline{3-13} 
-			 \multicolumn{2}{c|}{} & \multicolumn{11}{c|}{\textbf{Real}} \\ \cline{3-13} 
-			 \multicolumn{2}{c|}{} & \textbf{0} & \textbf{1} & \textbf{2} &  \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{Total}\\ \hline
-			 \multirow{10}{0.5cm}{\rotatebox{90}{\textbf{Predicción}}}& \textbf{0} &  \cellcolor{lightgray}4691 & 191 & 82 & 90 & 118 & 83 & 173 & 45 & 163 & 192 & 5828\\ \cline{2-13}
-			 & \textbf{1} & 76 & \cellcolor{lightgray}6391 & 119 & 65 & 213 & 22 & 209 & 212 & 246 & 142 & 7695\\ \cline{2-13}
-			 & \textbf{2} & 188 & 98 & \cellcolor{lightgray}5578 & 462 & 232 & 131 & 121 & 683 & 276 & 229 & 7998\\ \cline{2-13}
-			 & \textbf{3} & 43 & 30 & 443 & \cellcolor{lightgray}4904 & 270 & 201 & 48 & 275 & 243 & 311 & 6768\\ \cline{2-13}
-			 & \textbf{4} & 158 & 415 & 291 & 145 & \cellcolor{lightgray}5055 & 117 & 720 & 37 & 320 & 381 & 7639\\ \cline{2-13}
-			 & \textbf{5} & 96 & 72 & 65 & 633 & 107 & \cellcolor{lightgray}4780 & 234 & 112 & 323 & 243 & 6665\\ \cline{2-13}
-			 & \textbf{6} & 472 & 234 & 86 & 49 & 130 & 216 & \cellcolor{lightgray}4497 & 15 & 326 & 91 & 6116\\ \cline{2-13}
-			 & \textbf{7} & 57 & 416 & 265 & 255 & 244 & 105 & 19 & \cellcolor{lightgray}5473 & 235 & 488 & 7557\\ \cline{2-13}
-			 & \textbf{8} & 138 & 80 & 131 & 139 & 139 & 129 & 182 & 84 & \cellcolor{lightgray}4116 & 194 & 5332\\ \cline{2-13}
-			 & \textbf{9} & 941 & 18 & 164 & 328 & 366 & 460 & 503 & 260 & 570 & \cellcolor{lightgray}4792 & 8402\\ \cline{2-13} 
-			 & \textbf{Total} & 6860 & 7945 & 7224 & 7070 & 6874 & 6244 & 6706 & 7196 & 6818 & 7063 & 70000\\ \hline
-		\end{tabular}
-		\caption{Matriz de confusión red 1-0.}
-		\label{tab.matriz1-0}
-	\end{table}
-	
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|l|c|c|c|c|c|c|c|c|c|c|c|}
+		\cline{3-13} 
+		\multicolumn{2}{c|}{} & \multicolumn{11}{c|}{\textbf{Real}} \\ \cline{3-13} 
+		\multicolumn{2}{c|}{} & \textbf{0} & \textbf{1} & \textbf{2} &  \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{Total}\\ \hline
+		\multirow{10}{0.5cm}{\rotatebox{90}{\textbf{Predicción}}}& \textbf{0} &  \cellcolor{lightgray}4691 & 191 & 82 & 90 & 118 & 83 & 173 & 45 & 163 & 192 & 5828\\ \cline{2-13}
+		& \textbf{1} & 76 & \cellcolor{lightgray}6391 & 119 & 65 & 213 & 22 & 209 & 212 & 246 & 142 & 7695\\ \cline{2-13}
+		& \textbf{2} & 188 & 98 & \cellcolor{lightgray}5578 & 462 & 232 & 131 & 121 & 683 & 276 & 229 & 7998\\ \cline{2-13}
+		& \textbf{3} & 43 & 30 & 443 & \cellcolor{lightgray}4904 & 270 & 201 & 48 & 275 & 243 & 311 & 6768\\ \cline{2-13}
+		& \textbf{4} & 158 & 415 & 291 & 145 & \cellcolor{lightgray}5055 & 117 & 720 & 37 & 320 & 381 & 7639\\ \cline{2-13}
+		& \textbf{5} & 96 & 72 & 65 & 633 & 107 & \cellcolor{lightgray}4780 & 234 & 112 & 323 & 243 & 6665\\ \cline{2-13}
+		& \textbf{6} & 472 & 234 & 86 & 49 & 130 & 216 & \cellcolor{lightgray}4497 & 15 & 326 & 91 & 6116\\ \cline{2-13}
+		& \textbf{7} & 57 & 416 & 265 & 255 & 244 & 105 & 19 & \cellcolor{lightgray}5473 & 235 & 488 & 7557\\ \cline{2-13}
+		& \textbf{8} & 138 & 80 & 131 & 139 & 139 & 129 & 182 & 84 & \cellcolor{lightgray}4116 & 194 & 5332\\ \cline{2-13}
+		& \textbf{9} & 941 & 18 & 164 & 328 & 366 & 460 & 503 & 260 & 570 & \cellcolor{lightgray}4792 & 8402\\ \cline{2-13} 
+		& \textbf{Total} & 6860 & 7945 & 7224 & 7070 & 6874 & 6244 & 6706 & 7196 & 6818 & 7063 & 70000\\ \hline
+	\end{tabular}
+	\caption{Matriz de confusión red 1-0.}
+	\label{tab.matriz1-0}
+\end{table}
+
 Tras obtener la evaluación de la red basica, se procede a la modificación de la misma y su posterior evaluación, variando el número de imágenes transformadas que se utilizan, así como la inclusión o no de la imagen original. Para esta tarea, se partirá de la base de datos de entrenamiento modificada de la misma manera que se modificó la de test en la sección anterior, obteniendo 6 transformaciones y la imagen original. Tras evaluar los resultados, se irá reduciendo el número de imágenes, para evaluar el impacto y conseguir una base de datos que proporcione buenos resultados disminuyendo la complejidad de cómputo.
 \vspace{5pt}
 
@@ -934,7 +901,7 @@ Para poder establecer conclusiones más firmes, se calculan el \textit{precision
 	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/precision}}
 	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/recall}}
 	\caption{Resultados de parámetros de evaluación: (a) \textit{Precision}, (b) \textit{Recall}}
-		\label{fig.precision-recall}
+	\label{fig.precision-recall}
 \end{figure}
 Los resultados obtenidos confirman las conclusiones que se alcanzaron con anterioridad. Existe una clara mejora al introducir imágenes ruidosas en el entrenamiento, una única imagen ruidosa aporta suficiente información y la inclusión de la imagen original no aporta gran información para el entrenamiento.\\
 
@@ -960,26 +927,26 @@ Por todo lo mencionado anteriormente, se decide escoger la red entrenada con la 
 \section{Experimentos}
 Tras todo el análisis realizado anteriormente se ha obtenido una red neuronal más robusta que permite una mejor clasificación en tiempo real de los dígitos mostrados a la cámara. Con todo lo estudiado en puntos anteriores se realiza una comparación entre la primera red básica que se desarrolló y la red a la que se le han aplicado las variaciones precisas.\\
 
-En primer lugar se prueba la aplicación con un dígito cuyo fondo es negro, tal y como se entrenó en la primera red desarrollada. Los resultados de este experimento quedan reflejados en la Figura~\ref{fig.experimento1}.
+En primer lugar se prueba la aplicación con una imagen completamente limpia, donde el dígito se obtuvo con el ordenador y el fondo es negro, tal y como se entrenó en la primera red desarrollada. Los resultados de este experimento quedan reflejados en la Figura~\ref{fig.experimento1}.
 
 \begin{figure}[H]
 	\centering
-	\subfigure[Red básica]{\includegraphics[width=0.4\textwidth]{figures/exp_basica1}} \hspace{5pt}
-	\subfigure[Red robusta]{\includegraphics[width=0.4\textwidth]{figures/exp_robusta1}}
-	\caption{Evaluación de la aplicación con imagen de fondo negro.}
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/exp_basica1}} \hspace{5pt}
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/exp_robusta1}}
+	\caption{Evaluación de la aplicación con imagen limpia: (a)~Red básica, (b)~Red robusta.}
 	\label{fig.experimento1}
 \end{figure}
 
-Tras evaluar un ejemplo completamente limpio se pone a prueba la aplicación con una imagen más complicada para la misma, variando su fondo y no siendo tan perfecto. Esta prueba queda reflejada en la Figura~\ref{fig.experimento}, donde se expone un ejemplo con el que se comprueba cómo un dígito que con la red básica que se desarrolló en primer lugar no lograba ser identificado, pues no cumplia con todas las características que la red exigía para ser más precisa, sí es posible su clasificación tras mejorar la red entrenada según lo estudiado en los puntos anteriores. 
+Tras evaluar un ejemplo completamente limpio se pone a prueba la aplicación con una imagen más complicada para la misma, variando su fondo y escribiéndolo a mano. Esta prueba queda reflejada en la Figura~\ref{fig.experimento}, donde se expone un ejemplo con el que se comprueba cómo un dígito que con la red básica que se desarrolló en primer lugar no lograba ser identificado, pues no cumplia con todas las características que la red exigía para ser más precisa, sí es posible su clasificación tras mejorar la red entrenada según lo estudiado en los puntos anteriores. 
 
 \begin{figure}[H]
 	\centering
-	\subfigure[Red básica]{\includegraphics[width=0.4\textwidth]{figures/exp_basica}} \hspace{5pt}
-	\subfigure[Red robusta]{\includegraphics[width=0.4\textwidth]{figures/exp_robusta}}
-	\caption{Evaluación de la aplicación con diferentes redes.}
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/exp_basica}} \hspace{5pt}
+	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/exp_robusta}}
+	\caption{Evaluación de la aplicación con imagen imperfecta: (a)~Red básica, (b)~Red robusta.}
 	\label{fig.experimento}
 \end{figure}
 
-Para realizar los experimentos anteriores se ha tomado como "Red básica", la explicada en la Sección~\ref{sec.red}, en cuyo entrenamiento únicamente se disponía de imágenes con fondo negro y el dígito en blanco. Como era de esperar, y se demostró en la Sección~\ref{sec.bordes}, al mostrar a la cámara un dígito con el fondo blanco la red hace una clasificación errónea. En el caso de la "Red robusta", se ha seleccionado la red que se concluyó tras la Sección~\ref{sec.mod_bbdd}, una red entrenada con imágenes transformadas a las que se les ha aplicado el filtro de bordes Sobel iterando un total de 5000 veces, permitiendo independizar la imagen del fondo y que la imagen obtenida por la cámara no sea tan perfecta. Con esta nueva red la aplicación sí consigue clasificar correctamente el mismo dígito mostrado a la cámara.\\
+Para realizar los experimentos anteriores se ha tomado como red básica, la explicada en la Sección~\ref{sec.red}, en cuyo entrenamiento únicamente se disponía de imágenes con fondo negro y el dígito en blanco. Como era de esperar, y se demostró en la Sección~\ref{sec.bordes}, al mostrar a la cámara un dígito con el fondo blanco la red hace una clasificación errónea. En el caso de la red robusta, se ha seleccionado la red que se concluyó tras la Sección~\ref{sec.aprendizaje}, una red entrenada con imágenes transformadas a las que se les ha aplicado el filtro de bordes Sobel iterando un total de 5000 veces, permitiendo independizar la imagen del fondo y que la imagen obtenida por la cámara no sea tan perfecta. Con esta nueva red la aplicación sí consigue clasificar correctamente el mismo dígito mostrado a la cámara.\\
 
 La aplicación desarrollada es una muestra sencilla de herramienta para la clasificación de imágenes con mediante técnicas de aprendizaje profundo. Este ejemplo abre una nueva puerta para abarcar nuevos problemas de clasificación más complejos, con bases de datos más completas, que permitan solucionar problemas de interés para el ser humano.
