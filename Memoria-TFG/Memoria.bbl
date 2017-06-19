@@ -25,6 +25,12 @@ B.~Kolo.
 \newblock {\em Binary and Multiclass Classification}.
 \newblock Weatherford Press, 2011.
 
+\bibitem{2015arXiv151202325L}
+W.~{Liu}, D.~{Anguelov}, D.~{Erhan}, C.~{Szegedy}, S.~{Reed}, C.-Y. {Fu}, and
+  A.~C. {Berg}.
+\newblock {SSD: Single Shot MultiBox Detector}.
+\newblock {\em ArXiv e-prints}, December 2015.
+
 \bibitem{jia2014caffe}
 Yangqing Jia, Evan Shelhamer, Jeff Donahue, Sergey Karayev, Jonathan Long, Ross
   Girshick, Sergio Guadarrama, and Trevor Darrell.
@@ -112,5 +118,11 @@ OpenCV.
   \url{http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/sobel_derivatives/sobel_derivatives.html},
   2017.
 \newblock [Accedido 18 de Junio de 2017].
+
+\bibitem{liu2016ssd}
+Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed,
+  Cheng-Yang Fu, and Alexander~C. Berg.
+\newblock {SSD}: Single shot multibox detector.
+\newblock In {\em ECCV}, 2016.
 
 \end{thebibliography}

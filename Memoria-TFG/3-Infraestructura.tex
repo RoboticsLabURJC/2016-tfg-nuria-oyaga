@@ -170,7 +170,7 @@ Se trata de un subconjunto de una más grande, \textit{\acrfull{nist}}, en la qu
 
 Fue construida a partir de la Base de Datos Especial 3 y la Base de Datos Especial 1 del \acrshort{nist}, que contienen imágenes binarias de dígitos manuscritos.\acrshort{nist} originalmente designó SD-3 como su conjunto de entrenamiento y SD-1 como su conjunto de pruebas. Sin embargo, SD-3 es mucho más limpio y más fácil de reconocer que SD-1.Esto es debido a que SD-3 fue recogido entre los empleados de la Oficina del Censo, mientras que el SD-1 fue recogido entre los estudiantes de secundaria. Dado que para una buena extracción de conclusiones es necesario que el resultado sea independiente de la elección del conjunto de entrenamiento y de prueba entre el conjunto completo de muestras, fue necesaria la elaboración de un nuevo conjunto en el que ambas bases de datos estuviesen representadas de manera equitativa. Además, se aseguraron de que los conjuntos de escritores en el de entrenamiento y el de prueba son disjuntos.\\
 
-\subsection{COCO}
+\subsection{COCO} \label{sec.coco}
 Microsoft \textit{\acrfull{coco}}~\footnote{http://mscoco.org/} es un gran conjunto de datos de imágenes diseñado para la detección de objetos, segmentación y generación de subtítulos~\cite{veit2016cocotext}. Alguna de las características principales de este conjunto de datos son:
 	\begin{itemize}
          \item Múltiples objetos en cada imagen
@@ -199,7 +199,7 @@ Para la detección son de interés las anotaciones de instancias de objetos, cuy
 	\end{center}
 \end{figure}
 
-\subsection{VOC}
+\subsection{VOC} \label{sec.voc}
 El objetivo del desafío de \textit{\acrfull{voc}} \cite{Everingham10} es investigar el desempeño de los métodos de reconocimiento en un amplio espectro de imágenes naturales. Para ello, se requiere que los conjuntos de datos \acrshort{voc} contengan variabilidad significativa en términos de tamaño del objeto, orientación, pose, iluminación, posición y oclusión. También es importante que los conjuntos de datos no muestren sesgos sistemáticos, por ejemplo, favoreciendo imágenes con objetos centrados o una buena iluminación. Del mismo modo, para garantizar un entrenamiento y una evaluación precisa, es necesario que las anotaciones de imagen sean consistentes, precisas y exhaustivas para las clases especificadas.\\
 
 Teniendo claros estos conceptos, en 2007, se llevó a cabo una recolección de imágenes, como las mostradas en la Figura~\ref{fig.voc_example}, formando el conjunto de datos \textit{\acrshort{voc}}\textit{2007}~\cite{pascal-voc-2007}. Este conjunto dispone de dos grandes bases de datos, una de ellas compuesta por un conjunto de validación y otro de entrenamiento, y la otra con un único conjunto de test. Ambas bases de datos contienen alrededor de 5000 imágenes en las que se representan, apróximadamente, 12.000 objetos diferentes, por lo que, en total, este conjunto dispone de unas 10000 imágenes en las que se reperesentan unos 24000 objetos. En el año 2012 se modifica este conjunto, aumentando a 11530 el número de imágenes con representación de 27450 objetos diferentes~\cite{pascal-voc-2012}.

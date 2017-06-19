@@ -32,10 +32,10 @@
 \contentsline {subsection}{\numberline {3.2.2}Banco de pruebas manual}{37}{subsection.3.2.2}
 \contentsline {section}{\numberline {3.3}Efectos del aprendizaje}{40}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Aprendizaje con im\IeC {\'a}genes originales}{40}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Aprendizaje con transformaci\IeC {\'o}n por gradiente}{43}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.2}Aprendizaje con transformaci\IeC {\'o}n por gradiente}{42}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Otras transformaciones. \textit {Data Aumentation}}{47}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}Aprendizaje con bases de datos aumentadas}{49}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}N\IeC {\'u}mero de iteraciones}{56}{subsection.3.3.5}
 \contentsline {section}{\numberline {3.4}Experimentos}{57}{section.3.4}
-\contentsline {chapter}{\numberline {4}Detecci\IeC {\'o}n}{60}{chapter.4}
-\contentsline {chapter}{\numberline {5}Conclusiones}{61}{chapter.5}
+\contentsline {chapter}{\numberline {4}Detecci\IeC {\'o}n con Aprendizaje Profundo}{60}{chapter.4}
+\contentsline {chapter}{\numberline {5}Conclusiones}{69}{chapter.5}

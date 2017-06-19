@@ -26,9 +26,12 @@
 \contentsline {figure}{\numberline {3.14}{\ignorespaces Muestras de im\IeC {\'a}genes transformadas: (a)~Rotaci\IeC {\'o}n, (b)~Traslaci\IeC {\'o}n, (c)~Escalado, (d)~Ruido.\relax }}{49}{figure.caption.31}
 \contentsline {figure}{\numberline {3.15}{\ignorespaces Muestra de d\IeC {\'\i }gitos con mezcla de transformaciones.\relax }}{50}{figure.caption.32}
 \contentsline {figure}{\numberline {3.16}{\ignorespaces Evaluaci\IeC {\'o}n de la red con bases de datos transformadas.\relax }}{50}{figure.caption.33}
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Resultados de par\IeC {\'a}metros de evaluaci\IeC {\'o}n: (a) \textit {Precision}, (b) \textit {Recall}\relax }}{56}{figure.caption.39}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Resultados de \textit {Precision} y \textit {Recall}\relax }}{56}{figure.caption.39}
 \contentsline {figure}{\numberline {3.18}{\ignorespaces Red b\IeC {\'a}sica LeNet \acrshort {mnist}.\relax }}{57}{figure.caption.40}
 \contentsline {figure}{\numberline {3.19}{\ignorespaces Evaluaci\IeC {\'o}n de la aplicaci\IeC {\'o}n con imagen limpia: (a)~Red b\IeC {\'a}sica, (b)~Red robusta.\relax }}{58}{figure.caption.41}
 \contentsline {figure}{\numberline {3.20}{\ignorespaces Evaluaci\IeC {\'o}n de la aplicaci\IeC {\'o}n con imagen imperfecta: (a)~Red b\IeC {\'a}sica, (b)~Red robusta.\relax }}{58}{figure.caption.42}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Modelo \acrshort {ssd}. Imagen obtenida de~\cite {2015arXiv151202325L}\relax }}{61}{figure.caption.43}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Detecci\IeC {\'o}n en distintas im\IeC {\'a}genes: (a)~Imagen sencilla con \acrshort {coco}, (b)~Imagen sencilla con \acrshort {voc}, (c)~Imagen complejo con \acrshort {coco}, (d)~Imagen compleja con \acrshort {voc}, (e)~Se\IeC {\~n}al de tr\IeC {\'a}fico con \acrshort {coco}, (f)~Se\IeC {\~n}al de tr\IeC {\'a}fico con \acrshort {voc}\relax }}{66}{figure.caption.44}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Detecci\IeC {\'o}n en distintas im\IeC {\'a}genes: (a)~Imagen RGB con \acrshort {coco}, (b)~Imagen de grises con \acrshort {coco}, (c)~Imagen RGB con \acrshort {voc}, (d)~Imagen de grises con \acrshort {voc},\relax }}{67}{figure.caption.45}
 \addvspace {10\p@ }

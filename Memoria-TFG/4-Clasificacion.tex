@@ -11,21 +11,23 @@ La base de datos explicada, \acrshort{mnist}, proporciona dos conjuntos de datos
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{|l|c|c|c|c|}
+	\begin{tabular}{l|c|c|c|c|}
+		\cline{2-5}
+		& \multicolumn{3}{|c|}{\textbf{Set entrenamiento}} & \textbf{Set test} \\
 		\hline
-		\textbf{Dígito} & \textbf{Total} & \textbf{80\%} & \textbf{20\%} & \textbf{Test}\\
-		\hline \hline
-		0 & 5923 & 4738 & 1185 & 980\\ \hline
-		1 & 6742 & 5393 & 1349 & 1135\\ \hline
-		2 & 5958 & 4767 & 1191 & 1032\\ \hline
-		3 & 6131 & 4905 & 1226 & 1010\\ \hline
-		4 & 5842 & 4674 & 1168 & 982\\ \hline
-		5 & 5421 & 4337 & 1084 & 892\\ \hline
-		6 & 5918 & 4734 & 1184 & 958\\ \hline
-		7 & 6265 & 5012 & 1253 & 1028\\ \hline
-		8 & 5851 & 4681 & 1170 & 974\\ \hline
-		9 & 5949 & 4759 & 1190 & 1009\\ \hline
-		Total & 60000 & 48000 & 12000 & 10000\\ \hline
+		\multicolumn{1}{|l|}{\textbf{Dígito}} & \textbf{Total} & \textbf{80\%} & \textbf{20\%} & \textbf{Test}\\
+		\hline 
+		\multicolumn{1}{|l|}{\textbf{0}} & 5923 & 4738 & 1185 & 980\\ \hline
+		\multicolumn{1}{|l|}{\textbf{1}} & 6742 & 5393 & 1349 & 1135\\ \hline
+		\multicolumn{1}{|l|}{\textbf{2}} & 5958 & 4767 & 1191 & 1032\\ \hline
+		\multicolumn{1}{|l|}{\textbf{3}} & 6131 & 4905 & 1226 & 1010\\ \hline
+		\multicolumn{1}{|l|}{\textbf{4}} & 5842 & 4674 & 1168 & 982\\ \hline
+		\multicolumn{1}{|l|}{\textbf{5}} & 5421 & 4337 & 1084 & 892\\ \hline
+		\multicolumn{1}{|l|}{\textbf{6}} & 5918 & 4734 & 1184 & 958\\ \hline
+		\multicolumn{1}{|l|}{\textbf{7}} & 6265 & 5012 & 1253 & 1028\\ \hline
+		\multicolumn{1}{|l|}{\textbf{8}} & 5851 & 4681 & 1170 & 974\\ \hline
+		\multicolumn{1}{|l|}{\textbf{9}} & 5949 & 4759 & 1190 & 1009\\ \hline
+		\multicolumn{1}{|l|}{\textbf{Total}} & 60000 & 48000 & 12000 & 10000\\ \hline
 	\end{tabular}
 	\caption{Estructura de conjuntos de datos.}
 	\label{tab.baseDatos}
@@ -240,7 +242,7 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	Este archivo, permite añadir una nueva línea mediante la que se obtiene, en la ruta marcada, un archivo de \textit{log} con información sobre el entrenamiento y la evaluación. Esta línea se añade tras indicar el solucionador de la forma que se muestra a continuación.
 	\vspace{10pt}
 	\begin{lstlisting}
-		2>&1 | tee /home/nuria/TFG/logs/RedBasica.log $@
+	2>&1 | tee .../NombreArchivoLog.log $@
 	\end{lstlisting} 
 	
 	En la Figura~\ref{fig.entrenamiento} se muestra la información que se observa en el terminal al ejecutar el entrenamiento, siendo ésta la misma que queda registrada en el archivo \textit{log} indicado.
@@ -293,9 +295,8 @@ Esta propiedad estará enlazada con el componente \textit{Camera Server} de JdeR
 Otro aspecto importante que se maneja en la inicialización de la cámara es la especificación y carga de la red que se empleará para la clasificación. Este aspecto se realiza mediante las siguientes líneas:
 \vspace{10pt}
 \begin{lstlisting}[frame=single]
-	model_file = '/home/nuria/TFG/caffe/examples/mnist/lenet.prototxt'
-	pretrained_file = '/home/nuria/TFG/caffe/examples/mnist/Basica/
-						/lenet_iter_10000.solverstate'
+	model_file = '.../lenet.prototxt'
+	pretrained_file = '.../lenet_iter_10000.solverstate'
 	self.net = caffe.Classifier(model_file, pretrained_file, 
 									image_dims=(28, 28), raw_scale=255)
 \end{lstlisting}
@@ -388,9 +389,9 @@ El primer paso para la elaboración de este banco de pruebas pasa por el desarro
 	Las imágenes y sus correpondientes etiquetas estan almacenadas en bases de datos de tipo \textit{lmdb}. Este tipo de bases de datos requiere de un método específico para poder acceder al contenido de las mismas y poder manipular las imágenes que se almacenan en ellas, que queda definido a continuación.
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
-		lmdb_env = lmdb.open('/home/nuria/TFG/lmdb_test/test_lmdb')
-		lmdb_txn = lmdb_env.begin()
-		lmdb_cursor = lmdb_txn.cursor()
+	lmdb_env = lmdb.open('.../test_lmdb')
+	lmdb_txn = lmdb_env.begin()
+	lmdb_cursor = lmdb_txn.cursor()
 	\end{lstlisting}
 	
 	Tras este código, se obtiene un cursor que apunta al comienzo de los datos en la base de datos y que permitirá recorrerla para obtener las imágenes y etiquetas.\\
@@ -399,26 +400,26 @@ El primer paso para la elaboración de este banco de pruebas pasa por el desarro
 	Para poder procesar los datos obtenidos anteriormente utilizando la plataforma Caffe, será necesario crearse una estructura \textit{Datum} de la propia plataforma que incluirá, en cada iteración para recorrer la base de datos, la información de la instancia que se analiza. El siguiente código, crea la estructura indicada e indica la forma en que se recorre la base de datos, obteniendo, por un lado, los datos de la imagen en sí (\textit{data}), y por otro, las etiquetas de las mismas (\textit{label}).
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
-		datum = caffe.proto.caffe_pb2.Datum()
+	datum = caffe.proto.caffe_pb2.Datum()
+	...
+	for key, value in lmdb_cursor:
+		datum.ParseFromString(value)
+		label = datum.label
+		data = caffe.io.datum_to_array(datum)
 		...
-		for key, value in lmdb_cursor:
-			datum.ParseFromString(value)
-			label = datum.label
-			data = caffe.io.datum_to_array(datum)
-			...
 	\end{lstlisting}
 	
 	Finalmente, en la variable \textit{data} se almacena la imagen que se utilizará posteriormente para realizar la clasificación, y en \textit{label}, la etiqueta correspondiente que se empleará para hacer las comparaciones.
-	\vspace{5pt}
+	\vspace{20pt}
 	\item[Clasificación de las imágenes] \hfill 
 	\vspace{5pt}
 	\\
 	La tarea de clasificación se realizará exáctamente de la misma manera que se especificó en la Sección~\ref{sec.camara}, utilizando la misma función sobre cada uno de los \textit{data} obtenidos.
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
-		...
-		net_out = classification(data)
-		...
+	...
+	net_out = classification(data)
+	...
 	\end{lstlisting}
 	
 	Una vez se ha conseguido obtener el dígito que la red interpreta, se procede a las comparaciones para poder obtener datos más cómodos para la evaluación.
@@ -469,7 +470,7 @@ Una vez se dispone de los datos necesarios para la evaluación de prestaciones, 
 		\item{Para obtener el número de clasificaciones correctas:
 		\vspace{10pt}
 		\begin{lstlisting}[frame=single]
-			CONTAR.SI('Sobel sin trasform'.E3:E20002;"True")
+	CONTAR.SI('Sobel sin trasform'.E3:E20002;"True")
 		\end{lstlisting}
 		Donde:
 		\begin{itemize}
@@ -481,7 +482,7 @@ Una vez se dispone de los datos necesarios para la evaluación de prestaciones, 
 	\item{Para obtener el número de clasificaciones incorrectas:
 		\vspace{10pt}
 		\begin{lstlisting}[frame=single]
-			CONTAR.SI('Sobel sin trasform'.E3:E20002;"False")
+	CONTAR.SI('Sobel sin trasform'.E3:E20002;"False")
 		\end{lstlisting}
 		Es equivalente al anterior pero, en este caso, se cuenta el número de veces que se cometió un error en la clasificación.
 	}
@@ -503,7 +504,7 @@ Una vez se dispone de los datos necesarios para la evaluación de prestaciones, 
 	El código de cada celda queda materializado de la siguiente manera:
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
-		CONTAR.SI.CONJUNTO(C3:C70002;"1";D3:D70002;"2")
+	CONTAR.SI.CONJUNTO(C3:C70002;"1";D3:D70002;"2")
 	\end{lstlisting}
 	Donde:
 	\begin{itemize}
@@ -541,8 +542,7 @@ El primer problema que se encuentra en esta base de datos es que únicamente se 
 La obtención de la base de datos se consigue gracias al script \textit{create\_neg\_database.py}. El proceso llevado a cabo en este script parte del tratamiento de bases de datos de tipo \textit{lmdb} explicado en la Sección~\ref{sec.banco}. Se debe abrir la base de datos con las imágenes originales y utilizar los datos de la imagen obtenidos para realizar la transformación deseada. Posteriormente, para almacenar las imágenes transformadas, se debe abrir una nueva base de datos de este tipo, que permita escritura. Esta apertura se realiza con las siguientes líneas:
 \vspace{10pt}
 \begin{lstlisting}[frame=single]
-	new_lmdb_env = lmdb.open('/home/nuria/TFG/lmdb_test/test_edgesCanny_lmdb',
-								map_size=int(1e12))
+	new_lmdb_env = lmdb.open('.../database_lmdb', map_size=int(1e12))
 	new_lmdb_txn = new_lmdb_env.begin(write=True)
 	new_lmdb_cursor = new_lmdb_txn.cursor()
 	new_datum = caffe.proto.caffe_pb2.Datum()
@@ -729,7 +729,7 @@ Además de las bases de datos creadas con la transformación única, se elabora 
 En la Figura~\ref{fig.mix} se muestra la aplicación de la traslación para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.3\textwidth]{figures/mix}
+		\includegraphics[width=0.4\textwidth]{figures/mix}
 		\caption{Muestra de dígitos con mezcla de transformaciones.}
 		\label{fig.mix}
 	\end{center}
@@ -898,9 +898,8 @@ Una vez se han obtenido las matrices de confusión de cada una de las redes neur
 Para poder establecer conclusiones más firmes, se calculan el \textit{precision} y \textit{recall} de cada una de las redes, con ayuda de la matriz de confusión obtenida según lo explicado en la Sección~\ref{sec.banco}. Estos resultados quedan reflejados en la Figura~\ref{fig.precision-recall}.
 \begin{figure}[H]
 	\centering
-	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/precision}}
-	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/recall}}
-	\caption{Resultados de parámetros de evaluación: (a) \textit{Precision}, (b) \textit{Recall}}
+	\includegraphics[width=0.9\textwidth]{figures/precision-recall}
+	\caption{Resultados de \textit{Precision} y \textit{Recall}}
 	\label{fig.precision-recall}
 \end{figure}
 Los resultados obtenidos confirman las conclusiones que se alcanzaron con anterioridad. Existe una clara mejora al introducir imágenes ruidosas en el entrenamiento, una única imagen ruidosa aporta suficiente información y la inclusión de la imagen original no aporta gran información para el entrenamiento.\\
