@@ -1,1 +1,31 @@
-\chapter{Conclusiones}\label{cap.conclusiones}
+\chapter{Conclusiones y líneas futuras}\label{cap.conclusiones}
+Por último, en este capítulo se exponen las conclusiones alcanzadas con el desarrollo del trabajo, así como posibles líneas para continuar en el futuro, ayudándose de los resultados obtenidos en el desarrollo del mismo.
+
+\section{Conclusiones}
+El desarrollo de este trabajo ha permitido establecer una serie de conclusiones en el ámbito de aprendizaje profundo mediante el empleo de redes neuronales entrenadas con Caffe. A pesar de que el desarrollo del trabajo tenía como objetivos establecer conclusiones sobre las dos tareas principales de esta técnica, clasificación y detección, por las propias características del trabajo únicamente se obtuvieron conclusiones firmes sobre la clasificación, dejando abierta la puerta a una futura investigación en el problema de la detección con estas redes. A continuación se exponen todas las conclusiones que fueron establecidas gracias a la obtención de distintos resultados por la evaluación de las redes neuronales entrenadas.
+
+\begin{itemize}
+	\item La plataforma Caffe posee un funcionamiento muy adecuado para el ámbito de la visión artificial gracias a un entrenamiento rápido y a gran número de ejemplos y facilidades para el mismo. Además proporcionan la posibilidad de entrenamiento de redes tanto para clasificación como detección.
+	\item Las redes neuronales con Caffe pueden ser entrenadas con diferentes conjuntos de datos, siempre en formato \acrshort{lmdb}, obteniendo resultados muy diferentes en función de la composición de las mismas. 
+	\item Para el ejemplo tratado con la base de datos \acrshort{mnist} para la clasificación de dígitos, al variar la composición de estas bases de datos, se han obtenido diversas conclusiones interesantes que han permitido mejorar de forma considerable la red final entrenada.
+	\begin{itemize}
+		\item El entrenamiento con imágenes de borde amplia el número aciertos en la clasificación, pues independiza la misma del fondo de la imagen.
+		\item Al incluir imágenes con transformaciones en en entrenamiento de la red, la precisión de la clasificación aumenta, permitiendo obtener una red más robusta.
+		\item La precisión obtenida al incluir un alto número de imágenes transformadas frente a la que se obtiene disminuyendo ese número de imágenes es muy similar, por lo que no es necesario incluir un gran número de estas imágenes en el entrenamiento.
+		\item Sobre la inclusión de la imagen limpia en el entrenamiento, siendo ésta la imagen sin ninguna transformación, se obtienen resultados que avalan que no es necesario incluirla para obtener una mayor precisión.
+	\end{itemize}
+	\item Se ha elaborado un componente bastante y robusto con Python que permite la clasificación de dígitos mostrados a una cámara RGB gracias a una red entrenada con Caffe gracias a las conclusiones obtenidas en el punto anterior.
+\end{itemize}
+
+Como se mencionó anteriormente, los resultados obtenidos en los exprerimentos de la detección no son concluyenetes, por lo que no es posible establecer conclusiones firmes sobre esta técnica.
+
+\section{Líneas futuras}
+Para seguir con la investigación abordada en este trabajo se pueden seguir dos claras tendencias marcadas por los dos grande problemas que se pueden abordar, detección y clasificación.
+\begin{itemize}
+	\item Por un lado, el que no se haya obtenido resultados concluyentes en el campo de la detección permite continuar en futuras investigaciones en esta línea, tratando de obtener una red robusta para esta tarea mediante la modificación de la red entrenada con diferentes bases de datos o estructuras de red.
+	\item Por otro lado, en el campo de la clasificación, es posible extender lo aprendido para un ejemplo sencillo, la clasificación de dígitos con redes neuronales gracias al conjunto de datos \acrshort{mnist}, a un ejemplo más complejo como puede ser la clasificación de signos o de señales de tráfico.
+\end{itemize}
+
+Finalmente, la aplicación ideal consiste en una mezcla de ambos problemas. De esta manera, por ejemplo, sería posible la elaboración de una aplicación que permitiese a un choche circular de forma autónoma, detectando los estímulos que recibe de la carretera y clasificando los mismos para actuar en consecuencia a la clase detectada.\\
+
+Éstos son solo algunos ejemplos de los diferentes problemas que se pueden tratar de abordar con esta tecnología. La cantidad de tareas que se pueden tratar de realizar es tan amplia como el número de problemas que se le pueden presentar a un ser humano en su día a día, pues la finalidad de estas aplicaciones no es otra que facilitar la vida diaria de las personas.

@@ -1,5 +1,5 @@
 \chapter{Infraestructura}\label{cap.infraestructura}
-En este capítulo se expondrán los principales componentes software utilizados, centrados, principalmente, en la conexión con la cámara y el desarrollo, entrenamiento y test de la red neuronal. Además, se expone una descripción de las bases de datos de las que se partirá para realizar las distintas pruebas sobre la red neuronal. Estas bases de datos serán luego modificadas y adaptadas para el problema concreto que se plantee, permitiendo obtener diversas conclusiones acerca del comportamiento de la propia red y, así, emplear la más adecuada. Por último, serán expuestas los parámetros empleados para evaluar el impacto del aprendizaje en las redes neuronales y que permitirán escoger la red más adecuada para el problema.\\
+En este capítulo se expondrán los principales componentes software utilizados, centrados, principalmente, en la conexión con la cámara y el desarrollo, entrenamiento y test de la red neuronal. Además, se expone una descripción de las bases de datos de las que se partirá para realizar las distintas pruebas sobre la red neuronal. Estas bases de datos serán luego modificadas y adaptadas para el problema concreto que se plantee, permitiendo obtener diversas conclusiones acerca del comportamiento de la propia red y, así, emplear la más adecuada. Por último, serán expuestas los parámetros empleados para evaluar el impacto del aprendizaje en las redes neuronales y que permitirán escoger la red más adecuada para el problema.
 
 \section{Software}
 
@@ -144,8 +144,8 @@ La plataforma utiliza una serie de capas (\textit{layers}), que, según su confi
 
 Por último, además de las capas y parámetros definidos anteriormente, Caffe, permite el desarrollo de un solucionador (\textit{solver}) en el que se podrán ajustar parámetros como el número de iteraciones totales que se ejecutarán, el de evaluación que se van a realizar, cada cuantas iteraciones se realizará esa evaluación, o se sacarán redes intermedias.\\
 
-Para Caffe, el número de iteraciones no se corresponde con el número de veces que la red recorre la base de datos al completo, sino como las veces que se pasa por cada lote al completo. Esto viene dado porque, debido a la amplia dimensión de las bases de datos necesarias para desarrollar el aprendzaje profundo, según se explicación en el Capítulo~\ref{cap.introduccion}, será necesaria una división de la misma en pequeños lotes para que ordenador no se bloquee en el tratamiento de las mismas. De esta manera, se define el número de épocas, es decir, el número de veces que se recorre de manera completa la base de datos, con la siguiente expresión:\\
-$$\textup{N.Epocas}=\frac{\textup{Tamaño lote de entrenamiento}\times \textup{Total iteraciones}}{\textup{Muestras entrenamiento}} $$\\
+Para Caffe, el número de iteraciones no se corresponde con el número de veces que la red recorre la base de datos al completo, sino como las veces que se pasa por cada lote al completo. Esto viene dado porque, debido a la amplia dimensión de las bases de datos necesarias para desarrollar el aprendzaje profundo, según se explicación en el Capítulo~\ref{cap.introduccion}, será necesaria una división de la misma en pequeños lotes para que ordenador no se bloquee en el tratamiento de las mismas. De esta manera, se define el número de épocas, es decir, el número de veces que se recorre de manera completa la base de datos, con la siguiente expresión:
+$$\textup{N.Epocas}=\frac{\textup{Tamaño lote de entrenamiento}\times \textup{Total iteraciones}}{\textup{Muestras entrenamiento}} $$
 
 \subsection{DroidCam}\label{sec.droid}
 DroidCam~\footnote{https://www.dev47apps.com/} es una aplicación que permite convertir un dispositivo móvil en una cámara web, estableciendo una conexión mediante WiFi/LAN, modo servidor wifi, o USB. Esta aplicación es muy usada para establecer videoconferencias a través de plataformas como Skype o Google+, entre otras aplicaciones. En este trabajo será usada para obtener el flujo de vídeo desde un dispositivo distinto a la webcam del ordenador, haciendo más sencillo el manejo del mismo.\\
@@ -160,15 +160,14 @@ Entre sus características principales destacan:
 		\item Cámara IP de vigilancia con acceso MJPEG
 	\end{itemize}
 
-\vspace{10pt}
-\section{Bases de datos}
+\section{Conjuntos de datos}
 
 \subsection{MNIST}\label{sec.minst}
 La base de datos \textit{\acrfull{mnist}}~\footnote{http://yann.lecun.com/exdb/mnist/} está formada por diferentes imágenes con números escritos a mano y consta de un conjunto de entrenamiento de 60.000 ejemplos y otro de prueba de 10.000 ejemplos. Es una buena base de datos para personas que quieren probar técnicas de aprendizaje y métodos de reconocimiento de patrones en datos del mundo real, mientras que dedican un mínimo esfuerzo a preprocesar y formatear. \\
 
 Se trata de un subconjunto de una más grande, \textit{\acrfull{nist}}, en la que las imágenes originales en blanco y negro fueron normalizadas en el tamaño para encajar en un cuadro de 20x20 píxeles, preservando su relación de aspecto. Las imágenes obtenidas contienen niveles de gris como resultado de la técnica anti-aliasing utilizada por el algoritmo de normalización. Estas imágenes se centraron en una de 28x28 calculando el centro de masa de los píxeles y trasladando la imagen para situar este punto en el centro del campo 28x28.\\
 
-Fue construida a partir de la Base de Datos Especial 3 y la Base de Datos Especial 1 del \acrshort{nist}, que contienen imágenes binarias de dígitos manuscritos.\acrshort{nist} originalmente designó SD-3 como su conjunto de entrenamiento y SD-1 como su conjunto de pruebas. Sin embargo, SD-3 es mucho más limpio y más fácil de reconocer que SD-1.Esto es debido a que SD-3 fue recogido entre los empleados de la Oficina del Censo, mientras que el SD-1 fue recogido entre los estudiantes de secundaria. Dado que para una buena extracción de conclusiones es necesario que el resultado sea independiente de la elección del conjunto de entrenamiento y de prueba entre el conjunto completo de muestras, fue necesaria la elaboración de un nuevo conjunto en el que ambas bases de datos estuviesen representadas de manera equitativa. Además, se aseguraron de que los conjuntos de escritores en el de entrenamiento y el de prueba son disjuntos.\\
+Fue construida a partir de la Base de Datos Especial 3 y la Base de Datos Especial 1 del \acrshort{nist}, que contienen imágenes binarias de dígitos manuscritos.\acrshort{nist} originalmente designó SD-3 como su conjunto de entrenamiento y SD-1 como su conjunto de pruebas. Sin embargo, SD-3 es mucho más limpio y más fácil de reconocer que SD-1.Esto es debido a que SD-3 fue recogido entre los empleados de la Oficina del Censo, mientras que el SD-1 fue recogido entre los estudiantes de secundaria. Dado que para una buena extracción de conclusiones es necesario que el resultado sea independiente de la elección del conjunto de entrenamiento y de prueba entre el conjunto completo de muestras, fue necesaria la elaboración de un nuevo conjunto en el que ambas bases de datos estuviesen representadas de manera equitativa. Además, se aseguraron de que los conjuntos de escritores en el de entrenamiento y el de prueba son disjuntos.
 
 \subsection{COCO} \label{sec.coco}
 Microsoft \textit{\acrfull{coco}}~\footnote{http://mscoco.org/} es un gran conjunto de datos de imágenes diseñado para la detección de objetos, segmentación y generación de subtítulos~\cite{veit2016cocotext}. Alguna de las características principales de este conjunto de datos son:
@@ -221,8 +220,8 @@ Dado que la finalidad de este conjunto de datos es permitir el desarrollo tanto 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{figures/vocclasses}
-		\caption{Estructura de las clases en \acrfull{voc}2007. Imagen tomada de~\cite{Everingham10}}. El año de inclusión de cada clase en el desafío está indicado por
-		superíndices: $2005^1$, $2006^2$, $2007^3$.
+		\caption{Estructura de las clases en \acrfull{voc}2007. Imagen tomada de~\cite{Everingham10}.
+		El superíndice de cada una de las clases indica el año de inclusión en el desafío: $2005^1$, $2006^2$, $2007^3$.}
 		\label{fig.clasesVOC}
 	\end{center}
 \end{figure}
@@ -253,7 +252,6 @@ En una clasificación multiclase, esta matriz se aumenta de tal forma que exista
 \end{figure}
 
 En este caso no existe el concepto de falso negativo, sino que se obtiene, en cada celda, el número de veces que se predijo la clase correspondiente a la fila de la misma, al producirse la clase correspondiente a la columna en la que se sitúa. De esta manera, la diagonal, formaría los aciertos que se produjeron en la clasificación, y el resto de celdas las equivocaciones cometidas~\cite{kolo2011binary}.
-
 
 \subsection{\textit{Precision}}
 El valor de \textit{precision}, en clasificación binaria se define como una proporción de positivos verdaderos (TP) y el número total de positivos predichos por un modelo~\cite{FAWCETT2006861}. En el caso de clasificación multiclase se deberá de tener en cuenta la existencia de varias clases y se utilizará la siguiente expresión, adaptada de~\cite{FAWCETT2006861}:

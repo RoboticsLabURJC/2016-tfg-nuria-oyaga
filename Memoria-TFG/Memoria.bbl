@@ -1,5 +1,18 @@
 \begin{thebibliography}{10}
 
+\bibitem{Goodfellow-et-al-2016}
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
+\newblock {\em Deep Learning}.
+\newblock MIT Press, 2016.
+\newblock \url{http://www.deeplearningbook.org}.
+
+\bibitem{cnn}
+M.Eng. Dewi~Suryani, S.Kom.
+\newblock \textit{Convolutional Neural Network}.
+\newblock
+  \url{http://socs.binus.ac.id/2017/02/27/convolutional-neural-network/}, 2017.
+\newblock [Accedido 20 de Junio de 2017].
+
 \bibitem{caffe}
 Clayton~Mellina Rob~Hess and Friends.
 \newblock \textit{Introducing: Flickr PARK or BIRD}.
@@ -30,6 +43,11 @@ W.~{Liu}, D.~{Anguelov}, D.~{Erhan}, C.~{Szegedy}, S.~{Reed}, C.-Y. {Fu}, and
   A.~C. {Berg}.
 \newblock {SSD: Single Shot MultiBox Detector}.
 \newblock {\em ArXiv e-prints}, December 2015.
+
+\bibitem{2014arXiv1404.7828S}
+J.~{Schmidhuber}.
+\newblock {Deep Learning in Neural Networks: An Overview}.
+\newblock {\em ArXiv e-prints}, April 2014.
 
 \bibitem{jia2014caffe}
 Yangqing Jia, Evan Shelhamer, Jeff Donahue, Sergey Karayev, Jonathan Long, Ross

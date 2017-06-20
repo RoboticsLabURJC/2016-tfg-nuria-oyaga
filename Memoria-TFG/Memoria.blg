@@ -16,45 +16,45 @@ Warning--I didn't find a database entry for "codigo"
 Name 1 in "Rob Hess, Clayton Mellina, and Friends" has a comma at the end for entry caffe
 while executing---line 944 of file unsrt.bst
 Warning--empty year in fundamentos
-You've used 20 entries,
+You've used 23 entries,
             1791 wiz_defined-function locations,
-            564 strings with 6813 characters,
-and the built_in function-call counts, 3821 in all, are:
-= -- 299
-> -- 219
+            579 strings with 7236 characters,
+and the built_in function-call counts, 4276 in all, are:
+= -- 338
+> -- 238
 < -- 0
-+ -- 82
-- -- 62
-* -- 210
-:= -- 642
-add.period$ -- 68
-call.type$ -- 20
-change.case$ -- 14
++ -- 90
+- -- 67
+* -- 224
+:= -- 719
+add.period$ -- 79
+call.type$ -- 23
+change.case$ -- 16
 chr.to.int$ -- 0
-cite$ -- 21
-duplicate$ -- 166
-empty$ -- 399
-format.name$ -- 62
-if$ -- 856
+cite$ -- 24
+duplicate$ -- 189
+empty$ -- 450
+format.name$ -- 67
+if$ -- 960
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 20
-newline$ -- 108
-num.names$ -- 20
-pop$ -- 94
+int.to.str$ -- 23
+missing$ -- 23
+newline$ -- 125
+num.names$ -- 23
+pop$ -- 109
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 58
+skip$ -- 65
 stack$ -- 0
 substring$ -- 94
-swap$ -- 22
+swap$ -- 25
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 25
-width$ -- 22
-write$ -- 216
+while$ -- 28
+width$ -- 25
+write$ -- 250
 (There was 1 error message)

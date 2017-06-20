@@ -1,11 +1,12 @@
 \chapter{Clasificación con Aprendizaje Profundo}\label{cap.clasificacion}
-En este capítulo se expondrá el trabajo realizado para la comprensión del problema de clasificación de imágenes utilizando una plataforma de aprendizaje profundo. Para ello se ha elaborado un componente en Python que permite la clasificación de dígitos del 0 al 9 en tiempo real, que ha sido mejorado gracias a un amplio estudio sobre las variantes posibles aplicadas a las redes entrenadas, utilizando la plataforma Caffe.\\
+En este capítulo se expondrá el trabajo realizado para la comprensión del problema de clasificación de imágenes utilizando una plataforma de aprendizaje profundo. Para ello se ha elaborado un componente en Python que permite la clasificación de dígitos del 0 al 9 en tiempo real, que ha sido mejorado gracias a un amplio estudio sobre las variantes posibles aplicadas a las redes entrenadas, utilizando la plataforma Caffe.
 
 \section{Clasificador de dígitos}
-La primera tarea que se abarca en el proyecto es el desarrollo de un componente en Pyhton para la clasificación de dígitos entre 0 y 9 en tiempo real, materializando en una aplicación concreta el probblema de la clasificación de imágenes con aprendizaje profundo. Para poder desarrollar esta aplicación es necesario, previamente, un entendimiento de una primera red básica, que será la encargada de realizar la clasificación. En esta sección se explicará el procedimiento seguido para el entendimiento de la red y el desarrollo del propio componente.\\
+La primera tarea que se abarca en el proyecto es el desarrollo de un componente en Pyhton para la clasificación de dígitos entre 0 y 9 en tiempo real, materializando en una aplicación concreta el probblema de la clasificación de imágenes con aprendizaje profundo. Para poder desarrollar esta aplicación es necesario, previamente, un entendimiento de una primera red básica, que será la encargada de realizar la clasificación. En esta sección se explicará el procedimiento seguido para el entendimiento de la red y el desarrollo del propio componente.
 
 \subsection{Red básica}\label{sec.red}
 La red que se empleará, está orientada a la clasificación de números utilizando, en el entrenamiento, la base de datos numérica \acrshort{mnist}, explicada en la Sección~\ref{sec.minst}, y en la que se entrará en detalle a continuación.\\
+\vspace{-20pt}
 
 La base de datos explicada, \acrshort{mnist}, proporciona dos conjuntos de datos, uno de entrenamiento y otro de test, pero, a diferencia de otros conjuntos no dispone de una de validación, utilizada para evaluar el modelo durante el entrenamiento. Por ello, el primer paso que se derá consiste en dividir la base de datos de entrenamiento en dos, obteniendo un conjunto de validación a partir del que ofrece \acrshort{mnist} para el entrenamiento. Para esta tarea, se desarrolla un script, \textit{createvalidationdatabase.py}, que divide la base de datos de entrenamiento original en dos, el 80\% para entrenamiento y el 20\% restante para validación. En la Tabla~\ref{tab.baseDatos}, se muestra un resumen de la estructura final de ambas bases de datos, así como la estructura de la base de datos de test que no sufre ninguna modificación.\\
 
@@ -34,6 +35,7 @@ La base de datos explicada, \acrshort{mnist}, proporciona dos conjuntos de datos
 \end{table}
 
 Se puede comprobar, como era de esperar, que no todos los dígitos tienen la misma presencia, siendo mayor el número de muestras en los dígitos que pueden generar mayor confusión, como el 1 o el 7, y menor en los que son más claros como el 0. Por ello, es muy importante respetar las proporciones existentes en cada dígito el dividir la base de datos para no alterar la naturaleza de la base de datos original. Para mantener esta proporción se calculará el porcentaje sobre el total de cada dígito y no sobre el total del conjunto de datos.\\
+\vspace{-20pt}
 
 En la Figura~\ref{fig.digitosMNIST} se puede observar una muestra de cada uno de los dígitos que se almacenan, en este caso, en la base de datos de test, siendo de las mismas características el resto de bases de datos explicadas.
 
@@ -45,7 +47,7 @@ En la Figura~\ref{fig.digitosMNIST} se puede observar una muestra de cada uno de
 	\end{center}
 \end{figure}
 
-Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante, se procede al entrenamiento de la red. Para entrenar una red, Caffe proporciona tres archivos que se editarán para adaptar la red al problema que se abarque. A continuación, se explicará cada uno de esos archivos, siguiendo el orden que fue necesario hasta conseguir la red completamente entrenada.\\
+Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante, se procede al entrenamiento de la red. Para entrenar una red, Caffe proporciona tres archivos que se editarán para adaptar la red al problema que se abarque. A continuación, se explicará cada uno de esos archivos, siguiendo el orden que fue necesario hasta conseguir la red completamente entrenada.
 
 \subsubsection{Definición de la red}
 	Caffe utiliza el archivo 
@@ -57,7 +59,7 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	name: "LeNet"
 	\end{lstlisting}
 	
-	En concreto, esta red recibe el nombre de LeNet, un tipo de red que es conocida por un buen funcionamiento en las tareas de clasificación de dígitos y que, por lo general, consta de una capa convolucional seguida por una capa de agrupamiento (\textit{pooling}), repetido dos veces. Tras ellas, se incluyen dos capas totalmente conectadas similares a las perceptrones multicapa convencionales. Con Caffe la estructura habitual de la red LeNet se ve ligeramente modificada, pues se utiliza una función de activacion lineal en lugar de sigmoidal.\\
+	En concreto, esta red recibe el nombre de LeNet, un tipo de red que es conocida por un buen funcionamiento en las tareas de clasificación de dígitos y que, por lo general, consta de una capa convolucional seguida por una capa de agrupamiento (\textit{pooling}), repetido dos veces. Tras ellas, se incluyen dos capas totalmente conectadas similares a las perceptrones multicapa convencionales. Con Caffe la estructura habitual de la red LeNet se ve ligeramente modificada, utilizando una función de activacion lineal en lugar de sigmoidal.\\
 
 	Tras la definición del nombre se definen dos capas de datos, una de ellas correspondiente a los datos de entrenamiento y, la otra, correspondiente a los datos que se utilizarán para realizar la evaluación durante el entrenamiento, obteniendo datos de \textit{accuracy} y \textit{loss} con el conjunto de validación. A continuación se muestra un ejemplo de cómo se define esta capa de datos, en concreto, en fase de entrenamiento.
 	\vspace{10pt}
@@ -97,11 +99,11 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 			stride: 1
 			weight_filler {type: "xavier"}
 			bias_filler {type: "constant"}
-		}
+			}
 	}	
 	\end{lstlisting}
 	
-	La capa de agrupamiento, también explicada en la Sección~\ref{sec.caffe}, será alimentada por la capa de convolución anterior y alimentará a la siguiente en caso de que la haya. En caso de ser la última de las capas de agrupamiento sus salidas serán la entrada de las capas completamente conectadas cuya estructura se explicará más adelante en esta sección y que fueron detalladas en la Sección~\ref{sec.caffe}. Se definen en ella un tamaño de filtro de 2x2, un intervalo de dos muestras entre cada aplicación del filtro, por lo que no hay solape, y el método del máximo para realizar el agrupamiento. A continuación se muestra un ejemplo de cómo se define esta capa en el documento que se está tratando.
+	La capa de agrupamiento, también explicada en la Sección~\ref{sec.caffe}, será alimentada por la capa de convolución anterior y alimentará a la siguiente en caso de que la haya. A continuación se muestra un ejemplo de cómo se define esta capa.
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	layer {
@@ -115,8 +117,10 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 			stride: 2 }
 	}	
 	\end{lstlisting}
+	
+	Se definen en esta capa un tamaño de filtro de 2x2, un intervalo de dos muestras entre cada aplicación del filtro, por lo que no hay solape, y el método del máximo para realizar el agrupamiento.\\
 
-	Como se mencionó anteriormente, tras estas capas se establecen las dos capas completamente conectadas, \textit{InnerProduct} cuya definición en el documento queda de la siguiente manera: 
+	En caso de ser la última de las capas de agrupamiento sus salidas serán la entrada de las capas completamente conectadas,\textit{InnerProduct}, explicadas en la Sección~\ref{sec.caffe}. En concreto se establecen dos, cuya definición en el documento queda de la siguiente manera: 
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	layer {
@@ -139,12 +143,10 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	Las capas completamente conectadas están separadas entre sí por una capa de activación, en este caso linear, llamada \textit{\acrshort{relu}}. Esta capa fue explicada en la Sección~\ref{sec.caffe} y tiene la siguiente forma en el documento:
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
-	layer {
-		name: "relu1"
+	layer { name: "relu1"
 		type: "ReLU"
 		bottom: "ip1"
-		top: "ip1"
-	}	
+		top: "ip1"}	
 	\end{lstlisting}
 	
 	Esta capa no dispone de ningún parámetro modificable ya que la plataforma proporciona directamente la función por su identificador único.\\
@@ -172,8 +174,8 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	
 	Estas dos capas permiten obtener valores de precisión y pérdidas cada ciertas iteraciones, siendo marcado este valor en el documento que se explicará a continuación, el solucionador.\\
 
-	En la Figura~\ref{fig.redBasica} se puede observar un esquema de la estructura definida en este apartado, los valores de interés y cada una de las entradas y salidas de las capas. Para obtener esta figura, se ha ejecutado un código proporcionado por la propia plataforma, que, mediante el archivo que define la estructura, explicado anteriormente, dibuja la red. Para ello se debe ejecutar el siguiente comando:
-	\vspace{10pt}
+	En la Figura~\ref{fig.redBasica} se puede observar un esquema de la estructura definida en este apartado, los valores de interés y cada una de las entradas y salidas de las capas. Para obtener esta figura, se ha ejecutado un código proporcionado por la propia plataforma, que, mediante el archivo que define la estructura, explicado anteriormente, dibuja la red. Para ello se debe ejecutar comando mostrado a continuación.
+	\vspace{20pt}
 	\begin{lstlisting}[frame=single]
 	$ caffe/python/draw_net.py <netprototxt_filename> <out_img_filename>
 	\end{lstlisting}
@@ -187,8 +189,8 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	\end{figure}
 	
 \subsubsection{Definición del solucionador}
-	Para esta tarea se va a utilizar el archivo de Caffe \textit{lenet\_solver.prototxt}. En este documento se definen parámetros como la estructura de red que se utilizará, definida en el apartado anterior, y el número de iteraciones que se ejecutarán durante el entrenamiento de la red, cuya explicación se aportó en la Sección~\ref{sec.caffe}. Además, en ese mismo capítulo, se explican el resto de parámetros que se manejarán en este proyecto, como la evaluación de la red o las redes intermedias que se guardarán.
-	\vspace{10pt}
+	Para esta tarea se va a utilizar el archivo de Caffe \textit{lenet\_solver.prototxt}. En este documento se definen parámetros como la estructura de red que se utilizará, definida en el apartado anterior, y el número de iteraciones que se ejecutarán durante el entrenamiento de la red, cuya explicación se aportó en la Sección~\ref{sec.caffe}. Además, en ese mismo capítulo, se explican el resto de parámetros que se manejarán en este proyecto, como la evaluación de la red o las redes intermedias que se guardarán. A continuación se muestra el aspecto de este solucionador en Caffe, destacando los parámetros más significativos.
+	\vspace{20pt}
 	\begin{lstlisting}[frame=single]
 	# The train/test net protocol buffer definition
 	net: "examples/mnist/lenet_train_test.prototxt"
@@ -220,7 +222,7 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	
 	Se debe fijar especial atención en parámetros como \textit{net}, que define la ruta al documento de la sección anterior en el que se define la estructura de red, \textit{test\_interval}, que marca cada cuántas iteraciones se realizará la evaluación de la red en el entrenamiento, \textit{max\_iter}, que define el número de iteraciones totales para finalizar el entrenamiento, \textit{snapshot}, que indica cada cúantas iteraciones se creará un archivo con la red intermedia correspondiente, y, finalmente, \textit{snapshot\_prefix}, que marcará la ruta en la que se almacenarán los archivos. La forma en la que se almacenan los archivos se corresponden con la ruta indicada hasta el último "\text{/}", siendo lo posterior el nombre deseado que será completado con el número de iteración correspondiente. En el ejemplo mostrado, el archivo será almacenado en la ruta \textit{"\text{examples/mnist/}"}    y el nombre de la red final será \textit{"lenet\_iter\_10000"}.\\
 	
-	Tras definir el solucionador se procederá a la ejecución de un archivo que comience con el entrenamiento de la red y permita obtener, finalmente, el modelo entrenado para usar en la aplicación.\\
+	Tras definir el solucionador se procederá a la ejecución de un archivo que comience con el entrenamiento de la red y permita obtener, finalmente, el modelo entrenado para usar en la aplicación.
 	
 \subsubsection{Ejecución de la red}
 	Para comenzar con el entrenamiento de la red, una vez definida la estructura y y el solucionador, se deben ejecutar los siguientes comandos:
@@ -279,7 +281,7 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 \subsection{Componente Python} \label{sec.componente}
 Se ha desarrollado un componente escrito en Python que, mediante la ayuda del \textit{Camera Server} de JdeRobot, comentado en la Sección~\ref{sec.jderobot},  y la red explicada en la Sección~\ref{sec.red}, es capaz de clasificar un dígito mostrado a la cámara, que se especificará en un archivo de configuración, en tiempo real, encendiendo una bombilla que se corresponde con el número obtenido.\\
 
-Debido a la magnitud de la tarea a realizar, se optó por dividir el programa en dos hilos que serán explicados a continuación. Uno de ellos se encargará del aspecto gráfico de la aplicación, mostrando la imagen obtenida por la cámara, la imagen procesada para la clasificación, y la iluminación de la bombilla correspondiente. El segundo hilo, se encargará de gestionar la captación de la cámara, mediante la conexión con el componente \textit{Camera Server}, así como el proceso de clasificación, utilizando la red entrenada. Todo el código correspondiente a esta aplicación podrá ser encontrado en~\cite{codigo}.\\
+Debido a la magnitud de la tarea a realizar, se optó por dividir el programa en dos hilos que serán explicados a continuación. Uno de ellos se encargará del aspecto gráfico de la aplicación, mostrando la imagen obtenida por la cámara, la imagen procesada para la clasificación, y la iluminación de la bombilla correspondiente. El segundo hilo, se encargará de gestionar la captación de la cámara, mediante la conexión con el componente \textit{Camera Server}, así como el proceso de clasificación, utilizando la red entrenada. Todo el código correspondiente a esta aplicación podrá ser encontrado en~\cite{codigo}.
 
 \subsubsection{Cámara} \label{sec.camara}
 El hilo fundamental de la aplicación, que se encargará de la lógica de la misma mediante la adquisición de la imagen y su posterior procesamiento, estará referenciado por el nombre \textit{Camera}.\\
@@ -316,20 +318,20 @@ Finalmente, se crea la siguiete función para realizar la clasificación de los 
 		return digito
 \end{lstlisting}
 
-En primer lugar se asegura que las dimensiones del \textit{bolb} de datos sea de 28x28. En el siguiente paso, se introduce a la red la imagen obtenida tras la transformación, aplicandole el factor de escala para que el intervalo de los píxeles esté entre 0 y 1, pues eso fue lo que se indicó en el aprendizaje. Posteriormente se ejecuta la red y se obtiene, como salida, una estructura que almacena, por un lado, la propiedad \textit{'prob'} que se corresponde con un array que incluye las probabilidades de que la imagen introducida sea cada uno de los dígitos posibles, y, por otro, el tipo de datos que se almacena, en este caso \textit{float32}. Posteriormente, de ese array de probabilidades, se escoge el dígito cuya probabilidad es mayor, es decir, la clasificación realizada, y se devuelve.\\
+En primer lugar se asegura que las dimensiones del \textit{bolb} de datos sea de 28x28. En el siguiente paso, se introduce a la red la imagen obtenida tras la transformación, aplicandole el factor de escala para que el intervalo de los píxeles esté entre 0 y 1, coincidiendo con el aprendizaje. Posteriormente se ejecuta la red y se obtiene, como salida, una estructura que almacena, por un lado, la propiedad \textit{'prob'} que se corresponde con un array que incluye las probabilidades de que la imagen introducida sea cada uno de los dígitos posibles, y, por otro, el tipo de datos que se almacena, en este caso \textit{float32}. Posteriormente, de ese array de probabilidades, se escoge el dígito cuya probabilidad es mayor y se devuelve.\\
 
-Una vez establecida la lógica de la aplicación, con las funciones explicadas anteriormente, se procede a desarrollar el interfaz gráfico que permite al usuario visualizar, tanto las imágenes captadas y transformadas, como el resultado de la clasificación.\\
+Una vez establecida la lógica de la aplicación, se procede a desarrollar el interfaz gráfico que permite al usuario visualizar, tanto las imágenes captadas y transformadas, como el resultado de la clasificación.
 
 \subsubsection{GUI}
 Para el aspecto gráfico de la aplicación, en el componente principal, se inicializará un objeto llamado \textit{window} mediante el constructor \textit{Gui()}, al que posteriormente se le vinculará la cámara mediante una función propia, \textit{window.setCamera(camera)}. Por último, al tratarse de un componente gráfico, será necesario indicar que se muestre mediante \textit{window.show()}. Al inicializar este objeto se crean todos los elementos gráficos que serán necesarios y que se modificarán posteriormente para conseguir el resultado deseado.\\
 
 Al igual que en el caso de la cámara, se estabelcerá un hilo que permita aligerar la ejecución de la aplicación mediante \textit{ThreadGui(window)}, que establece el tiempo de actualización en 50ms. Debido al uso de este hilo, se crea en el objeto una función \textit{update()} que, en este caso, se encarga de obtener las imágenes original y transformada mediante la función \textit{getImage()} de la cámara, y adaptarlas para poder mostrarlas en las etiquetas definidas para cada una de ellas. Además, llama a otra función propia, \textit{lightON(out)}, que cambia el color del fondo del dígito que se haya clasificado, haciendo uso de la función de clasificación definida anteriormente en la cámara.\\
 
-En la Figura~\ref{fig.gui} se puede observar el resultado gráfico de la aplicación. Al no tener detección, la ejecución de la clasificación es continua, por lo que, aunque no exista un dígito en la imagen, el componente decide constantemente un determinado dígito que considerará correcto, encendiendo la bombilla adecuada.\\
+En la Figura~\ref{fig.gui} se puede observar el resultado gráfico de la aplicación. Al no tener detección, la ejecución de la clasificación es continua, por lo que, aunque no exista un dígito en la imagen, el componente decide constantemente un determinado dígito que considerará correcto, encendiendo la bombilla adecuada.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{figures/gui}
+		\includegraphics[width=0.65\textwidth]{figures/gui}
 		\caption{Captura de componente gráfico de la aplicación.}
 		\label{fig.gui}
 	\end{center}
@@ -346,8 +348,8 @@ Para ejecutar el \textit{Camera Server}, se seguirán las instrucciones que apor
 
 En el desarrollo de este trabajo, la propiedad de interés del archivo de configuración es \textit{CameraSrv.Camera.0.Uri}, que se centra en indicar la fuente de vídeo. Esta fuente puede ser un archivo de vídeo almacenado, para el que se empleará la ruta del archivo en ese campo, la webcam del propio ordenador, para el que se utilizará el valor 0, u otra cámara externa, para la que se le indicará el valor 1.\\
 
-En la Sección~\ref{sec.droid} se comentó una aplicación que permitía utilizar la camara de un smartphone android como fuente de vídeo mediante una cámara externa. Para poder utilizar esta herramienta es necesario tener instalados el programa tanto en el dispositivo móvil a utilizar como en el propio ordenador, según se indica en la guía de la aplicación~\footnote{https://www.dev47apps.com/droidcam/linuxx/}, y abrir la aplicación. Una vez abierta en ambos dispositivos, se debe conectar el USB del ordenador al móvil e indicar en la aplicación de escritorio que la conexión se hará vía USB. La razón del uso del USB y no de la conexión vía \textit{WiFi} radica en la rapidez, siendo más adecuada para tiempo real. Una vez se han realizado las acciones anteriores se estable la conexión y se obtienen los resultados de la Figura~\ref{fig.droid} para el ordenador y el dispositivo.
-
+En la Sección~\ref{sec.droid} se comentó una aplicación que permitía utilizar la camara de un smartphone android como fuente de vídeo mediante una cámara externa. Para poder utilizar esta herramienta es necesario tener instalados el programa tanto en el dispositivo móvil a utilizar como en el propio ordenador, según se indica en la guía de la aplicación~\footnote{https://www.dev47apps.com/droidcam/linuxx/}, y abrir la aplicación. Una vez abierta en ambos dispositivos, se debe conectar el USB del ordenador al móvil e indicar en la aplicación de escritorio que la conexión se hará vía USB. La razón del uso del USB y no de la conexión vía \textit{WiFi} radica en la rapidez, siendo más adecuada para tiempo real. Una vez se han realizado las acciones anteriores se estable la conexión y se obtienen los resultados de la Figura~\ref{fig.droid} para el ordenador y el dispositivo.\\
+\vspace{20cm}
 \begin{figure}[H]
 	\centering
 	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/droidcamEscr}} \hspace{10pt}
@@ -374,10 +376,10 @@ Finalmente, tras la ejecución, obtenemos el resultado del componente mostrado e
 	\end{center}
 \end{figure}
 
-Tras conseguir la aplicación del clasificador, se ha evaluado la red obtenida mediante un banco de pruebas, que será explicado a continuación y se ha procedido a la mejora de la misma gracias a los diferentes resultados obtenidos.\\
+Tras conseguir la aplicación del clasificador, se ha evaluado la red obtenida mediante un banco de pruebas, que será explicado a continuación y se ha procedido a la mejora de la misma gracias a los diferentes resultados obtenidos.
 
 \section{Banco de pruebas} \label{sec.banco}
-Para la evaluación de las diferentes redes neuronales que se desarrollarán en el proyecto se elabora un banco de pruebas que permite obtener los parámetros de evaluación explicados en el Capítulo~\ref{cap.infraestructura}, siendo necesario, previamente, la obtención de datos de clasificación sobre una determinada base de datos de test.\\
+Para la evaluación de las diferentes redes neuronales que se desarrollarán en el proyecto se elabora un banco de pruebas que permite obtener los parámetros de evaluación explicados en el Capítulo~\ref{cap.infraestructura}, siendo necesario, previamente, la obtención de datos de clasificación sobre una determinada base de datos de test.
 
 \subsection{Obtención de datos de test}
 El primer paso para la elaboración de este banco de pruebas pasa por el desarrollo de un script, \textit{testcaffenet.py}, que permite introducir una base de datos de test a la red neuronal deseada y obtener la clasificación para cada uno de los elementos existentes en la misma. Este script está dividido en tres partes claramente diferenciadas que permite la obtención de los resultados finales y que serán detalladas a continuación.
@@ -386,7 +388,7 @@ El primer paso para la elaboración de este banco de pruebas pasa por el desarro
 	\item[Obtención de las imágenes] \hfill 
 	\vspace{5pt}
 	\\
-	Las imágenes y sus correpondientes etiquetas estan almacenadas en bases de datos de tipo \textit{lmdb}. Este tipo de bases de datos requiere de un método específico para poder acceder al contenido de las mismas y poder manipular las imágenes que se almacenan en ellas, que queda definido a continuación.
+	Las imágenes y sus correpondientes etiquetas estan almacenadas en bases de datos de tipo \textit{\acrfull{lmdb}}. Este tipo de bases de datos requiere de un método específico para poder acceder al contenido de las mismas y poder manipular las imágenes que se almacenan en ellas, que queda definido a continuación.
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	lmdb_env = lmdb.open('.../test_lmdb')
@@ -414,8 +416,8 @@ El primer paso para la elaboración de este banco de pruebas pasa por el desarro
 	\item[Clasificación de las imágenes] \hfill 
 	\vspace{5pt}
 	\\
-	La tarea de clasificación se realizará exáctamente de la misma manera que se especificó en la Sección~\ref{sec.camara}, utilizando la misma función sobre cada uno de los \textit{data} obtenidos.
-	\vspace{10pt}
+	La tarea de clasificación se realizará exáctamente de la misma manera que se especificó en la Sección~\ref{sec.camara}, utilizando la misma función sobre cada uno de los \textit{data} obtenidos según se muestra en el código a continuación.
+	\vspace{25pt}
 	\begin{lstlisting}[frame=single]
 	...
 	net_out = classification(data)
@@ -464,8 +466,8 @@ Una vez se dispone de los datos necesarios para la evaluación de prestaciones, 
 	Este valor es el más lógico y sencillo de obtener. Para calcular la tasa de acierto independientemente del dígito que se trate, basta con contar el número de veces que se ha obtenido el valor \textit{True} en la columna de conclusión y dividirlo entre el número de imágenes de test que se han utilizado. De esta manera se obtiene el porcentaje de imágenes que se han clasificado de forma correcta, valor que se corresponde con la tasa de acierto de la red.\\
 	\vspace{-10pt}
 	\\
-	Para realizar esta operación, el código empleado ha sido dividido en cuatro partes diferenciadas:\\
-	\vspace{-20pt}
+	Para realizar esta operación, el código empleado ha sido dividido en cuatro partes diferenciadas, obteniendo en cada una de ellas uno de los valores para obtener el resultado final, que serán expuestas a continuación.\\
+	\vspace{10pt}
 	\begin{itemize}
 		\item{Para obtener el número de clasificaciones correctas:
 		\vspace{10pt}
@@ -532,14 +534,14 @@ Una vez se dispone de los datos necesarios para la evaluación de prestaciones, 
 \section{Efectos del aprendizaje} \label{sec.aprendizaje}
 Existen numerosos factores que afectan a la robusted de la red en el proceso de entrenamiento de la misma. Elementos como la base de datos, el número de neuronas empleadas, el número de capas o las etapas que se realizan en el entrenamiento~\cite{lopez2008redes}, hacen que la red tenga una mayor robusted, mejorando la aplicación deseada.\\
 
-En esta sección se tratará el efecto en el aprendizaje de dos de los factores que se pueden manipular para adaptar la robusted de la red a la aplicación que se vaya a tratar, estos elementos son el cambio en las bases de datos de entrenamiento y validación, y la disminución del número de iteraciones.\\
+En esta sección se tratará el efecto en el aprendizaje de dos de los factores que se pueden manipular para adaptar la robusted de la red a la aplicación que se vaya a tratar, estos elementos son el cambio en las bases de datos de entrenamiento y validación, y la disminución del número de iteraciones.
 
 \subsection{Aprendizaje con imágenes originales}
 La base de datos empleada en el primer ejemplo explicado es excesivamente simple y, por lo tanto, no aporta la robusted necesaria para un problema de clasificación real. Por ello se estudiará la ampliación y modificación de la misma para obtener una red robusta que permita solucionar el problema de la clasificación de imágenes en tiempo real de la manera más precisa posible.\\
 
 El primer problema que se encuentra en esta base de datos es que únicamente se dispone de muestras con el fondo negro y el dígito en blanco. Ésto limita bastante la funcionalidad de la aplicación, ya que se pretende clasificar cualquier dígito, independientemente del fondo sobre el que se muestre. Para estudiar el efecto que tiene el cambio de fondo en las imágenes en la red neuronal desarrollada se ha elaborado una base de datos de evaluación ampliada, incluyendo, para cada muestra, su negativo.\\
 
-La obtención de la base de datos se consigue gracias al script \textit{create\_neg\_database.py}. El proceso llevado a cabo en este script parte del tratamiento de bases de datos de tipo \textit{lmdb} explicado en la Sección~\ref{sec.banco}. Se debe abrir la base de datos con las imágenes originales y utilizar los datos de la imagen obtenidos para realizar la transformación deseada. Posteriormente, para almacenar las imágenes transformadas, se debe abrir una nueva base de datos de este tipo, que permita escritura. Esta apertura se realiza con las siguientes líneas:
+La obtención de la base de datos se consigue gracias al script \textit{create\_neg\_database.py}. El proceso llevado a cabo en este script parte del tratamiento de bases de datos de tipo \acrshort{lmdb} explicado en la Sección~\ref{sec.banco}. Se debe abrir la base de datos con las imágenes originales y utilizar los datos de la imagen obtenidos para realizar la transformación deseada. Posteriormente, para almacenar las imágenes transformadas, se debe abrir una nueva base de datos de este tipo, que permita escritura. Esta apertura se las líneas mostradas a continuación.
 \vspace{10pt}
 \begin{lstlisting}[frame=single]
 	new_lmdb_env = lmdb.open('.../database_lmdb', map_size=int(1e12))
@@ -570,6 +572,7 @@ Posteriormente, para la actualización de la base de datos, se deben incluir un 
 \end{lstlisting}
 
 Estas líneas se incluyen dentro de un condicional que hará que únicamente se escriba en la base de datos cada cierto tiempo, ya que no es necesario realizar estas acciones en todas las inserciones realizadas, ahorrando carga computacional.\\
+\vspace{20pt}
 
 En la Figura~\ref{fig.neg} se muestra el negativo almacenado en la base de datos para cada dígito mostrado en la Figura~\ref{fig.digitosMNIST}. Estas imágenes han sido obtenidas con el script \textit{dataread.py}, que lee las imágenes de la base de datos y crea un archivo para su visualización.\\
 
@@ -609,7 +612,7 @@ A continuación se explicarán los tres filtros que han sido evaluados en este p
 	\vspace{-10pt}
 	\\
 	Para aplicar este algoritmo en el código se debe implementar la función proporcionada por \textit{openCV} según~\cite{cannyOCV}. En la base de datos de test, se van a obtener dos imágenes iguales de cada dígito ya que se está aplicando sobre el original y el negativo el mismo filtro, que por su propio funcionamiento, detecta los mismos bordes en ambos.
-	\vspace{10pt}
+	\vspace{20pt}
 	\item[Filtro Laplaciano] \hfill 
 	\vspace{5pt}
 	\\
@@ -639,13 +642,13 @@ La Figura~\ref{fig.bordes} muestra la aplicación de las tres transformaciones p
 	\label{fig.bordes}
 \end{figure}
 
-Una vez obtenidas las diferentes bases de datos con los filtros de bordes aplicados se procede al entrenamiento de tres redes neuronales diferentes, una con cada uno de los filtros, según se explicó en la Sección~\ref{sec.red}. En concreto, únicamente se modificarán las distintas bases de datos empleadas en entrenamiento y evaluación por la obtenida para cada caso.\\
+Una vez obtenidas las diferentes bases de datos con los filtros de bordes aplicados se procede al entrenamiento de tres redes neuronales diferentes, una con cada uno de los filtros, según se explicó en la Sección~\ref{sec.red} modificando, únicamente, las bases de datos empleadas en entrenamiento y evaluación.\\
 
 Tras obtener las tres redes neuronales entrenadas será posible comenzar con el test de las mismas según lo explicado en la Sección~\ref{sec.banco}, obteniendo la tasa de acierto para cada uno de ellos, que quedan representados en la Figura~\ref{fig.filtros}. Para ello se ha empleado la base de datos de test ampliada con el negativo aplicando, para cada red, el filtro correspondiente.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.6\textwidth]{figures/filtros}
+		\includegraphics[width=0.5\textwidth]{figures/filtros}
 		\caption{Comparación de tasa de acierto con diferentes filtros.}
 		\label{fig.filtros}
 	\end{center}
@@ -904,12 +907,13 @@ Para poder establecer conclusiones más firmes, se calculan el \textit{precision
 \end{figure}
 Los resultados obtenidos confirman las conclusiones que se alcanzaron con anterioridad. Existe una clara mejora al introducir imágenes ruidosas en el entrenamiento, una única imagen ruidosa aporta suficiente información y la inclusión de la imagen original no aporta gran información para el entrenamiento.\\
 
-Tras mejorar la red en cuanto a términos de precisión con el cambio en las bases de datos, se analizará la posibilidad de reducir el número de iteraciones para disminuir la carga de cómputo en el entrenamiento de la red.\\
+Tras mejorar la red en cuanto a términos de precisión con el cambio en las bases de datos, se analizará la posibilidad de reducir el número de iteraciones para disminuir la carga de cómputo en el entrenamiento de la red.
 
 \subsection{Número de iteraciones}
 Hasta ahora, se había fijado el número de iteraciones que se realizan en el entrenamiento de la red en un valor de 10000, siendo la iteración, según lo explicado en la Sección~\ref{sec.caffe}, el paso por un \textit{batch}. Sin embargo, este número de iteraciones no tiene por qué ser el más idóneo para la aplicación.\\
 
 Durante el entrenamiento de una red neuronal el aprendizaje es progresivo, de esta manera, la red obtenida en la iteración \textit{n+1} es mejor que la obtenida en la iteración \textit{n}. Ésto se cumple hasta un cierto punto. Existe un momento durante el entrenamiento de la red en el que la mejora entre iteraciones consecutivas es prácticamente nula, pudiéndose producir, incluso, un deterioro en la red. Este deterioro de la red es conocido como sobreaprendizaje, producido por la excesiva focalización en las muestras proporcionadas en el entrenamiento empeorando la generalización.\\
+\vspace{10pt}
 
 Como se comentó en la Sección~\ref{sec.red}, Caffe permite obtener durante el entrenamiento un archivo \textit{log} en el que se plasman los datos de \textit{accuracy} calculados cada cierto número de iteraciones. Estos resultados han sido recogidos para cada una de las redes explicadas en la sección anterior, obteniendo una comparativa, mostrada en la Figura~\ref{fig.iteraciones}, que permita seleccionar la red más adecuada para la aplicación.
 \begin{figure}[H]
@@ -921,7 +925,7 @@ Como se comentó en la Sección~\ref{sec.red}, Caffe permite obtener durante el 
 \end{figure}
 En esta figura se puede comprobar que, además de la mejora mencionada anteriormente al introducir imágenes de ruido en el entrenamiento, la estabilidad de la red se alcanza mucho antes de las 10000 iteraciones marcadas.\\
 
-Por todo lo mencionado anteriormente, se decide escoger la red entrenada con la base de datos 0-1 parando en la iteración 5000, obteniendo buenos resultados en cuanto a la precisión de la red y disminuyendo consideráblemente la carga computacional, pues se reduce más de la mitad el número de iteraciones de entrenamiento de la red y se mantiene el número de muestras de las bases de datos de entrenamiento y validación, aunque estas hayan sido modificadas.\\
+Por todo lo mencionado anteriormente, se decide escoger la red entrenada con la base de datos 0-1 parando en la iteración 5000, obteniendo buenos resultados en cuanto a la precisión de la red y disminuyendo consideráblemente la carga computacional, pues se reduce más de la mitad el número de iteraciones de entrenamiento de la red y se mantiene el número de muestras de las bases de datos de entrenamiento y validación, aunque estas hayan sido modificadas.
 
 \section{Experimentos}
 Tras todo el análisis realizado anteriormente se ha obtenido una red neuronal más robusta que permite una mejor clasificación en tiempo real de los dígitos mostrados a la cámara. Con todo lo estudiado en puntos anteriores se realiza una comparación entre la primera red básica que se desarrolló y la red a la que se le han aplicado las variaciones precisas.\\
@@ -945,6 +949,7 @@ Tras evaluar un ejemplo completamente limpio se pone a prueba la aplicación con
 	\caption{Evaluación de la aplicación con imagen imperfecta: (a)~Red básica, (b)~Red robusta.}
 	\label{fig.experimento}
 \end{figure}
+\vspace{20pt}
 
 Para realizar los experimentos anteriores se ha tomado como red básica, la explicada en la Sección~\ref{sec.red}, en cuyo entrenamiento únicamente se disponía de imágenes con fondo negro y el dígito en blanco. Como era de esperar, y se demostró en la Sección~\ref{sec.bordes}, al mostrar a la cámara un dígito con el fondo blanco la red hace una clasificación errónea. En el caso de la red robusta, se ha seleccionado la red que se concluyó tras la Sección~\ref{sec.aprendizaje}, una red entrenada con imágenes transformadas a las que se les ha aplicado el filtro de bordes Sobel iterando un total de 5000 veces, permitiendo independizar la imagen del fondo y que la imagen obtenida por la cámara no sea tan perfecta. Con esta nueva red la aplicación sí consigue clasificar correctamente el mismo dígito mostrado a la cámara.\\
 
