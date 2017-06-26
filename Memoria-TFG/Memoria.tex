@@ -93,14 +93,21 @@
 \renewcommand{\tablename}{Tabla}
 \renewcommand{\listtablename}{Índice de tablas}
 \tableofcontents
-\listoffigures % Í­ndice de figuras
-\listoftables % Í­ndice de tablas
+
+\cleardoublepage % Í­ndice de figuras
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
+\cleardoublepage % Í­ndice de tablas
+\addcontentsline{toc}{chapter}{Índice de tablas}
+\listoftables 
 
 
 %%%%%%%%%%%%%%% Acronimos %%%%%%%%%%%%%%%%%%%%
 \renewcommand{\acronymname}{Acrónimos}
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Acrónimos}
 \printglossary[type=\acronymtype]
-
 
 \cleardoublepage
 %%%%%%%%%%%%%%% Capí­tulos %%%%%%%%%%%%%%%%%%

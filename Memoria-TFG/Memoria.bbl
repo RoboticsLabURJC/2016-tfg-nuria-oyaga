@@ -1,5 +1,14 @@
 \begin{thebibliography}{10}
 
+\bibitem{rna}
+Anyu.
+\newblock {''RNA – Redes Neuronales Artificiales'', \textit{Bitácoras de un
+  Ingeniero}}.
+\newblock
+  \url{http://andrealezcano.blogspot.com.es/2011/04/rna-redes-neuronales-artificiales.html},
+  2011.
+\newblock [Accedido 25 de Junio de 2017].
+
 \bibitem{Goodfellow-et-al-2016}
 Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
 \newblock {\em Deep Learning}.
@@ -8,14 +17,41 @@ Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
 
 \bibitem{cnn}
 M.Eng. Dewi~Suryani, S.Kom.
-\newblock \textit{Convolutional Neural Network}.
+\newblock {''CONVOLUTIONAL NEURAL NETWORK'', \textit{Binus University - School
+  of Computer Science}}.
 \newblock
   \url{http://socs.binus.ac.id/2017/02/27/convolutional-neural-network/}, 2017.
 \newblock [Accedido 20 de Junio de 2017].
 
+\bibitem{2016arXiv160605718W}
+D.~{Wang}, A.~{Khosla}, R.~{Gargeya}, H.~{Irshad}, and A.~H. {Beck}.
+\newblock {Deep Learning for Identifying Metastatic Breast Cancer}.
+\newblock {\em ArXiv e-prints}, June 2016.
+
+\bibitem{2015arXiv150500256C}
+C.~{Chen}, A.~{Seff}, A.~{Kornhauser}, and J.~{Xiao}.
+\newblock {DeepDriving: Learning Affordance for Direct Perception in Autonomous
+  Driving}.
+\newblock {\em ArXiv e-prints}, May 2015.
+
+\bibitem{traduccion}
+Otavio Good.
+\newblock {''How Google Translate squeezes deep learning onto a phone'',
+  \textit{Google Research Blog}}.
+\newblock
+  \url{https://research.googleblog.com/2015/07/how-google-translate-squeezes-deep.html},
+  2015.
+\newblock [Accedido 25 de Junio de 2017].
+
+\bibitem{2015arXiv151208512O}
+A.~{Owens}, P.~{Isola}, J.~{McDermott}, A.~{Torralba}, E.~H. {Adelson}, and
+  W.~T. {Freeman}.
+\newblock {Visually Indicated Sounds}.
+\newblock {\em ArXiv e-prints}, December 2015.
+
 \bibitem{caffe}
 Clayton~Mellina Rob~Hess and Friends.
-\newblock \textit{Introducing: Flickr PARK or BIRD}.
+\newblock {''Introducing: Flickr PARK or BIRD'', \textit{Flickr}}.
 \newblock
   \url{http://code.flickr.net/2014/10/20/introducing-flickr-park-or-bird/},
   2014.
@@ -43,11 +79,6 @@ W.~{Liu}, D.~{Anguelov}, D.~{Erhan}, C.~{Szegedy}, S.~{Reed}, C.-Y. {Fu}, and
   A.~C. {Berg}.
 \newblock {SSD: Single Shot MultiBox Detector}.
 \newblock {\em ArXiv e-prints}, December 2015.
-
-\bibitem{2014arXiv1404.7828S}
-J.~{Schmidhuber}.
-\newblock {Deep Learning in Neural Networks: An Overview}.
-\newblock {\em ArXiv e-prints}, April 2014.
 
 \bibitem{jia2014caffe}
 Yangqing Jia, Evan Shelhamer, Jeff Donahue, Sergey Karayev, Jonathan Long, Ross
@@ -105,7 +136,7 @@ J.~Canny.
 
 \bibitem{cannyOCV}
 OpenCV.
-\newblock \textit{Canny Edge Detection}.
+\newblock {''Canny Edge Detection'', \textit{OpenCV Python Tutorials}}.
 \newblock \url{http://docs.opencv.org/trunk/da/d22/tutorial_py_canny.html},
   2017.
 \newblock [Accedido 14 de Junio de 2017].
@@ -122,8 +153,8 @@ R.C. Gonzalez and R.E. Woods.
 \newblock Pearson/Prentice Hall, 2008.
 
 \bibitem{laplacianOCV}
-OpenCV-Sphinx.
-\newblock \textit{Laplace Operator}.
+OpenCV.
+\newblock {''Laplace Operator'', \textit{OpenCV Tutorials}}.
 \newblock
   \url{http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/laplace_operator/laplace_operator.html},
   2017.
@@ -131,7 +162,7 @@ OpenCV-Sphinx.
 
 \bibitem{sobelOCV}
 OpenCV.
-\newblock \textit{Sobel Derivatives}.
+\newblock {''Sobel Derivatives'', \textit{OpenCV Tutorials}}.
 \newblock
   \url{http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/sobel_derivatives/sobel_derivatives.html},
   2017.
