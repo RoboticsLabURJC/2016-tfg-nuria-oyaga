@@ -90,12 +90,13 @@ Este trabajo se centrará en la clasificación y detección de imágenes estáti
 Por último, para implementar todo lo explicado anteriormente, existen múltiples plataformas que facilitan el entrenamiento y la implementación de estas redes. TensorFlow, Keras, Theano, Caffe, Lassagne o Torch son algunos de los ejemplos más conocidos de estas plataformas. En este trabajo se utilizará la plataforma Caffe, una de las más veteranas. La elección de esta plataforma radica en el gran número de ejemplos que proporciona la misma para poder implementar en las aplicaciones sin necesidad de realizar el entrenamiento, ahorrando tiempo al desarrollador. Además está centrado en la \acrshort{va}, lugar hacia el que se enfoca este trabajo, y resulta bastante robusto y rápido.\\
 
 
-\section{Objetivos}
+\section{Objetivos} \label{sec.objetivos}
 Una vez se ha situado el trabajo en un marco definido, el objetivo general es claro: Se pretende ahondar en el mundo de la \acrshort{ia}, en concreto en técnicas de aprendizaje profundo y \acrshort{cnn}, para obtener resultados que puedan resultar interesantes y desarrollar una aplicación que permita implementar estas técnicas con la mayor exactitud posible. Este objetivo general ha sido  articulado en varios subobjetivos concretos: 
 
 \begin{itemize}
 	\item \textbf{Estudio de la plataforma Caffe.}. Se pretende entender la plataforma escogida para un correcto uso de la misma y la obtención de las redes que sean necesarias.
 	\item \textbf{Desarrollo de componente que permita la clasificación de dígitos}, integrando una red entrenada con Caffe.
+	\item \textbf{Desarrollo de un banco de pruebas}, que permita agilizar la obtención de parámetros de evaluación de las distintas redes entrenadas.
 	\item \textbf{Estudio y mejora de redes neuronales para la clasificación de dígitos.} Se realizarán diversas pruebas para tratar de alcanzar la red más robusta posible y utilizarla en el componente desarrollado.
 	\item \textbf{Primera aproximación a la detección de Caffe.} Se estudiará la detección SSD con Caffe para estímulos interesantes para aplicaciones futuras como personas, coches, bicicletas o señales de tráfico.
 \end{itemize}
