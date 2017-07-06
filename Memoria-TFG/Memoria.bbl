@@ -57,6 +57,12 @@ Clayton~Mellina Rob~Hess and Friends.
   2014.
 \newblock [Accedido 13 de Junio de 2017].
 
+\bibitem{coco}
+T.-Y. {Lin}, M.~{Maire}, S.~{Belongie}, L.~{Bourdev}, R.~{Girshick}, J.~{Hays},
+  P.~{Perona}, D.~{Ramanan}, C.~L. {Zitnick}, and {P.Dollár}.
+\newblock {Microsoft COCO: Common Objects in Context}.
+\newblock {\em ArXiv e-prints}, May 2014.
+
 \bibitem{Everingham10}
 M.~Everingham, L.~Van~Gool, C.~K.~I. Williams, J.~Winn, and A.~Zisserman.
 \newblock The pascal visual object classes (voc) challenge.

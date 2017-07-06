@@ -1,14 +1,13 @@
 \chapter{Clasificación con Aprendizaje Profundo}\label{cap.clasificacion}
-En este capítulo se expondrá el trabajo realizado para la comprensión del problema de clasificación de imágenes utilizando una plataforma de aprendizaje profundo. Para ello se ha elaborado un componente en Python que permite la clasificación de dígitos del 0 al 9 en tiempo real, que ha sido mejorado gracias a un amplio estudio sobre las variantes posibles aplicadas a las redes entrenadas, utilizando la plataforma Caffe.
+En este capítulo se expondrá el trabajo realizado para la comprensión del problema de clasificación de imágenes utilizando la plataforma Caffe de aprendizaje profundo. Para ello se ha elaborado un componente en Python que permite la clasificación de dígitos del 0 al 9 en tiempo real, que ha sido mejorado gracias a un amplio estudio sobre las variantes posibles aplicadas a las redes entrenadas.
 
 \section{Clasificador de dígitos}
-La primera tarea que se abarca en el proyecto es el desarrollo de un componente en Pyhton para la clasificación de dígitos entre 0 y 9 en tiempo real, materializando en una aplicación concreta el probblema de la clasificación de imágenes con aprendizaje profundo. Para poder desarrollar esta aplicación es necesario, previamente, un entendimiento de una primera red básica, que será la encargada de realizar la clasificación. En esta sección se explicará el procedimiento seguido para el entendimiento de la red y el desarrollo del propio componente.
+La primera tarea que se abarca en el proyecto es el desarrollo de un componente en Python para la clasificación de dígitos manuscritos entre 0 y 9 en tiempo real, materializando en una aplicación concreta el problema de la clasificación de imágenes con aprendizaje profundo. Para poder desarrollar esta aplicación es necesario, previamente, un entendimiento de una primera red básica, que será la encargada de realizar la clasificación. En esta sección se explica el procedimiento seguido para el entendimiento de la red y el desarrollo del propio componente.
 
 \subsection{Red básica}\label{sec.red}
-La red que se empleará, está orientada a la clasificación de números utilizando, en el entrenamiento, la base de datos numérica \acrshort{mnist}, explicada en la Sección~\ref{sec.minst}, y en la que se entrará en detalle a continuación.\\
-\vspace{-20pt}
+La red que se emplea está orientada a la clasificación de números, utilizando en el entrenamiento la base de datos numérica \acrshort{mnist}, explicada en la Sección~\ref{sec.minst}, y en la que se entra en detalle a continuación.\\
 
-La base de datos explicada, \acrshort{mnist}, proporciona dos conjuntos de datos, uno de entrenamiento y otro de test, pero, a diferencia de otros conjuntos no dispone de una de validación, utilizada para evaluar el modelo durante el entrenamiento. Por ello, el primer paso que se derá consiste en dividir la base de datos de entrenamiento en dos, obteniendo un conjunto de validación a partir del que ofrece \acrshort{mnist} para el entrenamiento. Para esta tarea, se desarrolla un script, \textit{createvalidationdatabase.py}, que divide la base de datos de entrenamiento original en dos, el 80\% para entrenamiento y el 20\% restante para validación. En la Tabla~\ref{tab.baseDatos}, se muestra un resumen de la estructura final de ambas bases de datos, así como la estructura de la base de datos de test que no sufre ninguna modificación.\\
+La base de datos \acrshort{mnist} proporciona dos conjuntos de datos, uno de entrenamiento y otro de test, pero, a diferencia de otros conjuntos, no dispone de una de validación, para evaluar el modelo durante el entrenamiento. Por ello, el primer paso que se da consiste en dividir la base de datos de entrenamiento en dos, obteniendo un conjunto de validación a partir del que ofrece \acrshort{mnist} para el entrenamiento. Para esta tarea, se desarrolla un script, \textit{createvalidationdatabase.py}, que divide la base de datos de entrenamiento original en dos, el 80\% para entrenamiento y el 20\% restante para validación. En la Tabla~\ref{tab.baseDatos}, se muestra un resumen de la estructura final de ambas bases de datos, así como la estructura de la base de datos de test que no sufre ninguna modificación.\\
 
 \begin{table}[H]
 	\centering
@@ -34,24 +33,13 @@ La base de datos explicada, \acrshort{mnist}, proporciona dos conjuntos de datos
 	\label{tab.baseDatos}
 \end{table}
 
-Se puede comprobar, como era de esperar, que no todos los dígitos tienen la misma presencia, siendo mayor el número de muestras en los dígitos que pueden generar mayor confusión, como el 1 o el 7, y menor en los que son más claros como el 0. Por ello, es muy importante respetar las proporciones existentes en cada dígito el dividir la base de datos para no alterar la naturaleza de la base de datos original. Para mantener esta proporción se calculará el porcentaje sobre el total de cada dígito y no sobre el total del conjunto de datos.\\
-\vspace{-20pt}
+Se puede comprobar, como era de esperar, que no todos los dígitos tienen la misma presencia, siendo mayor el número de muestras en los dígitos que pueden generar mayor confusión, como el 1 o el 7, y menor en los que son más claros como el 0. Por ello, es muy importante respetar las proporciones existentes en cada dígito al dividir la base de datos para no alterar la naturaleza de la base de datos original. Para mantener esta proporción se calcula el porcentaje sobre el total de cada dígito y no sobre el total del conjunto de datos.\\
 
-En la Figura~\ref{fig.digitosMNIST} se puede observar una muestra de cada uno de los dígitos que se almacenan, en este caso, en la base de datos de test, siendo de las mismas características el resto de bases de datos explicadas.
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.3\textwidth]{figures/original}
-		\caption{Muestras de base de datos \acrshort{mnist} original.}
-		\label{fig.digitosMNIST}
-	\end{center}
-\end{figure}
-
-Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante, se procede al entrenamiento de la red. Para entrenar una red, Caffe proporciona tres archivos que se editarán para adaptar la red al problema que se abarque. A continuación, se explicará cada uno de esos archivos, siguiendo el orden que fue necesario hasta conseguir la red completamente entrenada.
+Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante, se procede al entrenamiento de la red. Para entrenar una red, Caffe proporciona tres archivos que se editan para adaptar la red al problema concreto que se aborde. A continuación, se explicará cada uno de esos archivos, siguiendo el orden que fue necesario hasta conseguir la red completamente entrenada.
 
 \subsubsection{Definición de la red}
 	Caffe utiliza el archivo 
-	\textit{lenet\_train\_test.prototxt} para la especificación de todos los parámetros que son necesarios en el entrenamiento de la red, es decir, en este documento se definen las imágenes que se emplearán, la propia estructura de la red y la forma en la que se analizarán las imágenes proporcionadas, todo ello empleando diferentes capas (\textit{layers}).\\
+	\textit{lenet\_train\_test.prototxt} para la especificación de todos los parámetros que son necesarios en el entrenamiento de la red, es decir, en este documento se definen las imágenes que se emplean, la propia estructura de la red y la forma en la que se analizan las imágenes proporcionadas, todo ello empleando diferentes capas (\textit{layers}).\\
 
 	La primera línea de este documento es utilizada para indicar el nombre que se le quiere dar a la red, según se muestra a continuación.
 	\vspace{10pt}
@@ -61,8 +49,8 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	
 	En concreto, esta red recibe el nombre de LeNet, un tipo de red que es conocida por un buen funcionamiento en las tareas de clasificación de dígitos y que, por lo general, consta de una capa convolucional seguida por una capa de agrupamiento (\textit{pooling}), repetido dos veces. Tras ellas, se incluyen dos capas totalmente conectadas similares a las perceptrones multicapa convencionales. Con Caffe la estructura habitual de la red LeNet se ve ligeramente modificada, utilizando una función de activacion lineal en lugar de sigmoidal.\\
 
-	Tras la definición del nombre se definen dos capas de datos, una de ellas correspondiente a los datos de entrenamiento y, la otra, correspondiente a los datos que se utilizarán para realizar la evaluación durante el entrenamiento, obteniendo datos de \textit{accuracy} y \textit{loss} con el conjunto de validación. A continuación se muestra un ejemplo de cómo se define esta capa de datos, en concreto, en fase de entrenamiento.
-	\vspace{10pt}
+	Tras la definición del nombre se definen dos capas de datos, una de ellas correspondiente a los datos de entrenamiento y, la otra, correspondiente a los datos que se utilizan para realizar la evaluación durante el entrenamiento, obteniendo datos de \textit{accuracy} y \textit{loss} con el conjunto de validación. A continuación se muestra un ejemplo de cómo se define esta capa de datos, en concreto, en fase de entrenamiento.
+	\vspace{60pt}
 	\begin{lstlisting}[frame=single]
 	layer {
 		name: "mnist"
@@ -78,13 +66,13 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	}
 	\end{lstlisting}
 	
-	Los parámetros de transformación (\textit{transform\_param}), indican el preprocesamiento de la imagen antes de comenzar el entrenamiento, y, éstos, deben coincidir en ambas fases, ya que si se evaluase la red con una transformación de la imágen distinta a la aplicada en el entrenamiento los resultados obtenidos no serían reales. En este caso, se utiliza un factor de escala, indicado con el nombre \textit{scale}, que establece el rango de la imagen en [0,1]. \\
-	En esta red se utilizarán dos capas de datos que difieren en la fase en la que se utilizan los datos, entrenamiento o evaluación de la red, el tamaño del lote, siendo 64 muestras para el entrenamiento y 100 para la evaluación, y la ruta de la que se cogen los datos.\\
+	Los parámetros de transformación (\textit{transform\_param}) indican el preprocesamiento de la imagen antes de comenzar el entrenamiento, y éstos deben coincidir en ambas fases, ya que si se evaluase la red con una transformación de la imagen distinta a la aplicada en el entrenamiento los resultados obtenidos no serían reales. En este caso, se utiliza un factor de escala, indicado con el nombre \textit{scale}, que establece el rango de la imagen en [0,1]. \\
+	En esta red se utilizan dos capas de datos que difieren en la fase en la que se utilizan los datos, entrenamiento o evaluación de la red, el tamaño del lote, siendo 64 muestras para el entrenamiento y 100 para la evaluación, y la ruta de la que se cogen los datos.\\
 	
 	A continuación, se comienzan a definir las capas del entrenamiento propiamente dicho. Se intercala una capa de convolución con una de agrupamiento y se repite la estructura dos veces.\\
 	
-	En la capa de convolución, explicada en la Sección~\ref{sec.caffe}, se define que el tamaño del filtro será de 5x5 y que se obtendrán 20 salidas en la primera de ellas, en la segunda, sin embargo, se obtendrán 50 salidas. Además se define el algoritmo "Xavier" para la inicialización de los pesos, que determina automáticamente la escala de inicialización basada en el número de entradas y de las neuronas de salida, y la inicialización del \textit{bias} mediante una constante que por defecto es 0. Esta estructura se define de la siguiente forma en el documento de Caffe:
-	\vspace{10pt}
+	En la capa de convolución, explicada en la Sección~\ref{sec.caffe}, se define que el tamaño del filtro será de 5x5 y que se obtienen 20 salidas en la primera de ellas, en la segunda, sin embargo, se obtienen 50 salidas. Además se define el algoritmo ''Xavier'' para la inicialización de los pesos, que determina automáticamente la escala de inicialización basada en el número de entradas y de las neuronas de salida, y la inicialización del sesgo mediante una constante que por defecto es 0. Esta estructura se define de la siguiente forma en el documento de Caffe:
+	\vspace{20pt}
 	\begin{lstlisting}[frame=single]
 	layer {
 		name: "conv1"
@@ -103,7 +91,7 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	}	
 	\end{lstlisting}
 	
-	La capa de agrupamiento, también explicada en la Sección~\ref{sec.caffe}, será alimentada por la capa de convolución anterior y alimentará a la siguiente en caso de que la haya. A continuación se muestra un ejemplo de cómo se define esta capa.
+	La capa de agrupamiento, también explicada en la Sección~\ref{sec.caffe}, es alimentada por la capa de convolución anterior y alimenta a la siguiente en caso de que la haya. A continuación se muestra un ejemplo de cómo se define esta capa.
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	layer {
@@ -120,8 +108,9 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	
 	Se definen en esta capa un tamaño de filtro de 2x2, un intervalo de dos muestras entre cada aplicación del filtro, por lo que no hay solape, y el método del máximo para realizar el agrupamiento.\\
 
-	En caso de ser la última de las capas de agrupamiento sus salidas serán la entrada de las capas completamente conectadas,\textit{InnerProduct}, explicadas en la Sección~\ref{sec.caffe}. En concreto se establecen dos, cuya definición en el documento queda de la siguiente manera: 
-	\vspace{10pt}
+	En caso de ser la última de las capas de agrupamiento sus salidas serán la entrada de las capas completamente conectadas,\textit{InnerProduct}, explicadas en la Sección~\ref{sec.caffe}. En concreto se establecen dos, cuya definición en el documento queda de la siguiente manera:\\
+	\vspace{-10pt}
+	
 	\begin{lstlisting}[frame=single]
 	layer {
 		name: "ip1"
@@ -138,9 +127,9 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	}	
 	\end{lstlisting}
 	
-	En estas capas se definen 500 salidas para la primera de ellas, y tantas como clases se tengan, en la segunda. La aplicación que se está desarrollando pretende clasificar los dígitos del 0 al 9, por lo que esta última capa deberá de tener 10 salidas.\\
+	En estas capas se definen 500 salidas para la primera de ellas, y tantas como clases se tengan, en la segunda. La aplicación que se está desarrollando pretende clasificar los dígitos del 0 al 9, por lo que esta última capa debe de tener 10 salidas.\\
 
-	Las capas completamente conectadas están separadas entre sí por una capa de activación, en este caso linear, llamada \textit{\acrshort{relu}}. Esta capa fue explicada en la Sección~\ref{sec.caffe} y tiene la siguiente forma en el documento:
+	Las capas completamente conectadas están separadas entre sí por una capa de activación, en este caso lineal, llamada \textit{\acrshort{relu}}. Esta capa fue explicada en la Sección~\ref{sec.caffe} y tiene la siguiente forma en el documento:
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	layer { name: "relu1"
@@ -149,9 +138,9 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 		top: "ip1"}	
 	\end{lstlisting}
 	
-	Esta capa no dispone de ningún parámetro modificable ya que la plataforma proporciona directamente la función por su identificador único.\\
+	La capa de activación no dispone de ningún parámetro modificable ya que la plataforma proporciona directamente la función por su identificador único.\\
 	
-	Para terminar la estructura de la red básica, Caffe permite la opción de añadir capas que muestren parámetros de evaluación de la red que se está entrenando. Estas capas, se deben añadir como una capa más a continuación de las anteriormente explicadas y se definirá su estructura de la siguiente forma:
+	Para terminar la estructura de la red básica, Caffe permite la opción de añadir capas que muestren parámetros de evaluación de la red que se está entrenando. Éstas, se deben añadir como una capa más a continuación de las anteriormente explicadas y se define su estructura de la siguiente forma:
 	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	layer {
@@ -175,7 +164,7 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	Estas dos capas permiten obtener valores de precisión y pérdidas cada ciertas iteraciones, siendo marcado este valor en el documento que se explicará a continuación, el solucionador.\\
 
 	En la Figura~\ref{fig.redBasica} se puede observar un esquema de la estructura definida en este apartado, los valores de interés y cada una de las entradas y salidas de las capas. Para obtener esta figura, se ha ejecutado un código proporcionado por la propia plataforma, que, mediante el archivo que define la estructura, explicado anteriormente, dibuja la red. Para ello se debe ejecutar comando mostrado a continuación.
-	\vspace{20pt}
+	\vspace{10pt}
 	\begin{lstlisting}[frame=single]
 	$ caffe/python/draw_net.py <netprototxt_filename> <out_img_filename>
 	\end{lstlisting}
@@ -189,8 +178,8 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	\end{figure}
 	
 \subsubsection{Definición del solucionador}
-	Para esta tarea se va a utilizar el archivo de Caffe \textit{lenet\_solver.prototxt}. En este documento se definen parámetros como la estructura de red que se utilizará, definida en el apartado anterior, y el número de iteraciones que se ejecutarán durante el entrenamiento de la red, cuya explicación se aportó en la Sección~\ref{sec.caffe}. Además, en ese mismo capítulo, se explican el resto de parámetros que se manejarán en este proyecto, como la evaluación de la red o las redes intermedias que se guardarán. A continuación se muestra el aspecto de este solucionador en Caffe, destacando los parámetros más significativos.
-	\vspace{20pt}
+	Para esta tarea se utiliza el archivo de Caffe \textit{lenet\_solver.prototxt}. En este documento se definen parámetros como la estructura de red que se utiliza, definida en el apartado anterior, y el número de iteraciones que se ejecutan durante el entrenamiento de la red, cuya explicación se aportó en la Sección~\ref{sec.caffe}. Además, en ese mismo capítulo, se explican el resto de parámetros que se manejan en este proyecto, como la evaluación de la red o las redes intermedias que se almacenan. A continuación se muestra el aspecto de este solucionador en Caffe, destacando los parámetros más significativos.
+	\vspace{80pt}
 	\begin{lstlisting}[frame=single]
 	# The train/test net protocol buffer definition
 	net: "examples/mnist/lenet_train_test.prototxt"
@@ -220,9 +209,9 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	solver_mode: CPU	
 	\end{lstlisting}
 	
-	Se debe fijar especial atención en parámetros como \textit{net}, que define la ruta al documento de la sección anterior en el que se define la estructura de red, \textit{test\_interval}, que marca cada cuántas iteraciones se realizará la evaluación de la red en el entrenamiento, \textit{max\_iter}, que define el número de iteraciones totales para finalizar el entrenamiento, \textit{snapshot}, que indica cada cúantas iteraciones se creará un archivo con la red intermedia correspondiente, y, finalmente, \textit{snapshot\_prefix}, que marcará la ruta en la que se almacenarán los archivos. La forma en la que se almacenan los archivos se corresponden con la ruta indicada hasta el último "\text{/}", siendo lo posterior el nombre deseado que será completado con el número de iteración correspondiente. En el ejemplo mostrado, el archivo será almacenado en la ruta \textit{"\text{examples/mnist/}"}    y el nombre de la red final será \textit{"lenet\_iter\_10000"}.\\
+	Se debe fijar especial atención en parámetros como \textit{net}, que define la ruta al documento de la sección anterior en el que se define la estructura de red, \textit{test\_interval}, que marca cada cuántas iteraciones se realiza la evaluación de la red en el entrenamiento, \textit{max\_iter}, que define el número de iteraciones totales para finalizar el entrenamiento, \textit{snapshot}, que indica cada cúantas iteraciones se crea un archivo con la red intermedia correspondiente, y, finalmente, \textit{snapshot\_prefix}, que marca la ruta en la que se almacenan los archivos. La forma en la que se almacenan los archivos se corresponden con la ruta indicada hasta el último "\text{/}", siendo lo posterior el nombre deseado, completado con el número de iteración correspondiente. En el ejemplo mostrado, el archivo se almacena en la ruta \textit{"\text{examples/mnist/}"}    y el nombre de la red final es \textit{"lenet\_iter\_10000"}.\\
 	
-	Tras definir el solucionador se procederá a la ejecución de un archivo que comience con el entrenamiento de la red y permita obtener, finalmente, el modelo entrenado para usar en la aplicación.
+	Tras definir el solucionador se procede a la ejecución de un archivo que comience con el entrenamiento de la red y permita obtener, finalmente, el modelo entrenado para usar en la aplicación.
 	
 \subsubsection{Ejecución de la red}
 	Para comenzar con el entrenamiento de la red, una vez definida la estructura y y el solucionador, se deben ejecutar los siguientes comandos:
@@ -241,7 +230,8 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	./build/tools/caffe train 
 	  --solver=examples/mnist/lenet_solver_validation.prototxt 
 	\end{lstlisting}
-	Este archivo, permite añadir una nueva línea mediante la que se obtiene, en la ruta marcada, un archivo de \textit{log} con información sobre el entrenamiento y la evaluación. Esta línea se añade tras indicar el solucionador de la forma que se muestra a continuación.
+	
+	Este archivo permite añadir una nueva línea mediante la que se obtiene, en la ruta marcada, un archivo de \textit{log} con información sobre el entrenamiento y la evaluación. Esta línea se añade tras indicar el solucionador de la forma que se muestra a continuación.
 	\vspace{10pt}
 	\begin{lstlisting}
 	2>&1 | tee .../NombreArchivoLog.log $@
@@ -267,32 +257,37 @@ Tras tener claro los diferentes conjuntos de datos que se emplearán en adelante
 	
 	Tras terminar el entrenamiento, mostrado en la Figura~\ref{fig.finEntrBas}, se obtiene el archivo con la red neuronal entrenada, almacenado según la ruta que se indicó en el solucionador, que podrá ser utilizada en la herramienta que sea de interés.\\
 
-	Los parámetros de pérdidas y precisión calculados durante el entrenamiento para ambas fases, queda almacenados en el archivo \textit{log} generado, y serán divididos en las dos fases, entrenamiento y evauación para su análisis. Para ello se ejecuta el archivo \textit{parse\_log.sh} proporcionado por la plataforma en su carpeta \textit{tools/extra}. En la Figura~\ref{fig.parse} se muestra el aspecto de estos archivos desglosados.
+	Los parámetros de pérdidas y precisión calculados durante el entrenamiento para ambas fases quedan almacenados en el archivo \textit{log} generado, y son divididos en las dos fases, entrenamiento y evaluación, para su análisis. Para ello se ejecuta el archivo \textit{parse\_log.sh} proporcionado por la plataforma en su carpeta \textit{tools/extra}. En la Figura~\ref{fig.parse} se muestra el aspecto de estos archivos desglosados.
 	\vspace{10pt}
 	
 	\begin{figure}[H]
 			\centering
-			\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/parselogtrain}} \hspace{10pt}
-			\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/parselogtest}}
+			\subfigure[]{\includegraphics[width=0.45\textwidth]{figures/parselogtrain}}
+			\subfigure[]{\includegraphics[width=0.45\textwidth]{figures/parselogtest}}
 			\caption{Archivos \text{log} de: (a)~Entrenamiento, (b)~Evaluación.}
 			\label{fig.parse}
 	\end{figure}
 
-\subsection{Componente Python} \label{sec.componente}
-Se ha desarrollado un componente escrito en Python que, mediante la ayuda del \textit{Camera Server} de JdeRobot, comentado en la Sección~\ref{sec.jderobot},  y la red explicada en la Sección~\ref{sec.red}, es capaz de clasificar un dígito mostrado a la cámara, que se especificará en un archivo de configuración, en tiempo real, encendiendo una bombilla que se corresponde con el número obtenido.\\
+\subsection{Componente clasificador} \label{sec.componente}
+Se desarrolla un componente escrito en Python que, mediante la ayuda del \textit{Camera Server} de JdeRobot, comentado en la Sección~\ref{sec.jderobot},  y la red explicada en la Sección~\ref{sec.red}, es capaz de clasificar un dígito mostrado a la cámara, que se especifica en un archivo de configuración, en tiempo real, encendiendo una bombilla que se corresponde con el número obtenido. En la Figura~\ref{fig.componente} se muestra un diagrama de bloques con el diseño de este componente y todas sus entradas y salidas.\\
+	
+Debido a la magnitud de la tarea a realizar, se optó por dividir el programa en dos hilos que serán explicados a continuación. Uno de ellos se encargará del aspecto gráfico de la aplicación, mostrando la imagen obtenida por la cámara, la imagen procesada para la clasificación, y la iluminación de la bombilla correspondiente. El segundo hilo, se encargará de gestionar la captación de la cámara, mediante la conexión con el componente \textit{Camera Server}, así como el proceso de clasificación, utilizando la red entrenada. Todo el código correspondiente a esta aplicación se encuentra disponible en Github~\footnote{https://github.com/RoboticsURJC-students/2016-tfg-nuria-oyaga}.
 
-Debido a la magnitud de la tarea a realizar, se optó por dividir el programa en dos hilos que serán explicados a continuación. Uno de ellos se encargará del aspecto gráfico de la aplicación, mostrando la imagen obtenida por la cámara, la imagen procesada para la clasificación, y la iluminación de la bombilla correspondiente. El segundo hilo, se encargará de gestionar la captación de la cámara, mediante la conexión con el componente \textit{Camera Server}, así como el proceso de clasificación, utilizando la red entrenada. Todo el código correspondiente a esta aplicación podrá ser encontrado en~\cite{codigo}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/esquemaComponente}
+	\caption{Esquema del componente.}
+	\label{fig.componente}
+\end{figure}
 
-\subsubsection{Cámara} \label{sec.camara}
-El hilo fundamental de la aplicación, que se encargará de la lógica de la misma mediante la adquisición de la imagen y su posterior procesamiento, estará referenciado por el nombre \textit{Camera}.\\
+\subsubsection{Hilo \textit{Camera}} \label{sec.camara}
+El hilo fundamental de la aplicación, que se encarga de la lógica de la misma mediante la adquisición de la imagen y su posterior procesamiento, está referenciado por el nombre \textit{Camera}.\\
 
-Al comienzo de la ejecución se inicializa un objeto Cámara, mediante el constructor \textit{Camera()}, que será el encargado de gestionar las acciones anteriormente nombradas. En esta inicialización se indica qué cámara se va a utilizar, referenciada de manera externa mediante un archivo de configuración que se indicará en la ejecución de la aplicación. La línea que indica la cámara en este archivo es la siguiente:
+Al comienzo de la ejecución se inicializa un objeto Cámara, mediante el constructor \textit{Camera()}, que será el encargado de gestionar las acciones anteriormente nombradas. En esta inicialización se indica qué cámara se va a utilizar, referenciada de manera externa mediante un archivo de configuración que se indica en la ejecución de la aplicación. La propiedad que indica la cámara en este archivo está enlazada con el componente \textit{Camera Server} de JdeRobot y es la siguiente:
 \vspace{10pt}
 \begin{lstlisting}[frame=single]
 	Numberclassifier.Camera.Proxy=cameraA:default -h localhost -p 9999
 \end{lstlisting}
-
-Esta propiedad estará enlazada con el componente \textit{Camera Server} de JdeRobot que nos proporciona un servidor de imágenes mediante la cámara.\\
 
 Otro aspecto importante que se maneja en la inicialización de la cámara es la especificación y carga de la red que se empleará para la clasificación. Este aspecto se realiza mediante las siguientes líneas:
 \vspace{10pt}
@@ -303,11 +298,11 @@ Otro aspecto importante que se maneja en la inicialización de la cámara es la 
 									image_dims=(28, 28), raw_scale=255)
 \end{lstlisting}
 
-Con este código se realizan las tres acciones necesarias para establecer la red que se utilizará. En primer lugar, se indica cuál será el modelo empleado para la clasificación. Este modelo es un archivo porporcionado por Caffe de manera homóloga al \textit{lenet\_train\_test.prototxt}, con la excepción de que la capa de datos no recurre a archivos almacenados sino que utiliza imágenes que serán insertadas en la ejecución de la red. El resto de datos deben ser exáctamente iguales a la estructura de la red entrenada para que no se produzcan errores. En segundo lugar, se indica la red entrenada que se utilizará en la ejecución, el archivo obtenido al finalizar el entrenamiento según se indicó en la Sección~\ref{sec.red}. Por último, se crea la red ejecutable, es decir, se crea un objeto que será utilizado por la aplicación cada vez que se quiera realizar la clasificación. Para esta creación es necesario indicar, en primer lugar, que se trata de una red para la clasificación, y, además, introducir los parámetros del modelo, la red entrenada, las dimensiones de las imágenes, y la escala de los píxeles.\\
+Con este código se realizan las tres acciones necesarias para establecer la red que se utiliza. En primer lugar, se indica cuál será el modelo empleado para la clasificación. Este modelo es un archivo porporcionado por Caffe de manera homóloga al \textit{lenet\_train\_test.prototxt}, con la excepción de que la capa de datos no recurre a archivos almacenados sino que utiliza imágenes que serán insertadas en la ejecución de la red. El resto de datos deben ser exáctamente iguales a la estructura de la red entrenada para que no se produzcan errores. En segundo lugar, se indica la red entrenada que se utiliza en la ejecución, el archivo obtenido al finalizar el entrenamiento según se indicó en la Sección~\ref{sec.red}. Por último, se crea la red ejecutable, es decir, se crea un objeto que será utilizado por la aplicación cada vez que se quiera realizar la clasificación. Para esta creación es necesario indicar, en primer lugar, que se trata de una red para la clasificación, y, además, introducir los parámetros del modelo, la red entrenada, las dimensiones de las imágenes, y la escala de los píxeles.\\
 
-Además de las propiedades más importantes comentadas anteriormente, se definen también funciones que serán importantes para la ejecución de la aplicación. Se establece una función \textit{update(self)}, que será llamada cada 150ms para la actualización del hilo \textit{ThreadCamera(camera)}, creado en el componente principal, para obtener las imágenes de forma periódica y poder establecer un flujo de vídeo a tiempo real. Esta función, a su vez, necesita de otra, \textit{getImage(self)}, que obtiene la imagen, la redimensiona, y le aplica una transformación necesaria antes de introducirla en el proceso de clasificación, devolviendo un array con las dos imágenes, original y transformada. Para esa transformación se utiliza una tercera función de la cámara, \textit{trasformImage(self,img)}. En ella, se centra la imagen en un cuadrado, pues la captada es rectangular y la necesaria para introducir en la red debe ser cuadrada, se convierte a imagen de grises, se redimensiona al tamaño necesario para introducirla en la red (28x28), y por último, se le aplica un filtro gaussiano de 5x5 para reducir el ruido.\\
+Además de las propiedades más importantes comentadas anteriormente, se definen también funciones que serán importantes para la ejecución de la aplicación. Se establece una función \textit{update(self)}, que será llamada cada 150ms para la actualización del hilo \textit{ThreadCamera(camera)}, creado en el componente principal, para obtener las imágenes de forma periódica y poder establecer un flujo de vídeo a tiempo real. Esta función, a su vez, necesita de otra, \textit{getImage(self)}, que obtiene la imagen, la redimensiona, y le aplica una transformación necesaria antes de introducirla en el proceso de clasificación, devolviendo un array con las dos imágenes, original y transformada. Para esa transformación se utiliza una tercera función de la cámara, \textit{trasformImage(self,img)}. En ella, se centra la imagen en un cuadrado, pues la captada es rectangular y la necesaria para introducir en la red debe ser cuadrada, se convierte a imagen de grises, se redimensiona al tamaño necesario para introducirla en la red (28x28), se le aplica un filtro gaussiano de 5x5 para reducir el ruido,y por último, se aplica un filtro de transformación por gradiente para lograr independencia del fondo.\\
 
-Finalmente, se crea la siguiete función para realizar la clasificación de los dígitos:
+Finalmente, se crea una función para realizar la clasificación de los dígitos.En primer lugar se asegura que las dimensiones del \textit{blob} de datos sea de 28x28. En el siguiente paso, se introduce a la red la imagen obtenida tras la transformación, aplicandole el factor de escala para que el intervalo de los píxeles esté entre 0 y 1, coincidiendo con el aprendizaje. Posteriormente se ejecuta la red y se obtiene, como salida, una estructura que almacena, por un lado, la propiedad \textit{'prob'} que se corresponde con un array que incluye las probabilidades de que la imagen introducida sea cada uno de los dígitos posibles, y, por otro, el tipo de datos que se almacena, en este caso \textit{float32}. Posteriormente, de ese array de probabilidades, se escoge el dígito cuya probabilidad es mayor y se devuelve. Todo ello queda implementado con el siguiente código:
 \vspace{10pt}
 \begin{lstlisting}[frame=single]
 	def classification(self, img):
@@ -318,16 +313,14 @@ Finalmente, se crea la siguiete función para realizar la clasificación de los 
 		return digito
 \end{lstlisting}
 
-En primer lugar se asegura que las dimensiones del \textit{bolb} de datos sea de 28x28. En el siguiente paso, se introduce a la red la imagen obtenida tras la transformación, aplicandole el factor de escala para que el intervalo de los píxeles esté entre 0 y 1, coincidiendo con el aprendizaje. Posteriormente se ejecuta la red y se obtiene, como salida, una estructura que almacena, por un lado, la propiedad \textit{'prob'} que se corresponde con un array que incluye las probabilidades de que la imagen introducida sea cada uno de los dígitos posibles, y, por otro, el tipo de datos que se almacena, en este caso \textit{float32}. Posteriormente, de ese array de probabilidades, se escoge el dígito cuya probabilidad es mayor y se devuelve.\\
-
 Una vez establecida la lógica de la aplicación, se procede a desarrollar el interfaz gráfico que permite al usuario visualizar, tanto las imágenes captadas y transformadas, como el resultado de la clasificación.
 
-\subsubsection{GUI}
-Para el aspecto gráfico de la aplicación, en el componente principal, se inicializará un objeto llamado \textit{window} mediante el constructor \textit{Gui()}, al que posteriormente se le vinculará la cámara mediante una función propia, \textit{window.setCamera(camera)}. Por último, al tratarse de un componente gráfico, será necesario indicar que se muestre mediante \textit{window.show()}. Al inicializar este objeto se crean todos los elementos gráficos que serán necesarios y que se modificarán posteriormente para conseguir el resultado deseado.\\
+\subsubsection{Hilo de interfaz gŕafico}
+Para el aspecto gráfico de la aplicación, en el componente principal se inicializa un objeto llamado \textit{window} mediante el constructor \textit{Gui()}, al que posteriormente se le vincula la cámara mediante una función propia, \textit{window.setCamera(camera)}. Por último, al tratarse de un componente gráfico, es necesario indicar que se muestre mediante \textit{window.show()}. Al inicializar este objeto se crean todos los elementos gráficos que son necesarios y que se modificarán posteriormente para conseguir el resultado deseado.\\
 
-Al igual que en el caso de la cámara, se estabelcerá un hilo que permita aligerar la ejecución de la aplicación mediante \textit{ThreadGui(window)}, que establece el tiempo de actualización en 50ms. Debido al uso de este hilo, se crea en el objeto una función \textit{update()} que, en este caso, se encarga de obtener las imágenes original y transformada mediante la función \textit{getImage()} de la cámara, y adaptarlas para poder mostrarlas en las etiquetas definidas para cada una de ellas. Además, llama a otra función propia, \textit{lightON(out)}, que cambia el color del fondo del dígito que se haya clasificado, haciendo uso de la función de clasificación definida anteriormente en la cámara.\\
+Al igual que en el caso de la cámara, se establece un hilo que permite aligerar la ejecución de la aplicación mediante \textit{ThreadGui(window)}, que establece el tiempo de actualización en 50ms. Debido al uso de este hilo, se crea en el objeto una función \textit{update()} que, en este caso, se encarga de obtener las imágenes original y transformada mediante la función \textit{getImage()} de la cámara, y adaptarlas para poder mostrarlas en las etiquetas definidas para cada una de ellas. Además, llama a otra función propia, \textit{lightON(out)}, que cambia el color del fondo del dígito que se haya clasificado, haciendo uso de la función de clasificación definida anteriormente en la cámara.\\
 
-En la Figura~\ref{fig.gui} se puede observar el resultado gráfico de la aplicación. Al no tener detección, la ejecución de la clasificación es continua, por lo que, aunque no exista un dígito en la imagen, el componente decide constantemente un determinado dígito que considerará correcto, encendiendo la bombilla adecuada.
+En la Figura~\ref{fig.gui} se puede observar el resultado gráfico de la aplicación. Al no tener detección, la ejecución de la clasificación es continua, por lo que, aunque no exista un dígito en la imagen, el componente decide constantemente un determinado dígito que considera correcto, encendiendo la bombilla adecuada.
 
 \begin{figure}[H]
 	\begin{center}
@@ -337,19 +330,19 @@ En la Figura~\ref{fig.gui} se puede observar el resultado gráfico de la aplicac
 	\end{center}
 \end{figure}
 
-\subsubsection{Ejecución}
-El proceso de ejecución del componente se divide en dos pasos. Por un lado, será necesaria la ejecución del servidor de imágenes, para lo que se utilizará el componente de JdeRobot. Por otro lado se debe lanzar el propio componente clasificador explicado anteriormente.\\
+\subsubsection{Ejecución del componente}
+El proceso de ejecución del componente se divide en dos pasos. Por un lado, es necesaria la ejecución del servidor de imágenes, para lo que se utiliza el componente de JdeRobot. Por otro lado se debe lanzar el propio componente clasificador explicado anteriormente.\\
 
-Para ejecutar el \textit{Camera Server}, se seguirán las instrucciones que aporta la plataforma JdeRobot, utilizando el archivo de configuración que se facilita. Se utilizará el siguiente comando: 
+Para ejecutar el \textit{Camera Server}, se siguen las instrucciones que aporta la plataforma JdeRobot, utilizando el archivo de configuración que se facilita. Se utiliza el siguiente comando: 
 \vspace{10pt}
 \begin{lstlisting}[frame=single]
 	cameraserver cameraserver.cfg
 \end{lstlisting}
 
-En el desarrollo de este trabajo, la propiedad de interés del archivo de configuración es \textit{CameraSrv.Camera.0.Uri}, que se centra en indicar la fuente de vídeo. Esta fuente puede ser un archivo de vídeo almacenado, para el que se empleará la ruta del archivo en ese campo, la webcam del propio ordenador, para el que se utilizará el valor 0, u otra cámara externa, para la que se le indicará el valor 1.\\
+En este trabajo, la propiedad de interés del archivo de configuración es \textit{Camera.0.Uri}, que indica la fuente de vídeo. Esta fuente puede ser un archivo de vídeo almacenado, para el que se emplea la ruta del archivo en ese campo, la webcam del propio ordenador, para el que se utiliza el valor 0, u otra cámara externa, para la que se le indica el valor 1.\\
 
-En la Sección~\ref{sec.droid} se comentó una aplicación que permitía utilizar la camara de un smartphone android como fuente de vídeo mediante una cámara externa. Para poder utilizar esta herramienta es necesario tener instalados el programa tanto en el dispositivo móvil a utilizar como en el propio ordenador, según se indica en la guía de la aplicación~\footnote{https://www.dev47apps.com/droidcam/linuxx/}, y abrir la aplicación. Una vez abierta en ambos dispositivos, se debe conectar el USB del ordenador al móvil e indicar en la aplicación de escritorio que la conexión se hará vía USB. La razón del uso del USB y no de la conexión vía \textit{WiFi} radica en la rapidez, siendo más adecuada para tiempo real. Una vez se han realizado las acciones anteriores se estable la conexión y se obtienen los resultados de la Figura~\ref{fig.droid} para el ordenador y el dispositivo.\\
-\vspace{20cm}
+En la Sección~\ref{sec.droid} se comentó una aplicación que permite utilizar la camara de un smartphone android como fuente de vídeo mediante una cámara externa. Para poder utilizar esta herramienta es necesario tener instalados el programa tanto en el dispositivo móvil a utilizar como en el propio ordenador, según se indica en la guía de la aplicación~\footnote{https://www.dev47apps.com/droidcam/linuxx/}, y abrir la aplicación. Una vez abierta en ambos dispositivos, se debe conectar el USB del ordenador al móvil e indicar en la aplicación de escritorio que la conexión se hará vía USB. La razón del uso del USB y no de la conexión vía \textit{WiFi} radica en la rapidez, siendo más adecuada para tiempo real. Una vez se han realizado las acciones anteriores se estable la conexión y se obtienen los resultados de la Figura~\ref{fig.droid} para el ordenador y el dispositivo.\\
+
 \begin{figure}[H]
 	\centering
 	\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/droidcamEscr}} \hspace{10pt}
@@ -358,20 +351,31 @@ En la Sección~\ref{sec.droid} se comentó una aplicación que permitía utiliza
 	\label{fig.droid}
 \end{figure}
 
-Tras tener en funcionamiento el servidor de imágenes se debe proceder a la ejecución del componente clasificador, para ello se ejecutará el siguiente comando:
+Al incluir esta aplicación, el esquema de las conexiones del componente se modifica, dando lugar a una nueva estructura mostrada en la Figura~\ref{fig.esquemaDroid}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/esquemaDroid}
+	\caption{Esquema de conexión con DroidCam.}
+	\label{fig.esquemaDroid}
+\end{figure}
+\vspace{20pt}
+
+Tras tener en funcionamiento el servidor de imágenes se procede a la ejecución del componente clasificador, para ello se ejecuta el siguiente comando:
 \vspace{10pt}
 \begin{lstlisting}[frame=single]
 	python numberclassifier.py --Ice.Config=numberclassifier.cfg
 \end{lstlisting}
 
-El componente Python contiene los procedimientos indicados en las secciones anteriores, la creación del GUI, la cámara y el lanzamiento de los hilos correspondiente a cada uno de ellos. En el fichero de configuración se tiene una porpiedad que indica qué cámara utilizar, es importante que el nombre de esta cámara se corresponda con el indicado en el fichero de configuración del servidor, de esta manera se establece la comunicación entre ambos componentes.\\
+El componente Python contiene los procedimientos indicados en las secciones anteriores, la creación del GUI, la cámara y el lanzamiento de los hilos correspondiente a cada uno de ellos. En el fichero de configuración se tiene una propiedad que indica qué cámara utilizar, es importante que el nombre de esta cámara se corresponda con el indicado en el fichero de configuración del servidor, de esta manera se establece la comunicación entre ambos componentes.\\
 
-Finalmente, tras la ejecución, obtenemos el resultado del componente mostrado en la Figura~\ref{fig.componente1}, donde se aprecia el funcionamiento del mismo para un número sencillo y perfectamente definido según el entrenamiento de la red, es decir, fondo negro y número blanco.
+Finalmente, tras la ejecución, obtenemos el resultado del componente mostrado en la Figura~\ref{fig.componente1}, donde se aprecia el funcionamiento del mismo para un número sencillo.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{figures/componente1}
-		\caption{Captura del componente clasificador.}
+		\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/fondoNegro}}\hspace{10pt}
+		\subfigure[]{\includegraphics[width=0.4\textwidth]{figures/fondoBlanco}}
+		\caption{Ejemplo del componente clasificador con: (a)~Fondo negro, (b)~Fondo blanco.}
 		\label{fig.componente1}
 	\end{center}
 \end{figure}
@@ -512,7 +516,7 @@ Una vez se dispone de los datos necesarios para la evaluación de prestaciones, 
 	\begin{itemize}
 		\item C3:CC70002 se corresponde con la columna que contiene las etiquetas reales
 		\item D3:D70002 se corresponde con la columna que contiene las etiquetas predichas.
-		\item Los valores entre comillas, "1" y "2" se corresponde con el dígito en cuestión que se quiera analizar, siendo el primer valor el real y el segundo el predicho. En este caso, se está contando el número de veces que se ha producido un 1 y se ha predicho, erróneamente, un 2.
+		\item Los valores entre comillas, ''1'' y ''2'' se corresponde con el dígito en cuestión que se quiera analizar, siendo el primer valor el real y el segundo el predicho. En este caso, se está contando el número de veces que se ha producido un 1 y se ha predicho, erróneamente, un 2.
 	\end{itemize}
 	
 	De esta forma, cada vez que se prediga un dígito determinado, se sumará uno en la celda que se corresponda con el dígito real introducido en la red y la etiqueta resultante de la predicción.\\
