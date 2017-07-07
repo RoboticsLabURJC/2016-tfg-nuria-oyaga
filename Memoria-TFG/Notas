@@ -1,0 +1,82 @@
+
+Entre items en description: 15pt
+Entre items en description dentro de descr: 10pt
+Entre parrafos en description : -10pt
+Antes de listas: -20pt
+Entre titulo y texto en item descr: 10pt
+Entre titulo y texto en item descr dentro de descr: 5pt
+Antes de codigo: 10pt
+
+Matriz:
+\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|l|c|c|c|c|c|c|c|c|c|c|c|}
+			\cline{3-13} 
+			 \multicolumn{2}{c|}{} & \multicolumn{11}{c|}{\textbf{Real}} \\ \cline{3-13} 
+			 \multicolumn{2}{c|}{} & \textbf{0} & \textbf{1} & \textbf{2} &  \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{Total}\\ \hline
+			 \multirow{10}{0.5cm}{\rotatebox{90}{\textbf{Predicción}}}& \textbf{0} & \cellcolor{lightgray} &  &  &  &  &  &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{1} &  & \cellcolor{lightgray} &  &  &  &  &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{2} &  &  & \cellcolor{lightgray} &  &  &  &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{3} &  &  &  & \cellcolor{lightgray} &  &  &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{4} &  &  &  &  & \cellcolor{lightgray} &  &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{5} &  &  &  &  &  & \cellcolor{lightgray} &  &  &  &  & \\ \cline{2-13}
+			 & \textbf{6} &  &  &  &  &  &  & \cellcolor{lightgray} &  &  &  & \\ \cline{2-13}
+			 & \textbf{7} &  &  &  &  &  &  &  & \cellcolor{lightgray} &  &  & \\ \cline{2-13}
+			 & \textbf{8} &  &  &  &  &  &  &  &  & \cellcolor{lightgray} &  & \\ \cline{2-13}
+			 & \textbf{9} &  &  &  &  &  &  &  &  &  & \cellcolor{lightgray} & \\ \cline{2-13}
+			 & \textbf{Total} &  &  &  &  &  &  &  &  &  &  & \\ \hline
+		\end{tabular}
+		\caption{Matriz de confusión red .}
+		\label{tab.matriz}
+	\end{table}
+
+
+
+
+
+
+\subsubsection{Imágenes ruidosas en entrenamiento}
+
+\subsection{Número de iteraciones}
+Hasta ahora, se había fijado el número de iteraciones que se realizan en el entrenamiento de la red en un valor de 10000, siendo la iteración, según lo explicado en la Sección~\ref{sec.caffe}, el paso por un \textit{batch}. Sin embargo, este número de iteraciones no tiene por qué ser el más idóneo para la aplicación.\\
+
+Durante el entrenamiento de una red neuronal el aprendizaje es progresivo, de esta manera, la red obtenida en la iteración \textit{n+1} es mejor que la obtenida en la iteración \textit{n}. Ésto se cumple hasta un cierto punto. Existe un momento durante el entrenamiento de la red en el que la mejora entre iteraciones consecutivas es prácticamente nula, pudiéndose producir, incluso, un deterioro en la red. Este deterioro de la red es conocido como sobreaprendizaje, producido por la excesiva focalización en las muestras proporcionadas en el entrenamiento empeorando la generalización.\\
+
+Como se comentó en la Sección~\ref{sec.red}, Caffe permite obtener durante el entrenamiento un archivo \textit{log} en el que se plasman los datos de \textit{accuracy} calculados cada cierto número de iteraciones. Estos resultados han sido recogidos para cada una de las redes explicadas en la sección anterior, obteniendo una comparativa, mostrada en la Figura~\ref{fig.iteraciones}, que permita seleccionar la red más adecuada para la aplicación.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{figures/iteraciones}
+		\caption{Red básica LeNet \acrshort{mnist}.}
+		\label{fig.iteraciones}
+	\end{center}
+\end{figure}
+En esta figura se puede comprobar que, además de la mejora mencionada anteriormente al introducir imágenes de ruido en el entrenamiento, la estabilidad de la red se alcanza mucho antes de las 10000 iteraciones marcadas.\\
+
+Por todo lo mencionado anteriormente, se decide escoger la red entrenada con la base de datos 0-1 parando en la iteración 5000, obteniendo buenos resultados en cuanto a la precisión de la red y disminuyendo consideráblemente la carga computacional, pues se reduce más de la mitad el número de iteraciones de entrenamiento de la red y se mantiene el número de muestras de las bases de datos de entrenamiento y validación, aunque estas hayan sido modificadas.\\
+
+\section{Experimentos}
+Tras todo el análisis realizado anteriormente se ha obtenido una red neuronal más robusta que permite una mejor clasificación en tiempo real de los dígitos mostrados a la cámara. Con todo lo estudiado en puntos anteriores se realiza una comparación entre la primera red básica que se desarrolló y la red a la que se le han aplicado las variaciones precisas.\\
+
+En primer lugar se prueba la aplicación con un dígito cuyo fondo es negro, tal y como se entrenó en la primera red desarrollada. Los resultados de este experimento quedan reflejados en la Figura~\ref{fig.experimento1}.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[Red básica]{\includegraphics[width=0.4\textwidth]{figures/exp_basica1}} \hspace{5pt}
+	\subfigure[Red robusta]{\includegraphics[width=0.4\textwidth]{figures/exp_robusta1}}
+	\caption{Evaluación de la aplicación con imagen de fondo negro.}
+	\label{fig.experimento1}
+\end{figure}
+
+Tras evaluar un ejemplo completamente limpio se pone a prueba la aplicación con una imagen más complicada para la misma, variando su fondo y no siendo tan perfecto. Esta prueba queda reflejada en la Figura~\ref{fig.experimento}, donde se expone un ejemplo con el que se comprueba cómo un dígito que con la red básica que se desarrolló en primer lugar no lograba ser identificado, pues no cumplia con todas las características que la red exigía para ser más precisa, sí es posible su clasificación tras mejorar la red entrenada según lo estudiado en los puntos anteriores. 
+
+\begin{figure}[H]
+	\centering
+	\subfigure[Red básica]{\includegraphics[width=0.4\textwidth]{figures/exp_basica}} \hspace{5pt}
+	\subfigure[Red robusta]{\includegraphics[width=0.4\textwidth]{figures/exp_robusta}}
+	\caption{Evaluación de la aplicación con diferentes redes.}
+	\label{fig.experimento}
+\end{figure}
+
+Para realizar los experimentos anteriores se ha tomado como "Red básica", la explicada en la Sección~\ref{sec.red}, en cuyo entrenamiento únicamente se disponía de imágenes con fondo negro y el dígito en blanco. Como era de esperar, y se demostró en la Sección~\ref{sec.bordes}, al mostrar a la cámara un dígito con el fondo blanco la red hace una clasificación errónea. En el caso de la "Red robusta", se ha seleccionado la red que se concluyó tras la Sección~\ref{sec.mod_bbdd}, una red entrenada con imágenes transformadas a las que se les ha aplicado el filtro de bordes Sobel iterando un total de 5000 veces, permitiendo independizar la imagen del fondo y que la imagen obtenida por la cámara no sea tan perfecta. Con esta nueva red la aplicación sí consigue clasificar correctamente el mismo dígito mostrado a la cámara.\\
+
+La aplicación desarrollada es una muestra sencilla de herramienta para la clasificación de imágenes con mediante técnicas de aprendizaje profundo. Este ejemplo abre una nueva puerta para abarcar nuevos problemas de clasificación más complejos, con bases de datos más completas, que permitan solucionar problemas de interés para el ser humano.

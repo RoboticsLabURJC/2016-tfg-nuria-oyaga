@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Memoria.aux
+A level-1 auxiliary file: 0-Portada.aux
+A level-1 auxiliary file: 0-Agradecimientos.aux
+A level-1 auxiliary file: 0-Resumen.aux
+A level-1 auxiliary file: 1-Introduccion.aux
+A level-1 auxiliary file: 2-Infraestructura.aux
+A level-1 auxiliary file: 3-Clasificacion.aux
+A level-1 auxiliary file: 4-Deteccion.aux
+A level-1 auxiliary file: 5-Conclusiones.aux
+A level-1 auxiliary file: 6-Bibliografia.aux
+The style file: unsrt.bst
+Database file #1: Memoria.bib
+Name 1 in "Rob Hess, Clayton Mellina, and Friends" has a comma at the end for entry caffe
+while executing---line 944 of file unsrt.bst
+Warning--empty year in fundamentos
+You've used 28 entries,
+            1791 wiz_defined-function locations,
+            597 strings with 8408 characters,
+and the built_in function-call counts, 5238 in all, are:
+= -- 401
+> -- 325
+< -- 0
++ -- 121
+- -- 93
+* -- 287
+:= -- 898
+add.period$ -- 96
+call.type$ -- 28
+change.case$ -- 21
+chr.to.int$ -- 0
+cite$ -- 29
+duplicate$ -- 223
+empty$ -- 528
+format.name$ -- 93
+if$ -- 1160
+int.to.chr$ -- 0
+int.to.str$ -- 28
+missing$ -- 26
+newline$ -- 152
+num.names$ -- 28
+pop$ -- 130
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 78
+stack$ -- 0
+substring$ -- 94
+swap$ -- 30
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 33
+width$ -- 30
+write$ -- 304
+(There was 1 error message)

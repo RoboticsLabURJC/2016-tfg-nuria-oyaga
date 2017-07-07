@@ -1,0 +1,47 @@
+\select@language {spanish}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Comparaci\IeC {\'o}n de neurona artificial (derecha) y biol\IeC {\'o}gica (izquierda). Imagen obtenida de~\cite {rna}.\relax }}{3}{figure.caption.8}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Diagrama de Venn que muestra el marco de la \acrshort {ia}. Imagen obtenida de~\cite {Goodfellow-et-al-2016}.\relax }}{3}{figure.caption.9}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Estructura de \acrshort {cnn}. Imagen obtenida de~\cite {cnn}.\relax }}{5}{figure.caption.10}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Marco utilizado para la detecci\IeC {\'o}n del c\IeC {\'a}ncer de mama. Imagen obtenida de~\cite {2016arXiv160605718W}.\relax }}{5}{figure.caption.11}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Paradigmas de la conducci\IeC {\'o}n aut\IeC {\'o}noma. Imagen obtenida de~\cite {2015arXiv150500256C}.\relax }}{6}{figure.caption.12}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Ejemplo de traducci\IeC {\'o}n visual instant\IeC {\'a}nea. Imagen obtenida de~\cite {traduccion}.\relax }}{7}{figure.caption.13}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Ejemplo adici\IeC {\'o}n de sonidos a pel\IeC {\'\i }culas mudas. Imagen obtenida de~\cite {2015arXiv151208512O}.\relax }}{7}{figure.caption.14}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Diagrama de Gantt del trabajo realizado.\relax }}{9}{figure.caption.15}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Estructura y funcionamiento b\IeC {\'a}sico de red en Caffe. Figura obtenida de~\cite {caffe}\relax }}{13}{figure.caption.16}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Funci\IeC {\'o}n de activaci\IeC {\'o}n \textit {\acrshort {relu}}.\relax }}{16}{figure.caption.17}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Muestras de base de datos \acrshort {mnist}.\relax }}{21}{figure.caption.18}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Estructura b\IeC {\'a}sica de anotaciones en \acrshort {coco}.\relax }}{22}{figure.caption.19}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Estructura de instancias de objetos en \acrshort {coco}.\relax }}{23}{figure.caption.20}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Muestras de base de datos \acrshort {coco}. Imagen obtenida de~\cite {coco}.\relax }}{23}{figure.caption.21}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Ejemplos de im\IeC {\'a}genes en \acrshort {voc}. Imagen tomada de~\cite {Everingham10}\relax }}{24}{figure.caption.22}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Estructura de las clases en \acrfull {voc}2007. Imagen tomada de~\cite {Everingham10}. El super\IeC {\'\i }ndice de cada una de las clases indica el a\IeC {\~n}o de inclusi\IeC {\'o}n en el desaf\IeC {\'\i }o: $2005^1$, $2006^2$, $2007^3$.\relax }}{25}{figure.caption.23}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Matriz de confusi\IeC {\'o}n para clasificaci\IeC {\'o}n binaria. Imagen tomada de~\cite {FAWCETT2006861}\relax }}{26}{figure.caption.24}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Matriz de confusi\IeC {\'o}n para clasificaci\IeC {\'o}n multiclase. Imagen tomada de~\cite {kolo2011binary}\relax }}{26}{figure.caption.25}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Red b\IeC {\'a}sica LeNet \acrshort {mnist}.\relax }}{35}{figure.caption.27}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Ejecuci\IeC {\'o}n de entrenamiento de red LeNet \acrshort {mnist}.\relax }}{38}{figure.caption.28}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Fin de entrenamiento de red LeNet \acrshort {mnist}.\relax }}{38}{figure.caption.29}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Archivos \text {log} de: (a)~Entrenamiento, (b)~Evaluaci\IeC {\'o}n.\relax }}{39}{figure.caption.30}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Esquema del componente.\relax }}{40}{figure.caption.31}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Captura de componente gr\IeC {\'a}fico de la aplicaci\IeC {\'o}n.\relax }}{43}{figure.caption.32}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Capturas de DroidCam en: (a)~Escritorio, (b)~Dispositivo m\IeC {\'o}vil\relax }}{44}{figure.caption.33}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Esquema de conexi\IeC {\'o}n con DroidCam.\relax }}{44}{figure.caption.34}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Ejemplo del componente clasificador con: (a)~Fondo negro, (b)~Fondo blanco.\relax }}{45}{figure.caption.35}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Negativo de muestras de la base de datos.\relax }}{52}{figure.caption.36}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Porcentaje de acierto sobre red entrenada con \acrshort {mnist} y evaluada con base de datos original y ampliada con negativo.\relax }}{53}{figure.caption.37}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Muestras de im\IeC {\'a}genes de bordes: (a)~Canny, (b)~Laplaciano sobre original, (c)~Laplaciano sobre negativo, (d)~Sobel.\relax }}{55}{figure.caption.38}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Comparaci\IeC {\'o}n de tasa de acierto para la red entrenada con el conjunto original y evaluada con base de datos de test original y ampliado con negativo, y redes entrenadas con la base de datos con el filtro indicado y evaluada con la de test del mismo filtro.\relax }}{56}{figure.caption.39}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Muestras de im\IeC {\'a}genes transformadas: (a)~rotaci\IeC {\'o}n, (b)~traslaci\IeC {\'o}n, (c)~escalado, (d)~contaminaci\IeC {\'o}n con ruido aditivo.\relax }}{58}{figure.caption.40}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Muestra de d\IeC {\'\i }gitos con mezcla de transformaciones.\relax }}{59}{figure.caption.41}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces \textit {Accuracy} para cada d\IeC {\'\i }gito y global en la red entrenada con im\IeC {\'a}genes de bordes Sobel evaluada con bases de datos transformadas.\relax }}{60}{figure.caption.42}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Resultados de \textit {Precision} y \textit {Recall} para la red entrenada con im\IeC {\'a}genes de bordes y las redes entrenadas con transformaciones (1-6,1-1,0-6,0-1), sobre base de datos de test ampliada con combinaci\IeC {\'o}n de transformaciones\relax }}{66}{figure.caption.48}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Valores de \textit {Accuracy} en redes intermedias para cada una de las redes entrenadas.\relax }}{67}{figure.caption.49}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Evaluaci\IeC {\'o}n de la aplicaci\IeC {\'o}n con d\IeC {\'\i }gito sint\IeC {\'e}tico: (a)~red b\IeC {\'a}sica, (b)~red robusta.\relax }}{68}{figure.caption.50}
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Evaluaci\IeC {\'o}n de la aplicaci\IeC {\'o}n con d\IeC {\'\i }gito manuscrito sobre fondo blanco: (a)~red b\IeC {\'a}sica, (b)~red robusta.\relax }}{68}{figure.caption.51}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Modelo \acrshort {ssd}. Imagen obtenida de~\cite {2015arXiv151202325L}\relax }}{71}{figure.caption.52}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Detecci\IeC {\'o}n en distintas im\IeC {\'a}genes: (a)~Imagen sencilla con \acrshort {coco}, (b)~Imagen sencilla con \acrshort {voc}, (c)~Imagen complejo con \acrshort {coco}, (d)~Imagen compleja con \acrshort {voc}, (e)~Se\IeC {\~n}al de tr\IeC {\'a}fico con \acrshort {coco}, (f)~Se\IeC {\~n}al de tr\IeC {\'a}fico con \acrshort {voc}\relax }}{76}{figure.caption.53}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Detecci\IeC {\'o}n en distintas im\IeC {\'a}genes: (a)~Imagen RGB con \acrshort {coco}, (b)~Imagen de grises con \acrshort {coco}, (c)~Imagen RGB con \acrshort {voc}, (d)~Imagen de grises con \acrshort {voc},\relax }}{77}{figure.caption.54}
+\addvspace {10\p@ }
