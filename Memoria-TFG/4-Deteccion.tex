@@ -1,6 +1,10 @@
 \chapter{Detección con Aprendizaje Profundo}\label{cap.deteccion}
 En este capítulo se realiza una primera aproximación al problema de la detección mediante el aprendizaje profundo utilizando la plataforma Caffe. Para ello se ha utilizado la rama \textit{\acrfull{ssd}}~\cite{liu2016ssd} de la misma, que, además de permitir el entrenamiento de modelos para la detección de diferentes objetos en función de la base de datos utilizada, ofrece varios modelos que ya han sido entrenados para facilitar esta tarea.\\
 
+Antes de comenzar en el campo de la detección es importante explicar la diferencia que exite entre esta tarea y la clasificación. En la clasificación, se obtiene como salida una de las clases posibles para la red entrenada. En esta tarea no es posible obtener un resultado nulo, ya que siempre se asociará la imagen presentada a la red con una de las clases. En la detección, por el contrario, se obtiene como salida la presencia o no de un determinado objeto en una imagen, pudiendo obtener un resultado en caso de que no se detecte el objeto . Esta tarea es más compleja que la clasificación, ya que se desconoce el tamaño y posición del objeto a detectar en la imagen.\\
+
+Para abarcar la tarea de la detección existen numerosos métodos que se diferencian entre sí en la información que consideran relevante para realizar la detección y la forma que tienen de analizar esta información. Así, por ejemplo, existen los métodos basados en apariencia, que usa imágenes de ejemplo (llamadas plantillas o prototipos) de los objetos para realizar la detección. Dentro de este bloque se encuentran, entre otros, el emparejamiento de bordes, la búsqueda ``divide y vencerás'', y el emparejamiento  por escala de grises. Otro bloque es el de los métodos basados en características, en los que una búsqueda es usada para encontrar emparejamientos factibles entre las características del objeto y las características de la imagen. Dentro de este bloque se encuentran, por ejemplo, los árboles de interpretación,  consistencia de pose, y  \textit{Scale-Invariant Feature Transform} (SIFT).
+
 \section{Detección con técnica \acrshort{ssd}}
 El método utilizado, \acrshort{ssd}, está diseñado para detectar objetos en imágenes utilizando una única red neuronal profunda. El enfoque \acrshort{ssd} se basa en una red convolucional \textit{feed-forward} que produce una colección de tamaño fijo de cajas delimitadoras (\textit{bounding boxes}) y puntuaciones para la presencia de instancias de objetos en esas cajas, seguido de un paso de supresión no máxima para producir las detecciones finales. En el momento de la predicción, la red genera puntuaciones para la presencia de cada categoría de objeto en cada caja delimitadora predeterminada y produce ajustes en la caja para que coincida mejor con la forma del objeto. Además, la red combina predicciones de múltiples mapas de características con diferentes resoluciones para manejar de forma natural objetos de varios tamaños. Las primeras capas de red se basan en una arquitectura estándar utilizada para la clasificación de imágenes, similar a la explicada en el Capítulo~\ref{cap.clasificacion}. Posteriormente se añade una estructura auxiliar para producir las detecciones, teniendo en cuenta una serie de características:
 \begin{itemize}
@@ -59,8 +63,6 @@ Para realizar la detección con el \textit{script} mencionado, lo primero que se
 							caffe.TEST)     # use test mode 
 \end{lstlisting}
 
-
-
 Por otro lado, cabe destacar la función \textit{detection(self,img)}, que realiza diferentes pasos para obtener las detecciones, que serán explicados a continuación.
 
 \begin{itemize}
@@ -84,6 +86,7 @@ Por otro lado, cabe destacar la función \textit{detection(self,img)}, que reali
 	det_ymax = detections[0,0,:,6]
 	\end{lstlisting}
 	\item Una vez se obtienen los vectores con los parámetros de interés de las detecciones realizadas, es posible \textbf{implementar un filtro} que permita obtener las detecciones que se ajustan a las necesidades de la aplicación. Es muy común realizar este filtrado para obtener aquellas detecciones que superan un determinado umbral de confianza, dotando de mayor exactitud a la aplicación, así como por el objeto que sea de interés. En concreto, el siguiente fragmento de código realiza el filtrado para aquellas detecciones cuya confidencia supera el valor de 0.6.
+	\vspace{110pt}
 	\begin{lstlisting}[frame=single]
 	top_indices = []
 	# Get detections with confidence higher than 0.6.
