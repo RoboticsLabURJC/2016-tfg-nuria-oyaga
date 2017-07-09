@@ -604,10 +604,10 @@ Para desarrollar la comparación entre los diferentes filtros se ha desarrollado
 	\item[Filtro Laplaciano] \hfill 
 	\vspace{5pt}
 	\\
-	El laplaciano es un operador de segunda derivada que se utiliza con frecuencia en la detección de bordes~\cite{laplacian}~\cite{gonzalez2008digital}, identificando un borde cuando se produce un cruce por cero en la segunda derivada. Este operador posee dos filtros diferentes, uno positivo con el que se obtienen los bordes y uno negativo. Estos filtros proporcionan resultados diferentes ya que al aplicar el filtro positivo únicamente se tienen en cuenta los cruces por cero crecientes en la segunda derivada, mientras que en el negativo se consideran los decrecientes. Este hecho da lugar a la obtención de dos tipos de borde: el externo en el positivo, utilizado en este trabajo, y el interno en el negativo. El resultado final será una imagen en escala de grises correspondiente con los bordes de interés.\\
+	El laplaciano es un operador de segunda derivada que se utiliza con frecuencia en la detección de bordes~\cite{gonzalez2008digital}, identificando un borde cuando se produce un cruce por cero en la segunda derivada. Este operador utiliza diferentes máscaras para obtener el borde, y en función de la máscara que se utilice se obtendrán distintos resultados.\\
 	\vspace{-10pt}
 	\\
-	La aplicación del filtro es posible gracias a otra función de \textit{openCV}~\cite{laplacianOCV}. Al aplicar este filtro sobre las imágenes originales y su negativo no se obtiene exactamente la misma imagen. Al aplicar el filtro positivo sobre la imagen original, con el fondo negro, se obtienen los bordes externos de la misma, sin embargo, al invertir los niveles de intensidad, la derivada de la imagen se invierte de la misma manera. Este hecho hace que lo que se considera como bordes externos en la imagen de negativo se corresponda con lo que eran bordes internos en la original. Esta diferencia podría perjudicar a la robustez de la red, pues dependiendo de la imagen la diferencia entre ambos podría ser suficiente como para crear confusión.
+	La aplicación del filtro es posible gracias a otra función de \textit{openCV}~\cite{laplacianOCV}. Al aplicar este filtro sobre la imagen original y su negativo no se obtiene exactamente el mismo resultado. La diferencia entre ambos viene dada por el propio funcionamiento del filtro, que sitúa el borde de la imagen en la zona donde comienza o acaba el menor nivel de intensidad. De esta manera, al aplicarlo sobre la imagen original, con el fondo negro, se sitúa el borde en la zona ``externa'' del dígito, mientras que en la imagen del negativo lo localiza en la ``interna''. Esta diferencia podría perjudicar a la robustez de la red, pues dependiendo de la imagen la diferencia entre ambos podría ser suficiente como para crear confusión.
 	\vspace{5pt}
 	\item[Filtro de Sobel] \hfill 
 	\vspace{5pt}
@@ -673,7 +673,7 @@ A continuación se explicarán las distinas transformaciones que serán aplicada
 	\vspace{-10pt}
 	\\
 	Tras aplicar el escalado, el resultado es una imagen donde las dimensiones del dígito han variado, aumentando o disminuyendo en función de la proporción. Para introducir las imágenes en la red y obtener resultados adecuados se debe adaptar el tamaño de las imágenes al necesario para la red (28x28). Si el tamaño de la imagen es mayor de 28x28 píxeles, la imagen, se recortará manteniendo el centro. Si, por el contrario, el tamaño es menor, se añadirá un borde del mismo nivel de intensidad que el fondo de la imagen hasta obtener el tamaño deseado.
-	\vspace{5pt}
+	\vspace{50pt}
 	\item[Ruido aleatorio] \hfill 
 	\vspace{5pt}
 	\\
